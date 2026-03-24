@@ -239,8 +239,47 @@ def generate_quarto_document(output: ReviewOutput) -> str:
     return "\n".join(parts)
 
 
+async def write_outputs_ai(output: ReviewOutput, output_dir: Path | None = None) -> dict[str, Path]:
+    """Write all output files using AI-powered review writing."""
+    from litreview.pipeline.review_writer import write_full_review
+
+    out = output_dir or Path("output")
+    out.mkdir(parents=True, exist_ok=True)
+
+    # Generate AI-written review
+    quarto_content = await write_full_review(output)
+    output.quarto_content = quarto_content
+
+    # Recompute stats with word count
+    from litreview.utils.statistics import compute_statistics
+    saved_stats = output.statistics
+    output.statistics = compute_statistics(
+        articles=output.articles,
+        quarto_content=quarto_content,
+        bibtex_content=output.bibtex,
+        search_queries=saved_stats.search_queries_used,
+    )
+    output.statistics.total_articles_found = saved_stats.total_articles_found
+    output.statistics.articles_after_dedup = saved_stats.articles_after_dedup
+    output.statistics.articles_after_quality_filter = saved_stats.articles_after_quality_filter
+    output.statistics.articles_with_valid_doi = saved_stats.articles_with_valid_doi
+
+    paths = {}
+    qmd_path = out / "literature_review.qmd"
+    qmd_path.write_text(quarto_content, encoding="utf-8")
+    paths["qmd"] = qmd_path
+    logger.info(f"Wrote AI-powered Quarto document: {qmd_path}")
+
+    bib_path = out / "references.bib"
+    bib_path.write_text(output.bibtex, encoding="utf-8")
+    paths["bib"] = bib_path
+    logger.info(f"Wrote BibTeX: {bib_path}")
+
+    return paths
+
+
 def write_outputs(output: ReviewOutput, output_dir: Path | None = None) -> dict[str, Path]:
-    """Write all output files (Quarto, BibTeX) and return file paths."""
+    """Write all output files (Quarto, BibTeX) and return file paths. Template-based (no AI)."""
     out = output_dir or Path("output")
     out.mkdir(parents=True, exist_ok=True)
 
