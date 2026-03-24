@@ -1,0 +1,12 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+dist/
+*.egg-info/
+output/*.pdf
+output/*.docx
+output/*.html
+.quarto/
+_freeze/
+.ruff_cache/

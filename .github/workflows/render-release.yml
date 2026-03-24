@@ -1,0 +1,107 @@
+name: Render & Release Literature Review
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'output/*.qmd'
+      - 'output/*.bib'
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Research topic (leave empty to use existing files)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install dependencies
+        run: uv pip install --system -e ".[dev]"
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: '1.5'
+
+      - name: Install TinyTeX
+        run: quarto install tinytex
+
+      - name: Run pipeline (if topic provided)
+        if: ${{ github.event.inputs.topic != '' }}
+        env:
+          SCOPUS_API_KEY: ${{ secrets.SCOPUS_API_KEY }}
+          PUBMED_API_KEY: ${{ secrets.PUBMED_API_KEY }}
+          EMBASE_API_KEY: ${{ secrets.EMBASE_API_KEY }}
+          UNPAYWALL_EMAIL: ${{ secrets.UNPAYWALL_EMAIL }}
+          ZOTERO_API_KEY: ${{ secrets.ZOTERO_API_KEY }}
+          ZOTERO_LIBRARY_TYPE: ${{ secrets.ZOTERO_LIBRARY_TYPE }}
+          ZOTERO_LIBRARY_ID: ${{ secrets.ZOTERO_LIBRARY_ID }}
+          ZOTERO_COLLECTION_KEY: ${{ secrets.ZOTERO_COLLECTION_KEY }}
+        run: |
+          python -m litreview.cli review "${{ github.event.inputs.topic }}" --no-render -o output
+
+      - name: Render Quarto to PDF
+        run: |
+          cd output
+          quarto render literature_review.qmd --to pdf
+
+      - name: Render Quarto to DOCX
+        run: |
+          cd output
+          quarto render literature_review.qmd --to docx
+
+      - name: Generate release tag
+        id: tag
+        run: echo "tag=review-$(date +%Y%m%d-%H%M%S)" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: "Literature Review ${{ steps.tag.outputs.tag }}"
+          body: |
+            ## Automated Literature Review
+
+            Generated on ${{ github.event.head_commit.timestamp || github.event.repository.updated_at }}
+
+            ### Artifacts
+            - `literature_review.pdf` — PDF formatted review
+            - `literature_review.docx` — Word document
+            - `references.bib` — BibTeX references
+
+            ### Pipeline
+            - Multi-database search (Scopus, PubMed, Embase)
+            - Journal quality filtering (CiteScore ≥ 3.0)
+            - DOI validation via doi.org
+            - Open access enrichment via Unpaywall
+          files: |
+            output/literature_review.pdf
+            output/literature_review.docx
+            output/references.bib
+            output/literature_review.qmd
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: literature-review
+          path: |
+            output/literature_review.pdf
+            output/literature_review.docx
+            output/references.bib
+            output/literature_review.qmd
+          retention-days: 90
