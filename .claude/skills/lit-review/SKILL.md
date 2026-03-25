@@ -14,10 +14,53 @@ The user can request any of these modes:
 
 | Command | What it does |
 |---------|-------------|
-| `/robust-lit-review` | Full pipeline: topic -> search -> filter -> validate -> write -> render |
-| `/robust-lit-review brainstorm` | Brainstorm and refine search terms before running |
-| `/robust-lit-review validate` | Validate DOIs in an existing .bib file |
-| `/robust-lit-review render` | Re-render existing .qmd to PDF/DOCX |
+| `/lit-review` | Full pipeline: topic -> search -> filter -> validate -> write -> render |
+| `/lit-review --hitl` | Full pipeline with Human-in-the-Loop mode (9 checkpoints) |
+| `/brainstorm-topic` | Brainstorm and refine search terms before running |
+
+## Human-in-the-Loop Mode (`--hitl`)
+
+When enabled, the pipeline pauses at 9 checkpoints where human judgment matters most.
+Each checkpoint presents **multiple-choice options** via `AskUserQuestion`.
+
+```python
+from litreview.pipeline.checkpoints import (
+    format_checkpoint_for_user, CheckpointLog,
+    cp1_search_strategy, cp2_borderline_articles, cp3_final_article_set,
+    cp4_thematic_grouping, cp5_key_claims, cp6_prisma_audit,
+    cp7_cover_letter, cp8_final_preview, cp9_publish_decision,
+)
+```
+
+| CP | When | Why human needed | Default (auto-mode) |
+|----|------|-----------------|---------------------|
+| CP1 | After query generation | Wrong query = wrong review | Strategy A |
+| CP2 | After filtering | Borderline articles need domain judgment | Review individually |
+| CP3 | After selection | Missing landmark papers? Topic imbalance? | Approve |
+| CP4 | Before writing | Thematic structure shapes the narrative | Approve structure |
+| CP5 | After writing | LLM may hallucinate stats/dosing/p-values | All correct |
+| CP6 | After PRISMA audit | Some items may be legitimately N/A | Auto-fix all |
+| CP7 | Cover letter | Target journal affects framing | Approve |
+| CP8 | Before render | Last quality gate | Render |
+| CP9 | Before publish | Public action requires consent | Publish |
+
+**How to implement each checkpoint:**
+```
+# 1. Generate checkpoint
+cp = cp1_search_strategy(topic, suggested_queries)
+
+# 2. Present to user (if --hitl enabled)
+prompt_text = format_checkpoint_for_user(cp)
+# Use AskUserQuestion tool with prompt_text
+
+# 3. Record decision
+cp.selected = user_response  # "A", "B", "C", etc.
+log.record(cp)
+
+# 4. Branch pipeline based on selection
+```
+
+All decisions are logged to `output/checkpoint_log.json` for reproducibility.
 
 ## Environment
 
