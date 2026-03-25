@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "Robust Literature Review Pipeline"
+abstract: "Automated systematic literature review pipeline with multi-database search (Scopus, PubMed, Embase), DOI validation, journal quality filtering, and publication-ready Quarto output."
+authors:
+  - family-names: "Lin"
+    given-names: "Hsieh-Ting"
+    orcid: ""
+version: "1.0.0"
+date-released: "2026-03-25"
+license: MIT
+url: "https://github.com/htlin222/robust-lit-review"
+repository-code: "https://github.com/htlin222/robust-lit-review"
+keywords:
+  - systematic-review
+  - literature-review
+  - scopus
+  - pubmed
+  - embase
+  - quarto
+  - prisma
+  - doi-validation
+  - bibtex
+  - zotero
+  - hlh
