@@ -100,62 +100,70 @@ Use `litreview.pipeline.enrichment` module:
 - Create a new Zotero collection named "LitReview: {topic}"
 - Add all validated articles
 
-### Stage 6: Generate Outputs — PUBLICATION-QUALITY WRITING
-Write a REAL publication-ready review article, NOT a skeleton.
+### Stage 6: MODULAR PARALLEL WRITING (via section_dispatcher)
 
-**Writing the review (delegate to a writing subagent):**
+Write the review in PARALLEL using modular sections + Quarto `{{< include >}}`.
 
-The writing agent receives ALL article data including full abstracts and extracted
-quantitative data. It must produce 5,000-8,000 words of proper academic prose.
+**Step 6a: Dispatch sections**
+```python
+from litreview.pipeline.section_dispatcher import dispatch_sections, generate_main_qmd
+dispatched = dispatch_sections(articles, stats, Path("output"))
+main_qmd = generate_main_qmd(topic, stats, Path("output"))
+```
 
-**CRITICAL WRITING RULES for publication quality:**
+This creates `output/sections/*.context.json` with per-section article context.
 
-1. **Use specific numbers from abstracts**: "ferritin >10,000 ng/mL (98% specificity)" not "elevated ferritin"
-2. **Include dosing when available**: "etoposide 150 mg/m² twice weekly" not "etoposide-based therapy"
-3. **Cite epidemiologic data**: incidence rates, mortality trends, cohort sizes
-4. **Name specific organisms/drugs/genes**: Not "various viral triggers" but "EBV, CMV, HSV, HHV-6"
-5. **Include diagnostic thresholds**: H-Score cutoff 169 (93% sensitivity, 86% specificity)
-6. **Compare study findings quantitatively**: "Study A showed 61% 5-year OS vs Study B's 54%"
-7. **Name specific criteria/classifications**: HLH-2004, HLH-2024, EULAR/ACR MAS criteria
-8. **Include trial identifiers**: NCT numbers, study names (ZUMA-1, CARTITUDE-1)
-9. **Describe novel/pipeline agents**: Not just established drugs
-10. **Distinguish related but distinct entities**: CRS vs HLH, MAS vs HLH, COVID-19 vs classical HLH
+**Step 6b: Launch parallel writing subagents (8 sections simultaneously)**
 
-**Document structure:**
-- Structured abstract (~250 words: Background, Methods, Results, Conclusion)
-- Introduction: clinical significance, historical context, evolving understanding, objectives
-- Methods: PRISMA-compliant, search strategy, inclusion/exclusion, quality assessment
-- Results: Organized thematically (NOT one paragraph per article)
-  - Subtopic sections derived from article classification
-  - Cross-study synthesis with specific data points
-  - Temporal trends and evolution of the field
-- Discussion: synthesis, clinical implications, controversies, strengths/limitations, future directions
-- Conclusion
-- References
+Launch ALL of these agents in a SINGLE message (parallel tool calls):
 
-### Stage 7: Compute Statistics
-Report to user:
-- PRISMA flow diagram
-- Articles by source database
-- Articles by year
-- Articles by journal quartile
-- Average CiteScore and citation count
-- Word count
-- Reference count
+| Agent | Section File | Articles | Words |
+|-------|-------------|----------|-------|
+| 1 | `sections/00-abstract.qmd` | all | 300 |
+| 2 | `sections/01-introduction.qmd` | review, classification, epidemiology | 1,200-1,500 |
+| 3 | `sections/02-methods.qmd` | (none — methodological) | 800-1,000 |
+| 4 | `sections/03-pathogenesis.qmd` | pathogenesis, genetics | 1,000-1,200 |
+| 5 | `sections/04-diagnosis.qmd` | diagnosis, classification | 1,200-1,500 |
+| 6 | `sections/05-etiology.qmd` | infection, malignancy, autoimmune, iatrogenic | 1,200-1,500 |
+| 7 | `sections/06-treatment.qmd` | treatment_conventional/targeted/transplant | 1,500-1,800 |
+| 8 | `sections/07-covid.qmd` | infection_trigger, pathogenesis | 800-1,000 |
+| 9 | `sections/08-discussion.qmd` | review_guideline, prognosis | 1,500-1,800 |
 
-### Stage 8: Render
+Each agent:
+1. Reads its context from `output/sections/{name}.context.json`
+2. Reads `output/references.bib` for citation keys
+3. Writes ONLY the body text (no YAML frontmatter) to `output/sections/{name}.qmd`
+4. Uses [@key] citations matching the BibTeX
+
+**Step 6c: Generate main.qmd**
+Write the main file with `{{< include >}}` directives pointing to each section.
+
+**CRITICAL WRITING RULES (include in EVERY agent prompt):**
+1. Use specific numbers from abstracts (thresholds, dosing, sample sizes, p-values)
+2. Include exact dosing when available
+3. Name specific organisms/drugs/genes — never "various"
+4. Include trial names + sample sizes (ZUMA-1 n=108)
+5. Include diagnostic thresholds with sensitivity/specificity
+6. Synthesize across studies — NOT one paragraph per article
+7. Name all classification systems with full criteria
+8. Distinguish related entities precisely (CRS vs IEC-HS vs HLH)
+9. Use [@key] for parenthetical, @key for narrative citations
+10. Write flowing academic paragraphs, not bullet points
+
+### Stage 7: Assemble and Render
 ```bash
 cd output
 quarto render literature_review.qmd --to pdf
 quarto render literature_review.qmd --to docx
 ```
 
-### Stage 9: Final Report
-Present the user with:
+### Stage 8: Final Report
+Present to user:
 - File locations: `.qmd`, `.bib`, `.pdf`, `.docx`
-- Statistics summary table
-- Any warnings (invalid DOIs, missing metadata, Embase errors)
-- Remind: push to GitHub to trigger the release workflow
+- Statistics table (PRISMA flow, articles by source/year/quartile)
+- Word count per section and total
+- Any warnings
+- Remind: push to GitHub for release
 
 ## CLI Alternative
 

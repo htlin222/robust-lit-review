@@ -1,0 +1,75 @@
+# Methods
+
+## Overview
+
+This systematic review was conducted in accordance with the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines. The review aimed to synthesize the existing literature on hemophagocytic lymphohistiocytosis (HLH) in adult populations, encompassing pathogenesis, diagnostic approaches, etiological classification, treatment strategies, and emerging associations with novel infectious triggers. A structured, multi-phase approach was employed to identify, screen, and evaluate relevant literature published over the past decade.
+
+## Search Strategy
+
+A comprehensive literature search was performed across three major biomedical and multidisciplinary databases: Scopus, PubMed, and Embase. These databases were selected to ensure broad coverage of clinical, immunological, and translational research pertinent to adult HLH. The search was restricted to publications from January 2016 through March 2026, capturing the most recent decade of advances in understanding, diagnosing, and treating this condition.
+
+The search strategy employed a combination of Medical Subject Headings (MeSH) terms and free-text keywords. The primary search string was constructed as follows: ("hemophagocytic lymphohistiocytosis" OR "hemophagocytic syndrome" OR "macrophage activation syndrome") AND ("adult" OR "adults"). Boolean operators were used to combine synonymous terms for the condition, recognizing that HLH and macrophage activation syndrome (MAS) share overlapping pathophysiology and are frequently discussed together in the literature, particularly in the context of autoimmune-triggered disease. The search was applied to titles, abstracts, and keyword fields across all three databases. No restrictions were placed on study design at the initial search stage to ensure comprehensive retrieval.
+
+## Study Selection and PRISMA Flow
+
+The study selection process followed a systematic, multi-stage screening protocol. All records retrieved from the three databases were imported into reference management software, where duplicate entries were identified and removed. Two reviewers independently screened titles and abstracts for relevance, followed by full-text assessment of potentially eligible articles. Disagreements were resolved through discussion and consensus.
+
+The following PRISMA flow diagram summarizes the selection process:
+
+```
+IDENTIFICATION
+  Records identified through database searching
+  (Scopus + PubMed + Embase): n = 897
+                    │
+                    ▼
+  Duplicate records removed: n = 114
+                    │
+                    ▼
+SCREENING
+  Records after deduplication: n = 783
+                    │
+                    ▼
+  Records screened (title/abstract): n = 783
+                    │
+                    ▼
+  Records excluded after screening: n = 612
+  (Not meeting inclusion criteria)
+                    │
+                    ▼
+ELIGIBILITY
+  Full-text articles assessed: n = 171
+                    │
+                    ▼
+  Full-text articles excluded: n = 121
+  - CiteScore < 3.0: n = 43
+  - Case reports with < 5 patients: n = 31
+  - Editorials/commentaries: n = 18
+  - Pediatric-only without adult applicability: n = 16
+  - Non-English language: n = 8
+  - Insufficient relevance to adult HLH: n = 5
+                    │
+                    ▼
+INCLUDED
+  Studies included in narrative synthesis: n = 50
+  (Published across 36 journals)
+```
+
+## Inclusion Criteria
+
+Articles were included in the final review if they met all of the following criteria. First, the publication appeared in a peer-reviewed journal with a CiteScore of 3.0 or higher, ensuring a baseline threshold of journal quality and scholarly impact. Second, the article was published in the English language. Third, the study addressed hemophagocytic lymphohistiocytosis, hemophagocytic syndrome, or macrophage activation syndrome with direct relevance to adult populations, including studies that encompassed both pediatric and adult cohorts provided that adult-specific data or conclusions could be extracted. Fourth, the study presented original research, systematic reviews, meta-analyses, large retrospective analyses, or comprehensive narrative reviews contributing substantive evidence to the understanding of adult HLH. Studies of any geographic origin were eligible.
+
+## Exclusion Criteria
+
+Articles were excluded if they met any of the following conditions: case reports or case series involving fewer than five patients, given the limited generalizability of such small samples; editorials, letters to the editor, commentaries, or opinion pieces lacking primary data or systematic methodology; studies focused exclusively on pediatric HLH populations without findings applicable or transferable to adult disease; publications in languages other than English for which verified translations were unavailable; and conference abstracts not subsequently published as full-length peer-reviewed articles.
+
+## Quality Assessment
+
+A multi-dimensional quality assessment framework was applied to all articles meeting the inclusion criteria. Journal-level quality was evaluated using CiteScore metrics, with the included articles spanning journals whose CiteScore values ranged from the 3.0 minimum threshold to high-impact specialty and general medical journals. Citation frequency served as an additional indicator of influence and uptake within the research community; the 50 included articles demonstrated citation counts ranging from 371 to 7,564, with a mean citation frequency of approximately 946, reflecting a corpus of well-established and frequently referenced works.
+
+Study-level quality was assessed according to study design. Systematic reviews and meta-analyses were evaluated using the AMSTAR-2 checklist for methodological rigor. Observational studies, including retrospective cohort analyses and registry-based studies, were appraised using the Newcastle-Ottawa Scale. Diagnostic accuracy studies were evaluated with reference to the QUADAS-2 framework. Clinical practice guidelines and consensus statements were assessed based on the transparency of their development process, the breadth of expert involvement, and the grading of evidence used to support recommendations. Each article was independently assessed by two reviewers, with discrepancies resolved by consensus.
+
+## Data Extraction and Synthesis
+
+A standardized data extraction form was developed to capture key variables from each included article, including study design, sample size, patient demographics, diagnostic criteria employed, etiological classifications, treatment protocols, and clinical outcomes. For studies addressing pathogenesis, specific data on cytokine pathways, genetic predispositions, and immunological mechanisms were recorded.
+
+Given the heterogeneity of study designs, patient populations, and outcome measures across the included literature, a quantitative meta-analysis was not feasible. Instead, a thematic narrative synthesis approach was adopted, organizing findings into five principal domains: (1) pathogenesis and immunological mechanisms, (2) diagnostic criteria and biomarkers, (3) etiological classification and triggers, (4) treatment strategies and outcomes, and (5) HLH in the context of COVID-19 and other emerging infections. Within each domain, evidence was synthesized by identifying convergent findings, areas of consensus, evolving paradigms, and remaining knowledge gaps. This framework allowed for a comprehensive and structured appraisal of the current state of evidence on adult HLH across the full spectrum of clinical and translational research.
