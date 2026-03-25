@@ -52,6 +52,8 @@ abstract: |
 
 {{< include sections/08-discussion.qmd >}}
 
+{{< include sections/09-prisma-checklist.qmd >}}
+
 # References
 
 ::: {#refs}

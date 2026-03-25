@@ -1,0 +1,57 @@
+# PRISMA 2020 Checklist
+
+This systematic review was conducted and reported in accordance with the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 statement. The following checklist documents compliance with each of the 27 items.
+
+| Section | Item | Checklist Item | Reported on |
+|---------|------|---------------|-------------|
+| **TITLE** | | | |
+| Title | 1 | Identify the report as a systematic review | Title page |
+| **ABSTRACT** | | | |
+| Abstract | 2 | Structured summary (background, objectives, methods, results, conclusions) | Abstract |
+| **INTRODUCTION** | | | |
+| Rationale | 3 | Describe the rationale for the review in the context of existing knowledge | Section 1, para 1--3 |
+| Objectives | 4 | Provide an explicit statement of the objectives or questions the review addresses | Section 1, objectives list |
+| **METHODS** | | | |
+| Eligibility criteria | 5 | Specify inclusion and exclusion criteria for the review | Sections 2.4, 2.5 |
+| Information sources | 6 | Specify all databases, registers, websites, and other sources searched | Section 2.2 |
+| Search strategy | 7 | Present the full search strategies for all databases | Section 2.2 |
+| Selection process | 8 | Specify methods used to decide whether a study met inclusion criteria | Section 2.3 |
+| Data collection process | 9 | Specify methods used to collect data from reports | Section 2.7 |
+| Data items | 10a | List and define all outcomes for which data were sought | Section 2.7 |
+| | 10b | List and define all other variables for which data were sought | Section 2.7 |
+| Study risk of bias assessment | 11 | Specify methods used to assess risk of bias in included studies | Section 2.6 |
+| Effect measures | 12 | Specify for each outcome the effect measure(s) used in synthesis | Section 2.7 (narrative synthesis) |
+| Synthesis methods | 13a | Describe the processes used to decide which studies were eligible for each synthesis | Section 2.3 |
+| | 13b | Describe any methods required to prepare the data for presentation or synthesis | Section 2.7 |
+| | 13c | Describe any methods used to tabulate or visually display results | Section 2.3 (PRISMA flow), Results tables |
+| | 13d | Describe any methods used to synthesize results and provide a rationale for the choice | Section 2.7 (thematic narrative synthesis) |
+| | 13e | Describe any methods used to explore possible causes of heterogeneity among study results | Section 2.7 (thematic grouping) |
+| | 13f | Describe any sensitivity analyses conducted to assess robustness of the synthesized results | N/A (narrative synthesis) |
+| Reporting bias assessment | 14 | Describe any methods used to assess risk of bias due to missing results in a synthesis | Section 8.5 (limitations) |
+| Certainty assessment | 15 | Describe any methods used to assess certainty in the body of evidence for an outcome | Section 2.6 (AMSTAR-2, NOS, QUADAS-2) |
+| **RESULTS** | | | |
+| Study selection | 16a | Describe the results of the search and selection process, from the number of records identified to the number of studies included, ideally using a flow diagram | Section 2.3, Figure 1 (PRISMA TikZ) |
+| | 16b | Cite studies that might appear to meet the inclusion criteria, but which were excluded, and explain why | Section 2.3 (exclusion categories with counts) |
+| Study characteristics | 17 | Cite each included study and present its characteristics | Sections 3--7 (cited throughout) |
+| Risk of bias in studies | 18 | Present assessments of risk of bias for each included study | Section 2.6 |
+| Results of individual studies | 19 | For all outcomes, present for each study: summary statistics, effect estimates, and confidence intervals | Sections 3--7 (specific data throughout) |
+| Results of syntheses | 20a | Briefly summarise the characteristics and risk of bias among contributing studies for each synthesis | Sections 3--7 (per-theme summaries) |
+| | 20b | Present results of all statistical syntheses conducted | Sections 3--7 (quantitative data cited) |
+| | 20c | Present results of any investigations of possible causes of heterogeneity | Sections 3--7 (thematic grouping) |
+| | 20d | Present results of any sensitivity analyses | N/A (narrative synthesis) |
+| Reporting biases | 21 | Present assessments of risk of bias due to missing results for each synthesis | Section 8.5 |
+| Certainty of evidence | 22 | Present assessments of certainty in the body of evidence for each outcome assessed | Section 8.5 |
+| **DISCUSSION** | | | |
+| Discussion | 23a | Provide a general interpretation of the results in the context of other evidence | Section 8.1 |
+| | 23b | Discuss any limitations of the evidence included in the review | Section 8.5 |
+| | 23c | Discuss any limitations of the review processes used | Section 8.5 |
+| | 23d | Discuss implications of the results for practice, policy, and future research | Sections 8.3, 8.6 |
+| **OTHER INFORMATION** | | | |
+| Registration and protocol | 24a | Provide registration information for the review, or state that the review was not registered | Not registered |
+| | 24b | Indicate where the review protocol can be accessed, or state that a protocol was not prepared | Protocol not prepared |
+| | 24c | Describe and explain any amendments to information provided at registration or in the protocol | N/A |
+| Support | 25 | Describe sources of financial or non-financial support for the review, and the role of the funders | No external funding |
+| Competing interests | 26 | Declare any competing interests of review authors | No competing interests |
+| Availability of data, code, and other materials | 27 | Report which of the following are publicly available and where they can be found: template data collection forms; data extracted from included studies; data used for analyses; analytic code; any other materials used in the review | All code, search results, and rendered outputs are publicly available at [https://github.com/htlin222/robust-lit-review](https://github.com/htlin222/robust-lit-review) |
+
+*Checklist adapted from: Page MJ, McKenzie JE, Bossuyt PM, et al. The PRISMA 2020 statement: an updated guideline for reporting systematic reviews. BMJ. 2021;372:n71.*
