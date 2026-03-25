@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
     paths:
+      - 'output/**/*.qmd'
       - 'output/*.qmd'
       - 'output/*.bib'
   workflow_dispatch:
