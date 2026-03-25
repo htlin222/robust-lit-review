@@ -11,7 +11,7 @@ Most automated review tools stop at collecting references. This pipeline goes al
 | What we deliver | How we ensure quality |
 |----------------|----------------------|
 | 10,000+ word narrative review | 8 parallel writing agents, each with domain-specific context |
-| Specific clinical data (dosing, thresholds, p-values) | Structured data extraction from full abstracts |
+| Specific clinical data (dosing, thresholds, p-values) | Haiku subagent structured extraction from full abstracts |
 | Balanced topic coverage | Subtopic-aware article selection across 16 categories |
 | Every DOI verified | doi.org handle API validation (100% pass rate) |
 | PRISMA 2020 flow diagram | TikZ-rendered professional figure |
@@ -58,7 +58,7 @@ Every run produces a complete submission package:
                 |
           Balanced subtopic selection ──> 50 articles
                 |
-          Extract structured data (regex)
+          Haiku structured extraction (5 agents)
                 |
           Zotero export
                 |
@@ -84,7 +84,7 @@ Every run produces a complete submission package:
 
 What makes this pipeline truly robust is the **self-audit mechanism**. After all sections are written, the pipeline automatically:
 
-1. **Audits** the manuscript against all 27 PRISMA 2020 checklist items using keyword matching
+1. **Audits** the manuscript against all 27 PRISMA 2020 checklist items (keyword matching or LLM-as-judge via haiku subagents)
 2. **Identifies gaps** — items that are missing or partially addressed
 3. **Generates targeted fix instructions** for each section file that needs improvement
 4. **Dispatches repair agents** that add only the missing content (no rewrites)
@@ -200,6 +200,10 @@ Lin, H.-T. (2026). *Robust Literature Review Pipeline: Automated systematic revi
 ### AMA
 
 Lin HT. Robust Literature Review Pipeline: Automated Systematic Review with Multi-Database Search, DOI Validation, and Publication-Ready Output. Version 1.0.0. GitHub; 2026. Accessed March 25, 2026. https://github.com/htlin222/robust-lit-review
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## License
 
