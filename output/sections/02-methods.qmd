@@ -20,34 +20,51 @@ The following PRISMA flow diagram summarizes the selection process.
 \begin{figure}[H]
 \centering
 \resizebox{\textwidth}{!}{
-\prismaflowstart
+\begin{tikzpicture}[
+  node distance=12mm and 15mm,
+  mynode/.style={draw, rectangle, align=center, minimum height=10ex, text width=5.5cm, font=\small, outer sep=0pt},
+  exnode/.style={draw, rectangle, align=left, minimum height=10ex, text width=7cm, font=\small, outer sep=0pt},
+  ml/.style args={#1/#2}{draw, rectangle, align=center, rounded corners, font=\small\bfseries, inner sep=2ex, outer sep=0pt, fill=cyan!30, minimum height=1.8*10ex, left=8mm of #2},
+  arrow/.style={thick,->,>=stealth}
+]
+\coordinate (tc);
 
 % Identification Phase
-\prismaflownode{n1a}{left=of tc}{Records identified through\\database searching\\(Scopus + PubMed + Embase)\\(n = 897)}{};
-\prismaflownode{n1b}{right=of tc}{Additional records identified\\through other sources\\(n = 0)}{};
-\prismaflownode{n2}{below=of tc |- n1a.south}{Records after duplicates removed\\(n = 783)}{n1a};
-\prismaflowarrow{n1b}{n2};
+\node[mynode, left=of tc] (n1a) {Records identified through\\database searching\\(Scopus + PubMed + Embase)\\(\textbf{n = 897})};
+\node[mynode, right=of tc] (n1b) {Additional records identified\\through other sources\\(\textbf{n = 0})};
+\node[mynode, below=15mm of tc |- n1a.south] (n2) {Records after duplicates removed\\(\textbf{n = 783})};
+\draw[arrow] (n1a) -- (n2);
+\draw[arrow] (n1b) -- (n2);
 
 % Screening Phase
-\prismaflownode{n3}{below=of n2}{Records screened\\(title/abstract)\\(n = 783)}{n2};
-\prismaflownode{n3r}{right=of n3}{Records excluded\\(n = 612)}{};
-\prismaflowarrow{n3}{n3r};
+\node[mynode, below=15mm of n2] (n3) {Records screened\\(title and abstract)\\(\textbf{n = 783})};
+\node[exnode, right=20mm of n3] (n3r) {Records excluded\\(\textbf{n = 612})};
+\draw[arrow] (n2) -- (n3);
+\draw[arrow] (n3) -- (n3r);
 
 % Eligibility Phase
-\prismaflownode{n4}{below=of n3}{Full-text articles assessed\\for eligibility\\(n = 171)}{n3};
-\prismaflownode{n4r}{right=of n4}{Full-text articles excluded (n = 121)\\-- CiteScore < 3.0 (n = 43)\\-- Case reports < 5 patients (n = 31)\\-- Editorials/commentaries (n = 18)\\-- Pediatric-only (n = 16)\\-- Non-English (n = 8)\\-- Insufficient relevance (n = 5)}{};
-\prismaflowarrow{n4}{n4r};
+\node[mynode, below=15mm of n3] (n4) {Full-text articles assessed\\for eligibility\\(\textbf{n = 171})};
+\node[exnode, right=20mm of n4, text width=7.5cm] (n4r) {Full-text articles excluded (\textbf{n = 121})\\[3pt]
+\quad $\bullet$ CiteScore $<$ 3.0 (n = 43)\\
+\quad $\bullet$ Case reports $<$ 5 patients (n = 31)\\
+\quad $\bullet$ Editorials/commentaries (n = 18)\\
+\quad $\bullet$ Pediatric-only (n = 16)\\
+\quad $\bullet$ Non-English (n = 8)\\
+\quad $\bullet$ Insufficient relevance (n = 5)};
+\draw[arrow] (n3) -- (n4);
+\draw[arrow] (n4) -- (n4r);
 
 % Inclusion Phase
-\prismaflownode{n5}{below=of n4}{Studies included in\\qualitative synthesis\\(n = 50)}{n4};
+\node[mynode, below=15mm of n4] (n5) {Studies included in\\qualitative synthesis\\(\textbf{n = 50})\\(across 36 journals)};
+\draw[arrow] (n4) -- (n5);
 
-% Labels
-\prismalabel{1.3*\mh}{n1a.west}{Identification};
-\prismalabel{1.3*\mh}{n1a.west |- {$(n2)!0.6!(n3)$}}{Screening};
-\prismalabel{1.3*\mh}{n1a.west |- {$(n3)!0.6!(n4)$}}{Eligibility};
-\prismalabel{1.3*\mh}{n1a.west |- n5}{Included};
+% Phase Labels
+\node[ml=1.8*10ex/n1a.west] {\rotatebox{90}{\textbf{Identification}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n2)!0.5!(n3)$}}] {\rotatebox{90}{\textbf{Screening}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n3)!0.5!(n4)$}}] {\rotatebox{90}{\textbf{Eligibility}}};
+\node[ml=1.8*10ex/{n1a.west |- n5}] {\rotatebox{90}{\textbf{Included}}};
 
-\prismaflowend
+\end{tikzpicture}
 }
 \caption{PRISMA 2020 flow diagram for the systematic review of hemophagocytic lymphohistiocytosis in adults.}
 \label{fig-prisma}
