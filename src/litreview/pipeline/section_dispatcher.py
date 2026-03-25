@@ -313,7 +313,7 @@ format:
     number-sections: true
     theme: cosmo
 bibliography: references.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
 abstract: |
   {{{{< include sections/00-abstract.qmd >}}}}
 ---

@@ -25,7 +25,7 @@ format:
     number-sections: true
     theme: cosmo
 bibliography: references.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
 abstract: |
   **Background:** Hemophagocytic lymphohistiocytosis (HLH) is a life-threatening hyperinflammatory syndrome characterized by uncontrolled immune activation, excessive cytokine release, and multi-organ damage. In adults, HLH is most often secondary to infections, malignancies, and autoimmune conditions, yet remains underrecognized with high mortality. The expanding use of chimeric antigen receptor (CAR) T-cell therapy and immune checkpoint inhibitors, together with COVID-19-associated hyperinflammation, has renewed interest in HLH pathophysiology, diagnosis, and management.
   **Methods:** A systematic search was conducted across Scopus, PubMed, and Embase using predefined terms related to hemophagocytic lymphohistiocytosis, macrophage activation syndrome, cytokine storm, and hyperinflammation in adults. Records were screened following PRISMA guidelines. A journal quality threshold of CiteScore 3.0 or higher was applied to ensure inclusion of high-impact evidence.

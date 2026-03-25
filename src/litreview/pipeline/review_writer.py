@@ -287,7 +287,7 @@ format:
     number-sections: true
     theme: cosmo
 bibliography: references.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
 abstract: |
   **Background:** {topic} represents a significant clinical challenge requiring comprehensive
   evidence synthesis. This systematic review aims to consolidate current knowledge from
