@@ -150,15 +150,54 @@ Write the main file with `{{< include >}}` directives pointing to each section.
 9. Use [@key] for parenthetical, @key for narrative citations
 10. Write flowing academic paragraphs, not bullet points
 
-### Stage 7: Assemble and Render
+### Stage 7: PRISMA 2020 Audit Loop (mandatory before render)
+
+Run the automated PRISMA audit to check all 27 items:
+
+```python
+from litreview.pipeline.prisma_audit import audit_manuscript, format_audit_report, generate_repair_prompts
+from pathlib import Path
+
+results = audit_manuscript(Path("output/sections"))
+print(format_audit_report(results))
+repairs = generate_repair_prompts(results)
+```
+
+**If any items FAIL or are PARTIAL:**
+
+1. `generate_repair_prompts()` returns per-file fix instructions
+2. Launch repair subagents — one per section file that needs fixing
+3. Each agent reads its section, adds ONLY the missing content, preserves everything else
+4. Re-run audit until all items pass (max 2 iterations)
+
+**Repair agent prompt template:**
+```
+Read /Users/htlin/robust-lit-review/output/sections/{filename}
+The PRISMA 2020 audit found gaps. ADD the missing content without rewriting.
+Required fixes:
+{fix_instructions}
+Do NOT remove existing content. Insert at appropriate locations.
+```
+
+5. After all items pass, generate the PRISMA checklist appendix:
+```python
+from litreview.pipeline.prisma_checklist import generate_prisma_checklist
+checklist = generate_prisma_checklist(
+    repo_url="https://github.com/htlin222/robust-lit-review"
+)
+# Write to output/sections/09-prisma-checklist.qmd
+```
+
+### Stage 8: Render
 ```bash
 cd output
 quarto render literature_review.qmd --to pdf
 quarto render literature_review.qmd --to docx
 ```
 
-### Stage 8: Final Report
+### Stage 9: Final Report
 Present to user:
+- PRISMA audit score (e.g., "36/36 passed")
 - File locations: `.qmd`, `.bib`, `.pdf`, `.docx`
 - Statistics table (PRISMA flow, articles by source/year/quartile)
 - Word count per section and total
