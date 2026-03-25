@@ -80,21 +80,56 @@ Launch validation subagent:
 - Verify URL accessibility
 - **REJECT articles with invalid DOIs**
 
-### Stage 4.5: Balanced Selection & Data Enrichment (NEW)
-Use `litreview.pipeline.enrichment` module:
-- **Balanced subtopic coverage**: Don't just take top-N by citations (skews toward reviews/COVID).
-  Use `ensure_balanced_coverage()` to guarantee minimum articles per subtopic:
-  epidemiology, pathogenesis, diagnosis, classification, genetics,
-  treatment (conventional/targeted/transplant), prognosis
-- **Extract structured data from abstracts**: Use `enrich_articles()` to pull out:
-  - Sample sizes, percentages, p-values, confidence intervals
-  - Hazard/odds ratios, survival rates
-  - Diagnostic thresholds (ferritin >10,000, sIL-2R cutoffs)
-  - Drug dosing (etoposide 150 mg/m², anakinra 1-2 mg/kg)
-  - Incidence rates (cases per million)
-  - Sensitivity/specificity values
-- **Classify articles by subtopic** for thematic grouping
-- **Build rich context** with `build_rich_article_context()` for the AI writer
+### Stage 4.5: Article Selection (choose ONE method)
+
+**Method A: Balanced heuristic (fast, no extra deps)**
+```python
+from litreview.pipeline.enrichment import ensure_balanced_coverage
+selected = ensure_balanced_coverage(articles, target_count=50)
+```
+
+**Method B: PubMedBert embedding + haiku judge (better relevance)**
+```python
+from litreview.pipeline.semantic_selector import select_articles
+scored, judge_tasks = select_articles(topic, articles, Path("/tmp/judge"))
+```
+Then dispatch judge tasks in parallel:
+```
+for task in judge_tasks:
+    Agent(model="haiku", description=task.description, prompt=task.prompt)
+```
+After all complete:
+```python
+from litreview.pipeline.semantic_selector import collect_judge_results
+selected = collect_judge_results(scored, Path("/tmp/judge"), target=50)
+```
+Requires: `uv pip install -e ".[semantic]"` (sentence-transformers + torch)
+
+### Stage 4.6: Structured Data Extraction (choose ONE method)
+
+**Method A: Regex extraction (fast, no LLM cost)**
+```python
+from litreview.pipeline.enrichment import enrich_articles
+enriched = enrich_articles(selected)
+```
+
+**Method B: Haiku subagent extraction (much better quality)**
+```python
+from litreview.pipeline.llm_extraction import generate_extraction_tasks
+tasks = generate_extraction_tasks(selected, Path("/tmp/extract"))
+```
+Then dispatch ALL in parallel (model="haiku"):
+```
+for task in tasks:
+    Agent(model="haiku", description=task.description, prompt=task.prompt)
+```
+After all complete:
+```python
+from litreview.pipeline.llm_extraction import collect_extraction_results
+enriched = collect_extraction_results(selected, Path("/tmp/extract"))
+```
+
+- **Build rich context** with `build_rich_article_context()` for the writing agents
 
 ### Stage 5: Export to Zotero
 - Create a new Zotero collection named "LitReview: {topic}"
@@ -152,20 +187,37 @@ Write the main file with `{{< include >}}` directives pointing to each section.
 
 ### Stage 7: PRISMA 2020 Audit Loop (mandatory before render)
 
-Run the automated PRISMA audit to check all 27 items:
+Choose ONE audit method:
 
+**Method A: Keyword audit (fast, no LLM cost)**
 ```python
 from litreview.pipeline.prisma_audit import audit_manuscript, format_audit_report, generate_repair_prompts
-from pathlib import Path
-
 results = audit_manuscript(Path("output/sections"))
 print(format_audit_report(results))
 repairs = generate_repair_prompts(results)
 ```
 
+**Method B: Haiku LLM-as-judge (much more accurate)**
+```python
+from litreview.pipeline.llm_prisma_judge import generate_judge_tasks, collect_judge_results
+tasks = generate_judge_tasks(Path("output/sections"), Path("/tmp/prisma_judge"))
+```
+Dispatch all tasks in parallel (model="haiku"):
+```
+for task in tasks:
+    Agent(model="haiku", description=task.description, prompt=task.prompt)
+```
+After all complete:
+```python
+results = collect_judge_results(Path("/tmp/prisma_judge"))
+```
+The LLM judge reads the actual section text and evaluates whether each
+PRISMA item is substantively addressed — not just keyword-present.
+It also generates specific fix suggestions in natural language.
+
 **If any items FAIL or are PARTIAL:**
 
-1. `generate_repair_prompts()` returns per-file fix instructions
+1. `generate_repair_prompts()` or the judge's `suggestion` field returns fix instructions
 2. Launch repair subagents — one per section file that needs fixing
 3. Each agent reads its section, adds ONLY the missing content, preserves everything else
 4. Re-run audit until all items pass (max 2 iterations)
