@@ -2,7 +2,18 @@
 
 [![Render & Release](https://github.com/htlin222/robust-lit-review/actions/workflows/render-release.yml/badge.svg)](https://github.com/htlin222/robust-lit-review/actions/workflows/render-release.yml)
 
-自動化系統性文獻回顧工具，搜尋 **Scopus**、**PubMed** 和 **Embase** 三大資料庫，依期刊影響力 (CiteScore/SJR) 篩選，驗證每一筆 DOI，並產生可直接投稿的文獻回顧文章。
+**一個指令，從主題到可投稿的完整稿件。** 本工具產出的不是範本或參考文獻清單，而是一篇完整的學術文獻回顧文章 — 含敘事性綜合分析、具體臨床數據、完整的 PRISMA 2020 合規性，以及致編輯函。
+
+## 為何叫「Robust」？
+
+多數自動化回顧工具只停在收集文獻。本工具一路做到 **可直接投稿的完整稿件**，並內建品質保證機制：
+
+- PRISMA 2020 自動審核 (27 項檢查清單，自動偵測缺失並修復)
+- 100% DOI 驗證 (doi.org API)
+- 結構化數據萃取 (劑量、閾值、p 值、樣本數)
+- 均衡的 16 類主題涵蓋
+- AMA 引用格式 (上標數字)
+- 致編輯函 (自動產生)
 
 ## 功能特色
 

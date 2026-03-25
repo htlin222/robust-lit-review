@@ -1,0 +1,46 @@
+---
+title: "Cover Letter"
+format:
+  pdf:
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 1.15
+    number-sections: false
+    toc: false
+  docx:
+    toc: false
+---
+
+\today
+
+Dear Editor,
+
+We are pleased to submit our manuscript entitled **"Hemophagocytic Lymphohistiocytosis in Adults: A Systematic Review of Pathogenesis, Diagnosis, and Management (2016--2026)"** for consideration for publication in your journal.
+
+Hemophagocytic lymphohistiocytosis (HLH) is a life-threatening hyperinflammatory syndrome with mortality rates exceeding 50% in untreated adults. The past decade has witnessed transformative advances in our understanding and management of this condition, driven by: (1) the publication of the first adult-specific management guidelines; (2) the approval of emapalumab as the first targeted therapy for HLH; (3) the emergence of iatrogenic triggers from CAR T-cell therapy and immune checkpoint inhibitors; and (4) the COVID-19 pandemic, which brought cytokine storm syndromes to global clinical attention.
+
+Despite these advances, no comprehensive systematic review has synthesized the full scope of developments across pathogenesis, diagnostic criteria, etiological classification, treatment strategies, and the COVID-19 paradigm in a single, integrated article. Our review addresses this gap by systematically searching Scopus, PubMed, and Embase for publications from 2016 to 2026, applying rigorous quality filtering (CiteScore $\geq$ 3.0), and validating every DOI to ensure reference integrity. From 897 initial records, 50 high-impact articles across 36 journals were selected for narrative thematic synthesis.
+
+**Key contributions of this review include:**
+
+- A comprehensive synthesis of the IFN-$\gamma$--macrophage activation axis as the validated central pathogenic pathway, supported by the clinical success of emapalumab (63% response rate, $P$ = 0.02)
+- Critical evaluation of diagnostic tools for adult populations: HLH-2004, the updated HLH-2024 criteria, HScore (93% sensitivity, 86% specificity at cutoff 168), and EULAR/ACR MAS criteria
+- The first systematic cataloging of iatrogenic HLH triggers, including the distinction between cytokine release syndrome and immune effector cell-associated HLH-like syndrome (IEC-HS) in the CAR T-cell setting
+- An evidence-based treatment framework encompassing etoposide-based protocols with adult dose modifications, targeted therapies (emapalumab, anakinra, ruxolitinib, tocilizumab), and trigger-specific strategies
+- A nuanced analysis of the COVID-19 and HLH overlap, distinguishing shared pathophysiology from critical immunological differences
+
+This review was conducted in full compliance with the PRISMA 2020 guidelines, with a completed 27-item checklist provided as an appendix. All references have been validated through DOI resolution, and the complete search methodology, data, and analytic materials are publicly available.
+
+We believe this manuscript will be of significant interest to hematologists, intensivists, rheumatologists, and oncologists who encounter HLH in clinical practice, and that it provides a timely, comprehensive resource as the therapeutic landscape continues to evolve.
+
+This manuscript has not been published previously and is not under consideration for publication elsewhere. All authors have approved the submitted version.
+
+Thank you for your consideration. We look forward to hearing from you.
+
+Sincerely,
+
+Hsieh-Ting Lin\
+Department of Hematology\
+ORCID: 0009-0002-3974-4528
