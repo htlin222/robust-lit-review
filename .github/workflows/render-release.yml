@@ -36,10 +36,10 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          version: '1.5'
+          version: '1.7.32'
 
       - name: Install TinyTeX
-        run: quarto install tinytex
+        run: quarto install tinytex --update-path
 
       - name: Run pipeline (if topic provided)
         if: ${{ github.event.inputs.topic != '' }}
