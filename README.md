@@ -82,7 +82,7 @@ Every run produces a complete submission package:
 
 ## The PRISMA 2020 Audit Loop
 
-What makes this pipeline truly robust is the **self-audit mechanism**. After all sections are written, the pipeline automatically:
+After all sections are written, the pipeline automatically:
 
 1. **Audits** the manuscript against all 27 PRISMA 2020 checklist items (keyword matching or LLM-as-judge via haiku subagents)
 2. **Identifies gaps** — items that are missing or partially addressed
@@ -98,6 +98,30 @@ print(format_audit_report(results))
 # Score: 35/36 passed (0 failed, 0 partial, 1 N/A)
 # All PRISMA 2020 items are addressed. The manuscript is ready for submission.
 ```
+
+## Human-in-the-Loop Mode
+
+Add `--hitl` to pause at 9 critical decision points where human judgment is irreplaceable:
+
+```
+/lit-review --hitl "your research topic"
+```
+
+| Checkpoint | When | Why human needed |
+|-----------|------|-----------------|
+| **CP1** Search Strategy | After query generation | Wrong query = wrong review. Domain expert knows the right terms. |
+| **CP2** Borderline Articles | After filtering | Articles near the threshold need domain judgment to include/exclude. |
+| **CP3** Final Article Set | After selection | Expert may know landmark papers the machine missed. |
+| **CP4** Thematic Grouping | Before writing | How findings are grouped shapes the narrative arc. |
+| **CP5** Key Claims | After writing | **Highest error cost.** LLMs can hallucinate dosing, p-values, survival rates. |
+| **CP6** PRISMA Audit | After audit | Some items may be legitimately N/A for the review type. |
+| **CP7** Cover Letter | Before render | Target journal selection affects framing. |
+| **CP8** Final Preview | Before render | Last chance to catch major issues. |
+| **CP9** Publish Decision | Before push | Public release requires conscious consent. |
+
+Each checkpoint presents **multiple-choice options** (not open-ended questions), has a **default** for auto-mode, and **logs decisions** to `checkpoint_log.json` for reproducibility.
+
+Without `--hitl`, the pipeline runs fully automated using defaults.
 
 ## Quick Start
 

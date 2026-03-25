@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Human-in-the-Loop mode** (`--hitl`): 9 checkpoints where pipeline pauses for human judgment — search strategy approval, borderline article review, final article set, thematic grouping, key claims verification, PRISMA audit, cover letter, final preview, publish decision. Multiple-choice format, defaults for auto-mode, logged to `checkpoint_log.json`
 - **Full pipeline**: Topic to submission-ready manuscript in one command
 - **Multi-database search**: Parallel search across Scopus, PubMed, and Embase APIs
 - **API clients**: `ScopusClient`, `PubMedClient`, `EmbaseClient`, `UnpaywallClient`, `ZoteroClient`
