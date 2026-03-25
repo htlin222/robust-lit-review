@@ -15,6 +15,9 @@ format:
       - margin=1in
     fontsize: 11pt
     linestretch: 1.5
+    include-in-header:
+      - text: |
+          \usepackage{prisma-flow-diagram/prisma-flow-diagram}
   docx:
     toc: true
     toc-depth: 3

@@ -14,45 +14,53 @@ The search strategy employed a combination of Medical Subject Headings (MeSH) te
 
 The study selection process followed a systematic, multi-stage screening protocol. All records retrieved from the three databases were imported into reference management software, where duplicate entries were identified and removed. Two reviewers independently screened titles and abstracts for relevance, followed by full-text assessment of potentially eligible articles. Disagreements were resolved through discussion and consensus.
 
-The following PRISMA flow diagram summarizes the selection process:
+The following PRISMA flow diagram summarizes the selection process.
 
+```{=latex}
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\prismaflowstart
+
+% Identification Phase
+\prismaflownode{n1a}{left=of tc}{Records identified through\\database searching\\(Scopus + PubMed + Embase)\\(n = 897)}{};
+\prismaflownode{n1b}{right=of tc}{Additional records identified\\through other sources\\(n = 0)}{};
+\prismaflownode{n2}{below=of tc |- n1a.south}{Records after duplicates removed\\(n = 783)}{n1a};
+\prismaflowarrow{n1b}{n2};
+
+% Screening Phase
+\prismaflownode{n3}{below=of n2}{Records screened\\(title/abstract)\\(n = 783)}{n2};
+\prismaflownode{n3r}{right=of n3}{Records excluded\\(n = 612)}{};
+\prismaflowarrow{n3}{n3r};
+
+% Eligibility Phase
+\prismaflownode{n4}{below=of n3}{Full-text articles assessed\\for eligibility\\(n = 171)}{n3};
+\prismaflownode{n4r}{right=of n4}{Full-text articles excluded (n = 121)\\-- CiteScore < 3.0 (n = 43)\\-- Case reports < 5 patients (n = 31)\\-- Editorials/commentaries (n = 18)\\-- Pediatric-only (n = 16)\\-- Non-English (n = 8)\\-- Insufficient relevance (n = 5)}{};
+\prismaflowarrow{n4}{n4r};
+
+% Inclusion Phase
+\prismaflownode{n5}{below=of n4}{Studies included in\\qualitative synthesis\\(n = 50)}{n4};
+
+% Labels
+\prismalabel{1.3*\mh}{n1a.west}{Identification};
+\prismalabel{1.3*\mh}{n1a.west |- {$(n2)!0.6!(n3)$}}{Screening};
+\prismalabel{1.3*\mh}{n1a.west |- {$(n3)!0.6!(n4)$}}{Eligibility};
+\prismalabel{1.3*\mh}{n1a.west |- n5}{Included};
+
+\prismaflowend
+}
+\caption{PRISMA 2020 flow diagram for the systematic review of hemophagocytic lymphohistiocytosis in adults.}
+\label{fig-prisma}
+\end{figure}
 ```
-IDENTIFICATION
-  Records identified through database searching
-  (Scopus + PubMed + Embase): n = 897
-                    │
-                    ▼
-  Duplicate records removed: n = 114
-                    │
-                    ▼
-SCREENING
-  Records after deduplication: n = 783
-                    │
-                    ▼
-  Records screened (title/abstract): n = 783
-                    │
-                    ▼
-  Records excluded after screening: n = 612
-  (Not meeting inclusion criteria)
-                    │
-                    ▼
-ELIGIBILITY
-  Full-text articles assessed: n = 171
-                    │
-                    ▼
-  Full-text articles excluded: n = 121
-  - CiteScore < 3.0: n = 43
-  - Case reports with < 5 patients: n = 31
-  - Editorials/commentaries: n = 18
-  - Pediatric-only without adult applicability: n = 16
-  - Non-English language: n = 8
-  - Insufficient relevance to adult HLH: n = 5
-                    │
-                    ▼
-INCLUDED
-  Studies included in narrative synthesis: n = 50
-  (Published across 36 journals)
-```
+
+::: {.content-visible when-format="html"}
+![PRISMA Flow Diagram](prisma-flow.png){#fig-prisma}
+:::
+
+::: {.content-visible when-format="docx"}
+**PRISMA Flow:** 897 records identified → 783 after deduplication → 171 full-text assessed → 50 included in synthesis (36 journals). Excluded: CiteScore < 3.0 (n=43), case reports < 5 patients (n=31), editorials (n=18), pediatric-only (n=16), non-English (n=8), insufficient relevance (n=5).
+:::
 
 ## Inclusion Criteria
 
