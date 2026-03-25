@@ -221,9 +221,9 @@ class LitReviewPipeline:
         validated = await self.validate_and_enrich(filtered)
         after_validation = len([a for a in validated if a.doi_validated or not a.doi])
 
-        # Stage 6: Select top articles (by citation count, then CiteScore)
-        validated.sort(key=lambda a: (a.citation_count or 0, a.citescore or 0), reverse=True)
-        selected = validated[: self.config.target_articles]
+        # Stage 6: Select articles with balanced subtopic coverage
+        from litreview.pipeline.enrichment import ensure_balanced_coverage
+        selected = ensure_balanced_coverage(validated, self.config.target_articles)
         output.articles = selected
 
         # Stage 7: Export to Zotero

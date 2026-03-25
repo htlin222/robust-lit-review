@@ -80,19 +80,58 @@ Launch validation subagent:
 - Verify URL accessibility
 - **REJECT articles with invalid DOIs**
 
+### Stage 4.5: Balanced Selection & Data Enrichment (NEW)
+Use `litreview.pipeline.enrichment` module:
+- **Balanced subtopic coverage**: Don't just take top-N by citations (skews toward reviews/COVID).
+  Use `ensure_balanced_coverage()` to guarantee minimum articles per subtopic:
+  epidemiology, pathogenesis, diagnosis, classification, genetics,
+  treatment (conventional/targeted/transplant), prognosis
+- **Extract structured data from abstracts**: Use `enrich_articles()` to pull out:
+  - Sample sizes, percentages, p-values, confidence intervals
+  - Hazard/odds ratios, survival rates
+  - Diagnostic thresholds (ferritin >10,000, sIL-2R cutoffs)
+  - Drug dosing (etoposide 150 mg/m², anakinra 1-2 mg/kg)
+  - Incidence rates (cases per million)
+  - Sensitivity/specificity values
+- **Classify articles by subtopic** for thematic grouping
+- **Build rich context** with `build_rich_article_context()` for the AI writer
+
 ### Stage 5: Export to Zotero
 - Create a new Zotero collection named "LitReview: {topic}"
 - Add all validated articles
 
-### Stage 6: Generate Outputs
-- BibTeX file (`output/references.bib`)
-- Quarto document (`output/literature_review.qmd`) with:
-  - YAML frontmatter (PDF + DOCX + HTML formats, APA citation style)
-  - Introduction (objectives, scope)
-  - Methods (PRISMA flow, search strategy, inclusion criteria)
-  - Results (statistics table, year distribution, thematic synthesis)
-  - Discussion (findings, trends, limitations, future directions)
-  - References section
+### Stage 6: Generate Outputs — PUBLICATION-QUALITY WRITING
+Write a REAL publication-ready review article, NOT a skeleton.
+
+**Writing the review (delegate to a writing subagent):**
+
+The writing agent receives ALL article data including full abstracts and extracted
+quantitative data. It must produce 5,000-8,000 words of proper academic prose.
+
+**CRITICAL WRITING RULES for publication quality:**
+
+1. **Use specific numbers from abstracts**: "ferritin >10,000 ng/mL (98% specificity)" not "elevated ferritin"
+2. **Include dosing when available**: "etoposide 150 mg/m² twice weekly" not "etoposide-based therapy"
+3. **Cite epidemiologic data**: incidence rates, mortality trends, cohort sizes
+4. **Name specific organisms/drugs/genes**: Not "various viral triggers" but "EBV, CMV, HSV, HHV-6"
+5. **Include diagnostic thresholds**: H-Score cutoff 169 (93% sensitivity, 86% specificity)
+6. **Compare study findings quantitatively**: "Study A showed 61% 5-year OS vs Study B's 54%"
+7. **Name specific criteria/classifications**: HLH-2004, HLH-2024, EULAR/ACR MAS criteria
+8. **Include trial identifiers**: NCT numbers, study names (ZUMA-1, CARTITUDE-1)
+9. **Describe novel/pipeline agents**: Not just established drugs
+10. **Distinguish related but distinct entities**: CRS vs HLH, MAS vs HLH, COVID-19 vs classical HLH
+
+**Document structure:**
+- Structured abstract (~250 words: Background, Methods, Results, Conclusion)
+- Introduction: clinical significance, historical context, evolving understanding, objectives
+- Methods: PRISMA-compliant, search strategy, inclusion/exclusion, quality assessment
+- Results: Organized thematically (NOT one paragraph per article)
+  - Subtopic sections derived from article classification
+  - Cross-study synthesis with specific data points
+  - Temporal trends and evolution of the field
+- Discussion: synthesis, clinical implications, controversies, strengths/limitations, future directions
+- Conclusion
+- References
 
 ### Stage 7: Compute Statistics
 Report to user:
