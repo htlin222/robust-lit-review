@@ -6,7 +6,7 @@ abstract: "Automated systematic literature review pipeline with multi-database s
 authors:
   - family-names: "Lin"
     given-names: "Hsieh-Ting"
-    orcid: ""
+    orcid: "https://orcid.org/0009-0002-3974-4528"
 version: "1.0.0"
 date-released: "2026-03-25"
 license: MIT
