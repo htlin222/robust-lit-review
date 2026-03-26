@@ -1,0 +1,17 @@
+{
+  "filename": "02-methods.qmd",
+  "heading": "# Methods",
+  "word_target": "800-1,000",
+  "writing_instructions": "Write the Methods section. Include:\n1. Search Strategy: Scopus, PubMed, Embase; date range 2016-2026; search terms\n2. PRISMA Flow: 897 identified \u2192 783 after deduplication \u2192 50 included\n3. Inclusion criteria: CiteScore >= 3.0, peer-reviewed, English, adult relevance\n4. Exclusion criteria: case reports <5 patients, editorials, pediatric-only\n5. Quality assessment approach\n6. Data extraction and thematic synthesis methodology\n\nInclude the PRISMA flow as a code block diagram.",
+  "article_count": 0,
+  "article_context": "(No specific articles for this section)",
+  "stats": {
+    "total_found": 500,
+    "after_dedup": 500,
+    "after_quality": 500,
+    "included": 50,
+    "journals": 26,
+    "date_range": "2016-2026",
+    "avg_citations": 322.24
+  }
+}

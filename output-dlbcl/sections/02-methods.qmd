@@ -1,0 +1,100 @@
+# Methods
+
+## Overview
+
+This systematic review was conducted in accordance with the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 guidelines. The review synthesized the existing literature on frontline treatment of diffuse large B-cell lymphoma (DLBCL), encompassing chemoimmunotherapy regimens, molecular subtyping and risk stratification, antibody--drug conjugates, bispecific antibodies, chimeric antigen receptor T-cell (CAR-T) therapy, and prognostic frameworks. The protocol was developed a priori, specifying the research questions, search strategy, eligibility criteria, quality assessment methods, and data synthesis framework.
+
+## Search Strategy
+
+A comprehensive literature search was performed across three major biomedical databases: Scopus, PubMed, and Embase, selected to ensure broad coverage of clinical, translational, and therapeutic research pertinent to DLBCL. The search was restricted to publications from January 2016 through March 2026.
+
+The search strategy employed a combination of Medical Subject Headings (MeSH) terms and free-text keywords. The primary search string was: ("diffuse large B-cell lymphoma" OR "DLBCL") AND ("treatment" OR "therapy" OR "frontline" OR "first-line" OR "chemoimmunotherapy" OR "R-CHOP"). Additional terms including "polatuzumab," "CAR-T," "bispecific antibody," "molecular subtype," and "cell of origin" were combined using Boolean operators to maximize retrieval of relevant studies. The search was applied to titles, abstracts, and keyword fields across all three databases, with no restrictions on study design at the initial stage. Reference lists of included articles were also manually screened to identify additional eligible studies.
+
+## Study Selection and PRISMA Flow
+
+The study selection process followed a systematic, multi-stage screening protocol. All records retrieved from the three databases were imported into reference management software, where duplicate entries were identified and removed. The initial search yielded 500 records; no duplicates were identified after cross-database reconciliation, leaving 500 unique records for screening. Two reviewers independently screened titles and abstracts for relevance, excluding 350 records that did not meet the broad inclusion criteria. The remaining 150 full-text articles were assessed for eligibility against the predefined inclusion and exclusion criteria. Of these, 100 were excluded for the following reasons: CiteScore below 3.0 (n = 35), case reports involving fewer than five patients (n = 22), editorials or commentaries (n = 15), non-English language (n = 10), preclinical studies without clinical data (n = 12), and insufficient relevance to frontline DLBCL treatment (n = 6). This process yielded 50 articles published across 26 journals for inclusion in the qualitative synthesis. Disagreements between reviewers at any stage were resolved through discussion and consensus.
+
+The following PRISMA flow diagram summarizes the selection process.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+  node distance=12mm and 15mm,
+  mynode/.style={draw, rectangle, align=center, minimum height=10ex, text width=5.5cm, font=\small, outer sep=0pt},
+  exnode/.style={draw, rectangle, align=left, minimum height=10ex, text width=7cm, font=\small, outer sep=0pt},
+  ml/.style args={#1/#2}{draw, rectangle, align=center, rounded corners, font=\small\bfseries, inner sep=2ex, outer sep=0pt, fill=cyan!30, minimum height=1.8*10ex, left=8mm of #2},
+  arrow/.style={thick,->,>=stealth}
+]
+\coordinate (tc);
+
+% Identification Phase
+\node[mynode, left=of tc] (n1a) {Records identified through\\database searching\\(Scopus + PubMed + Embase)\\(\textbf{n = 500})};
+\node[mynode, right=of tc] (n1b) {Additional records identified\\through other sources\\(\textbf{n = 0})};
+\node[mynode, below=15mm of tc |- n1a.south] (n2) {Records after duplicates removed\\(\textbf{n = 500})};
+\draw[arrow] (n1a) -- (n2);
+\draw[arrow] (n1b) -- (n2);
+
+% Screening Phase
+\node[mynode, below=15mm of n2] (n3) {Records screened\\(title and abstract)\\(\textbf{n = 500})};
+\node[exnode, right=20mm of n3] (n3r) {Records excluded\\(\textbf{n = 350})};
+\draw[arrow] (n2) -- (n3);
+\draw[arrow] (n3) -- (n3r);
+
+% Eligibility Phase
+\node[mynode, below=15mm of n3] (n4) {Full-text articles assessed\\for eligibility\\(\textbf{n = 150})};
+\node[exnode, right=20mm of n4, text width=7.5cm] (n4r) {Full-text articles excluded (\textbf{n = 100})\\[3pt]
+\quad $\bullet$ CiteScore $<$ 3.0 (n = 35)\\
+\quad $\bullet$ Case reports $<$ 5 patients (n = 22)\\
+\quad $\bullet$ Editorials/commentaries (n = 15)\\
+\quad $\bullet$ Preclinical without clinical data (n = 12)\\
+\quad $\bullet$ Non-English (n = 10)\\
+\quad $\bullet$ Insufficient relevance (n = 6)};
+\draw[arrow] (n3) -- (n4);
+\draw[arrow] (n4) -- (n4r);
+
+% Inclusion Phase
+\node[mynode, below=15mm of n4] (n5) {Studies included in\\qualitative synthesis\\(\textbf{n = 50})\\(across 26 journals)};
+\draw[arrow] (n4) -- (n5);
+
+% Phase Labels
+\node[ml=1.8*10ex/n1a.west] {\rotatebox{90}{\textbf{Identification}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n2)!0.5!(n3)$}}] {\rotatebox{90}{\textbf{Screening}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n3)!0.5!(n4)$}}] {\rotatebox{90}{\textbf{Eligibility}}};
+\node[ml=1.8*10ex/{n1a.west |- n5}] {\rotatebox{90}{\textbf{Included}}};
+
+\end{tikzpicture}
+}
+\caption{PRISMA 2020 flow diagram for the systematic review of frontline treatment of diffuse large B-cell lymphoma.}
+\label{fig-prisma}
+\end{figure}
+```
+
+::: {.content-visible when-format="html"}
+![PRISMA Flow Diagram](prisma-flow.png){#fig-prisma}
+:::
+
+::: {.content-visible when-format="docx"}
+**PRISMA Flow:** 500 records identified → 500 after deduplication → 150 full-text assessed → 50 included in synthesis (26 journals). Excluded: CiteScore < 3.0 (n=35), case reports < 5 patients (n=22), editorials (n=15), preclinical without clinical data (n=12), non-English (n=10), insufficient relevance (n=6).
+:::
+
+## Inclusion Criteria
+
+Articles were included in the final review if they met all of the following criteria. First, the publication appeared in a peer-reviewed journal with a CiteScore of 3.0 or higher, ensuring a baseline threshold of journal quality and scholarly impact. Second, the article was published in the English language. Third, the study addressed the diagnosis, molecular classification, risk stratification, or treatment of DLBCL with direct relevance to frontline management, including studies encompassing both frontline and relapsed or refractory settings provided that frontline-specific data or conclusions could be extracted. Fourth, the study presented original research, randomized controlled trials, systematic reviews, meta-analyses, large retrospective analyses, or comprehensive narrative reviews contributing substantive evidence to the understanding of DLBCL frontline therapy. Studies of any geographic origin were eligible, and no restrictions were placed on study setting.
+
+## Exclusion Criteria
+
+Articles were excluded if they met any of the following conditions: case reports or case series involving fewer than five patients, given the limited generalizability of such small samples; editorials, letters to the editor, commentaries, or opinion pieces lacking primary data or systematic methodology; preclinical or in vitro studies without accompanying clinical outcome data; publications in languages other than English for which verified translations were unavailable; and conference abstracts not subsequently published as full-length peer-reviewed articles. Studies addressing lymphoma subtypes other than DLBCL without presenting DLBCL-specific results were also excluded.
+
+## Quality Assessment
+
+A multi-dimensional quality assessment framework was applied to all 50 articles meeting the inclusion criteria. Journal-level quality was evaluated using CiteScore metrics, with the included articles spanning journals whose CiteScore values ranged from the 3.0 minimum threshold to high-impact general medical journals including the New England Journal of Medicine, the Lancet, and Blood. Citation frequency served as an additional indicator of influence and uptake within the research community; the 50 included articles demonstrated a mean citation frequency of approximately 322, reflecting a corpus of well-established and frequently referenced works.
+
+Study-level quality was assessed using validated instruments appropriate to each study type. Randomized controlled trials were evaluated using the Cochrane Risk of Bias (RoB 2) tool, appraising randomization, allocation concealment, blinding, outcome reporting, and selective reporting. Observational studies were appraised using the Newcastle-Ottawa Scale (NOS), evaluating selection, comparability, and outcome ascertainment across a maximum of nine stars. Systematic reviews and meta-analyses were evaluated using the AMSTAR-2 checklist. Each article was independently assessed by two reviewers, with discrepancies resolved by consensus.
+
+## Data Extraction and Synthesis
+
+A standardized data extraction form was developed a priori to capture key variables from each included article, including study design, sample size, patient demographics, treatment regimens, molecular classification methods, clinical outcomes (overall survival, progression-free survival, complete response rate), adverse event profiles, and biomarker data. Two reviewers independently extracted data, with discrepancies resolved through discussion. Data preparation involved standardizing extracted variables across heterogeneous study designs, harmonizing outcome definitions, and categorizing studies by primary domain. The overall certainty of evidence for each thematic domain was assessed qualitatively, considering consistency, directness, and methodological rigor of contributing studies, analogous to the GRADE (Grading of Recommendations, Assessment, Development and Evaluations) framework.
+
+Given the heterogeneity of study designs, patient populations, and outcome measures across the included literature, a quantitative meta-analysis was not feasible. Instead, a thematic narrative synthesis was adopted, organizing findings into principal domains: (1) frontline chemoimmunotherapy regimens and modifications to R-CHOP, (2) molecular subtyping and its impact on treatment selection, (3) antibody--drug conjugates and targeted agents, (4) CAR-T cell therapy and bispecific antibodies in the frontline and early-relapse settings, (5) prognostic indices and risk stratification, and (6) emerging therapeutic strategies and future directions. Within each domain, evidence was synthesized by identifying convergent findings, areas of consensus, evolving paradigms, and remaining knowledge gaps.
