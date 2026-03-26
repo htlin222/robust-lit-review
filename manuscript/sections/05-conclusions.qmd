@@ -1,0 +1,7 @@
+# Conclusions
+
+We present the first open-source pipeline that automates the complete systematic review workflow, from multi-database search through screening, data extraction, and narrative synthesis to a submission-ready PRISMA-compliant manuscript. Validation across three hematology/oncology topics demonstrated consistent methodological rigor, achieving PRISMA compliance scores of 33--35 out of 36 items without manual correction.
+
+Our work demonstrates that contemporary LLM engineering techniques---multi-agent orchestration, structured data extraction, LLM-as-judge evaluation, and self-repair loops---can be systematically applied to evidence synthesis while preserving methodological transparency. The PRISMA self-audit loop addresses a critical gap in existing tooling: no prior system checks its own compliance against reporting guidelines and iteratively corrects deficiencies. Human-in-the-loop checkpoints at protocol registration, screening adjudication, and final review ensure that automation efficiency does not come at the expense of clinical judgment.
+
+By releasing the pipeline as open-source software, we invite the research community to adapt, extend, and rigorously evaluate it across disciplines and review types. Future work should prioritize robust hallucination detection mechanisms, integration with full-text access infrastructure, expanded support for meta-analytic computation, and validation in non-medical domains where systematic evidence synthesis is increasingly demanded.

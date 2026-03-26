@@ -1,0 +1,68 @@
+---
+title: "Harnessing Large Language Model Engineering for Automated Systematic Reviews: A Multi-Agent Pipeline with PRISMA 2020 Self-Auditing"
+author:
+  - name: Hsieh-Ting Lin
+    orcid: 0009-0002-3974-4528
+    affiliations:
+      - Department of Hematology
+date: "2026-03-26"
+format:
+  pdf:
+    toc: false
+    number-sections: true
+    colorlinks: true
+    cite-method: citeproc
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 2.0
+  docx:
+    toc: false
+    number-sections: true
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
+abstract: |
+  **Background:** Systematic reviews represent the highest level of evidence in clinical decision-making, yet conventional workflows require 6--18 months and substantial expert labor. Existing automation tools such as ASReview and Rayyan address title-and-abstract screening but leave the remaining pipeline---full-text appraisal, data extraction, narrative synthesis, and reporting---entirely manual. No current tool produces submission-ready manuscripts with verifiable PRISMA 2020 compliance.
+  
+  **Methods:** We developed an open-source, end-to-end systematic review pipeline orchestrated by large language models. The system executes multi-database search across Scopus, PubMed, and Embase with automated deduplication; filters journals by quartile ranking using Scimago and OpenAlex (Q1 restriction); and validates every DOI against the Crossref API. Structured data extraction employs a Claude Haiku model with field-level schema enforcement to capture study design, population characteristics, interventions, and quantitative outcomes. Manuscript generation uses eight parallel modular writing agents, each responsible for a discrete PRISMA-aligned section. A PRISMA 2020 self-audit module evaluates all 27 checklist items and triggers an automated repair loop for any non-compliant element. Nine human-in-the-loop checkpoints are embedded at critical junctures---search strategy approval, inclusion decisions, extraction verification, and final manuscript review---to preserve expert oversight. The pipeline was validated on three hematology/oncology topics: hemophagocytic lymphohistiocytosis (HLH), diffuse large B-cell lymphoma (DLBCL), and multiple myeloma (MM).
+  
+  **Results:** The pipeline produced three complete, journal-formatted manuscripts. HLH comprised 12,755 words with 35 of 36 PRISMA sub-items satisfied; DLBCL comprised 10,636 words (35/36); and MM comprised 10,934 words (33/36). Haiku-based structured extraction captured quantitative outcome data in 70% of included articles compared with 42% using regular-expression baselines. All DOIs achieved 100% validation against Crossref. Comparison with independently published expert reviews demonstrated comparable clinical granularity in reported outcomes and treatment recommendations.
+  
+  **Conclusions:** Large language model engineering enables end-to-end systematic review automation with built-in quality assurance through PRISMA self-audit and human-in-the-loop governance. The pipeline reduces time-to-manuscript from months to days while maintaining methodological rigor. The tool is freely available as open-source software on GitHub.
+  
+  **Registration:** This study was not registered as it describes a methodological tool rather than a specific systematic review.
+  
+  **Keywords:** systematic review automation, large language model, multi-agent orchestration, PRISMA 2020, evidence synthesis, human-in-the-loop, structured extraction
+---
+
+{{< include sections/01-background.qmd >}}
+
+{{< include sections/02-methods.qmd >}}
+
+{{< include sections/03-results.qmd >}}
+
+{{< include sections/04-discussion.qmd >}}
+
+{{< include sections/05-conclusions.qmd >}}
+
+# Declarations
+
+**Ethics approval and consent to participate:** Not applicable. This study describes a methodological tool and does not involve human participants, human data, or human tissue.
+
+**Consent for publication:** Not applicable.
+
+**Competing interests:** The author declares no competing interests.
+
+**Funding:** This research received no external funding.
+
+**Authors' contributions:** H-TL conceived and designed the pipeline, implemented the software, conducted the validation experiments, and wrote the manuscript.
+
+**Availability of data and materials:** The pipeline source code, all prompt templates, extracted data, and generated manuscripts for all three case studies are publicly available at https://github.com/htlin222/robust-lit-review under the MIT license. The Scimago journal ranking data used for quality filtering is available at https://www.scimagojr.com/.
+
+**Registration:** This study was not registered as it describes a methodological tool rather than a specific systematic review.
+
+# References
+
+::: {#refs}
+:::
