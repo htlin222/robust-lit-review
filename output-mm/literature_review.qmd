@@ -1,0 +1,58 @@
+---
+title: "Relapsed and Refractory Multiple Myeloma: A Systematic Review of Treatment Advances (2016-2026)"
+subtitle: "A Systematic Literature Review"
+date: "2026-03-26"
+author: "Automated Literature Review Pipeline"
+format:
+  pdf:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
+    cite-method: citeproc
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 1.5
+    include-in-header:
+      - text: |
+          \usepackage{prisma-flow-diagram/prisma-flow-diagram}
+  docx:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
+abstract: |
+  **Background:** Multiple myeloma (MM) is the second most common hematologic malignancy, accounting for approximately 10% of all blood cancers worldwide. Despite significant therapeutic advances over the past two decades, including proteasome inhibitors, immunomodulatory drugs, and anti-CD38 monoclonal antibodies, virtually all patients with MM eventually experience disease relapse [@van2021Multiple; @Rajkumar2022Multiple]. The management of relapsed and refractory multiple myeloma (RRMM) has undergone a paradigm shift with the emergence of novel immunotherapeutic modalities, including chimeric antigen receptor T-cell (CAR-T) therapies, bispecific antibodies, antibody-drug conjugates, and next-generation cereblon E3 ligase modulators. A comprehensive synthesis of evidence evaluating these therapeutic innovations is urgently needed to inform clinical decision-making and identify remaining knowledge gaps.
+  
+  **Methods:** This systematic review was conducted following the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 guidelines. A comprehensive literature search was performed across Scopus and PubMed databases for publications from January 2016 through March 2026. The search strategy combined Medical Subject Headings (MeSH) terms and free-text keywords related to relapsed/refractory multiple myeloma and novel therapeutic agents. Study selection followed a multi-stage screening protocol. Quality assessment employed validated instruments including the Newcastle-Ottawa Scale for observational studies, the Cochrane Risk of Bias tool for randomized trials, and GRADE principles for evaluating the overall certainty of evidence. Data were synthesized thematically using narrative methods.
+  
+  **Results:** The initial search identified 499 records. After screening and eligibility assessment, 50 articles published across 20 journals were included in the qualitative synthesis. The included studies demonstrated a mean citation frequency of 677.56, reflecting a corpus of high-impact and well-referenced works. Key findings revealed that anti-BCMA CAR-T therapies (idecabtagene vicleucel and ciltacabtagene autoleucel) achieved overall response rates exceeding 70% in heavily pretreated populations. Bispecific antibodies targeting BCMA (teclistamab, elranatamab) and GPRC5D (talquetamab) demonstrated promising efficacy as off-the-shelf alternatives. Belantamab mafodotin provided a targeted antibody-drug conjugate option, while selinexor offered a novel mechanism for triple-class refractory disease. Evidence on resistance mechanisms, including biallelic BCMA loss and cereblon pathway mutations, was synthesized alongside evolving sequencing strategies.
+  
+  **Conclusions:** The treatment landscape for RRMM has been fundamentally transformed by immunotherapeutic innovations between 2016 and 2026. While CAR-T cell therapies and bispecific antibodies represent major advances for patients with limited treatment options, challenges remain regarding durability of responses, management of unique toxicity profiles, optimal sequencing of novel agents, and equitable access. Future research should prioritize head-to-head comparisons, combination strategies, and biomarker-driven approaches to personalize therapy selection in this rapidly evolving field.
+---
+
+{{< include sections/01-introduction.qmd >}}
+
+{{< include sections/02-methods.qmd >}}
+
+{{< include sections/03-pathogenesis.qmd >}}
+
+{{< include sections/04-diagnosis.qmd >}}
+
+{{< include sections/05-etiology.qmd >}}
+
+{{< include sections/06-treatment.qmd >}}
+
+{{< include sections/07-covid.qmd >}}
+
+{{< include sections/08-discussion.qmd >}}
+
+{{< include sections/09-prisma-checklist.qmd >}}
+
+# References
+
+::: {#refs}
+:::

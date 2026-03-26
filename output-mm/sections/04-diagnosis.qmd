@@ -1,0 +1,35 @@
+# Proteasome Inhibitor and IMiD-Based Salvage
+
+## Daratumumab-Based Triplets
+
+The addition of the anti-CD38 monoclonal antibody daratumumab to backbone doublets has transformed salvage therapy for relapsed/refractory multiple myeloma (RRMM). Two landmark phase 3 trials established daratumumab triplets as standard-of-care regimens in the relapsed setting.
+
+The POLLUX trial evaluated daratumumab plus lenalidomide and dexamethasone (DRd) versus lenalidomide-dexamethasone (Rd) in 569 patients with RRMM who had received at least one prior line of therapy. DRd demonstrated a significantly superior overall response rate (ORR) of 92.9% versus 76.4% for Rd, with complete response (CR) or better rates of 43.1% versus 19.2%. At the updated analysis, median PFS was 44.5 months in the DRd arm versus 17.5 months for Rd (HR 0.44; 95% CI, 0.35-0.55; P < 0.001) [@Dimopoulos2016Daratumumab]. These results established DRd as a preferred regimen for lenalidomide-sensitive relapsed disease.
+
+The CASTOR trial randomized 498 patients with RRMM to daratumumab plus bortezomib and dexamethasone (DVd) versus bortezomib-dexamethasone (Vd). The 12-month PFS rate was 60.7% in the DVd group compared with 26.9% in the Vd group. Median PFS was not reached in the DVd arm versus 7.2 months for Vd (HR 0.39; 95% CI, 0.28-0.53; P < 0.001). The ORR was 82.9% versus 63.2% (P < 0.001), with very good partial response (VGPR) or better rates of 59.2% versus 29.1% (P < 0.001) and CR or better rates of 19.2% versus 9.0% (P = 0.001) [@Palumbo2016Daratumumab]. Common grade 3-4 adverse events included thrombocytopenia (45.3% vs. 32.9%), anemia (14.4% vs. 16.0%), and neutropenia (12.8% vs. 4.2%). Infusion-related reactions occurred in 45.3% of daratumumab-treated patients, though 98.2% of these were limited to the first infusion.
+
+## Carfilzomib-Based Regimens
+
+Carfilzomib, a second-generation irreversible proteasome inhibitor, has demonstrated significant activity in the relapsed setting. The ASPIRE trial evaluated carfilzomib plus lenalidomide and dexamethasone (KRd) versus Rd in 792 patients with relapsed myeloma after one to three prior lines of therapy. KRd improved median PFS to 26.3 months compared with 17.6 months for Rd (HR 0.69; 95% CI, 0.57-0.83; P = 0.0001). The ORR was 87.1% versus 66.7%, and the rate of CR or better was 31.8% versus 9.3%. Importantly, the final overall survival analysis demonstrated a 7.9-month improvement in median OS favoring KRd (48.3 vs. 40.4 months; HR 0.79; P = 0.0045) [@Rajkumar2022Multiple].
+
+The ENDEAVOR trial compared carfilzomib-dexamethasone (Kd) with bortezomib-dexamethasone (Vd) in 929 patients with RRMM. Kd achieved superior median PFS of 18.7 months versus 9.4 months for Vd (HR 0.53; 95% CI, 0.44-0.65; P < 0.0001), with an ORR of 77% versus 63% [@Dimopoulos2016Carfilzomib]. This head-to-head comparison between proteasome inhibitors established carfilzomib as a preferred PI in the relapsed setting, particularly for patients with prior bortezomib exposure.
+
+The IKEMA trial evaluated isatuximab plus carfilzomib and dexamethasone (isa-Kd) versus Kd in 302 patients with relapsed myeloma who had received one to three prior lines. Isa-Kd demonstrated superior PFS with a median of 35.7 months compared with 19.2 months for Kd (HR 0.58; 95% CI, 0.42-0.79). The ORR was 86.6% versus 82.9%, with VGPR or better rates of 72.6% versus 56.1% and MRD-negativity rates significantly favoring the isatuximab arm [@Attal2019Isatuximab]. These results positioned isa-Kd as a potent option for patients relapsing after lenalidomide-containing frontline therapy.
+
+## Pomalidomide-Based Combinations
+
+Pomalidomide, a third-generation IMiD with activity in lenalidomide-refractory disease, serves as a backbone for several salvage regimens. The OPTIMISMM trial evaluated pomalidomide plus bortezomib and dexamethasone (PVd) versus Vd in 559 patients with RRMM who had received one to three prior lines, including lenalidomide. PVd demonstrated superior median PFS of 11.2 months versus 7.1 months for Vd (HR 0.61; 95% CI, 0.49-0.77; P < 0.0001). Notably, in the subgroup of patients who were lenalidomide-refractory, PVd maintained its PFS advantage (median 9.5 vs. 5.6 months; HR 0.65), confirming the non-cross-resistance of pomalidomide with lenalidomide [@Rajkumar2022Multiple].
+
+The ICARIA-MM trial randomized 307 patients with RRMM who had received at least two prior lines (including lenalidomide and a PI) to isatuximab plus pomalidomide-dexamethasone (isa-Pd) versus pomalidomide-dexamethasone (Pd). Isa-Pd achieved a median PFS of 11.5 months compared with 6.5 months for Pd (HR 0.596; 95% CI, 0.44-0.81; P = 0.001). The ORR was 60.4% versus 35.3%, with VGPR or better rates of 31.8% versus 8.5% [@Attal2019Isatuximab]. This regimen has become a preferred option for patients with lenalidomide-refractory disease who retain anti-CD38 sensitivity.
+
+## Elotuzumab-Based Regimens
+
+Elotuzumab, a monoclonal antibody targeting SLAMF7 (CS1), has shown activity in combination with IMiDs. The ELOQUENT-3 trial evaluated elotuzumab plus pomalidomide and dexamethasone (Elo-Pd) versus Pd in 117 patients with RRMM who had received at least two prior therapies including lenalidomide and a PI. Elo-Pd improved median PFS to 10.3 months compared with 4.7 months for Pd (HR 0.54; 95% CI, 0.34-0.86; P = 0.008). The ORR was 53% versus 26% [@Dimopoulos2018Elotuzumab]. While the magnitude of benefit is modest compared with anti-CD38-based triplets, elotuzumab-based regimens remain relevant for patients who have progressed on daratumumab or isatuximab.
+
+## Oral Proteasome Inhibition
+
+Ixazomib, the first oral proteasome inhibitor, was evaluated in the TOURMALINE-MM1 trial, which randomized 722 patients with RRMM to ixazomib plus lenalidomide-dexamethasone (IRd) versus placebo plus Rd. IRd achieved a median PFS of 20.6 months versus 14.7 months for Rd (HR 0.74; 95% CI, 0.59-0.94; P = 0.012). The ORR was 78.3% versus 71.5%, with CR rates of 11.7% versus 6.6% [@Moreau2016Oral]. The all-oral convenience of IRd, combined with a favorable toxicity profile, makes it a practical option for patients who benefit from reduced treatment burden, although its efficacy is generally considered inferior to parenteral PI-based combinations.
+
+## Practical Considerations and Treatment Selection
+
+Selection among these regimens depends on prior therapy exposure, refractoriness patterns, patient fitness, and logistical considerations [@Dimopoulos2021Multiple]. For patients relapsing after frontline lenalidomide-based therapy, bortezomib- or carfilzomib-based combinations (DVd, Kd, isa-Kd) are preferred. For patients with prior bortezomib exposure who retain lenalidomide sensitivity, DRd or KRd offers substantial benefit. Patients refractory to both lenalidomide and a PI increasingly require pomalidomide-based regimens or escalation to BCMA-directed immunotherapies. The diminishing duration of response with successive lines of salvage therapy underscores the importance of achieving deep responses early and the growing role of novel immunotherapeutic approaches in the relapsed setting [@Gandhi2019Outcomes].

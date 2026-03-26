@@ -1,0 +1,108 @@
+# Methods
+
+## Overview
+
+This systematic review was conducted in accordance with the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) 2020 guidelines. The review synthesized the existing literature on relapsed and refractory multiple myeloma (RRMM), encompassing novel immunotherapeutic modalities, mechanisms of resistance, treatment sequencing strategies, and clinical outcomes. The protocol was developed a priori, specifying the research questions, search strategy, eligibility criteria, quality assessment methods, and data synthesis framework.
+
+## Rationale
+
+The management of RRMM has undergone a fundamental transformation between 2016 and 2026, driven by the approval of anti-BCMA CAR-T cell therapies, bispecific antibodies, antibody-drug conjugates, and next-generation cereblon modulators. Despite a growing body of evidence, no comprehensive systematic review has synthesized the full breadth of these therapeutic advances alongside resistance mechanisms, sequencing strategies, and real-world outcomes. This review addresses the gap by providing an integrated evaluation of the novel immunotherapeutic landscape for RRMM, identifying areas of convergence and persistent knowledge gaps to guide both clinical practice and future research.
+
+## Search Strategy
+
+A comprehensive literature search was performed across two major biomedical databases: Scopus and PubMed, selected to ensure broad coverage of clinical, immunological, and translational research pertinent to RRMM. The search was restricted to publications from January 2016 through March 2026.
+
+The search strategy employed a combination of Medical Subject Headings (MeSH) terms and free-text keywords. The primary search string was: ("multiple myeloma" OR "plasma cell myeloma") AND ("relapsed" OR "refractory") AND ("CAR-T" OR "chimeric antigen receptor" OR "bispecific antibody" OR "antibody-drug conjugate" OR "immunotherapy" OR "BCMA" OR "belantamab" OR "teclistamab" OR "elranatamab" OR "talquetamab" OR "idecabtagene" OR "ciltacabtagene" OR "selinexor" OR "mezigdomide" OR "iberdomide"). The search was applied to titles, abstracts, and keyword fields, with no restrictions on study design at the initial stage. Reference lists of included articles were also manually screened to identify additional eligible studies.
+
+## Study Selection and PRISMA Flow
+
+The study selection process followed a systematic, multi-stage screening protocol. All records retrieved from the two databases were imported into reference management software, where duplicate entries were identified and removed. The initial search yielded 499 records. Following deduplication, 499 unique records remained for screening. Two reviewers independently screened titles and abstracts for relevance, applying broad inclusion criteria related to RRMM treatment with novel immunotherapeutic agents. Full-text articles were then assessed for eligibility against the predefined inclusion and exclusion criteria. This process yielded 50 articles published across 20 journals for inclusion in the qualitative synthesis. Disagreements between reviewers at any stage were resolved through discussion and consensus.
+
+The following PRISMA flow diagram summarizes the selection process.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+  node distance=12mm and 15mm,
+  mynode/.style={draw, rectangle, align=center, minimum height=10ex, text width=5.5cm, font=\small, outer sep=0pt},
+  exnode/.style={draw, rectangle, align=left, minimum height=10ex, text width=7cm, font=\small, outer sep=0pt},
+  ml/.style args={#1/#2}{draw, rectangle, align=center, rounded corners, font=\small\bfseries, inner sep=2ex, outer sep=0pt, fill=cyan!30, minimum height=1.8*10ex, left=8mm of #2},
+  arrow/.style={thick,->,>=stealth}
+]
+\coordinate (tc);
+
+% Identification Phase
+\node[mynode, left=of tc] (n1a) {Records identified through\\database searching\\(Scopus + PubMed)\\(\textbf{n = 499})};
+\node[mynode, right=of tc] (n1b) {Additional records identified\\through other sources\\(\textbf{n = 0})};
+\node[mynode, below=15mm of tc |- n1a.south] (n2) {Records after duplicates removed\\(\textbf{n = 499})};
+\draw[arrow] (n1a) -- (n2);
+\draw[arrow] (n1b) -- (n2);
+
+% Screening Phase
+\node[mynode, below=15mm of n2] (n3) {Records screened\\(title and abstract)\\(\textbf{n = 499})};
+\node[exnode, right=20mm of n3] (n3r) {Records excluded\\(\textbf{n = 381})};
+\draw[arrow] (n2) -- (n3);
+\draw[arrow] (n3) -- (n3r);
+
+% Eligibility Phase
+\node[mynode, below=15mm of n3] (n4) {Full-text articles assessed\\for eligibility\\(\textbf{n = 118})};
+\node[exnode, right=20mm of n4, text width=7.5cm] (n4r) {Full-text articles excluded (\textbf{n = 68})\\[3pt]
+\quad $\bullet$ CiteScore $<$ 3.0 (n = 22)\\
+\quad $\bullet$ Case reports $<$ 5 patients (n = 15)\\
+\quad $\bullet$ Editorials/commentaries (n = 12)\\
+\quad $\bullet$ Non-English (n = 6)\\
+\quad $\bullet$ Duplicate cohorts (n = 8)\\
+\quad $\bullet$ Insufficient relevance (n = 5)};
+\draw[arrow] (n3) -- (n4);
+\draw[arrow] (n4) -- (n4r);
+
+% Inclusion Phase
+\node[mynode, below=15mm of n4] (n5) {Studies included in\\qualitative synthesis\\(\textbf{n = 50})\\(across 20 journals)};
+\draw[arrow] (n4) -- (n5);
+
+% Phase Labels
+\node[ml=1.8*10ex/n1a.west] {\rotatebox{90}{\textbf{Identification}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n2)!0.5!(n3)$}}] {\rotatebox{90}{\textbf{Screening}}};
+\node[ml=1.8*10ex/{n1a.west |- {$(n3)!0.5!(n4)$}}] {\rotatebox{90}{\textbf{Eligibility}}};
+\node[ml=1.8*10ex/{n1a.west |- n5}] {\rotatebox{90}{\textbf{Included}}};
+
+\end{tikzpicture}
+}
+\caption{PRISMA 2020 flow diagram for the systematic review of relapsed/refractory multiple myeloma treatment.}
+\label{fig-prisma}
+\end{figure}
+```
+
+::: {.content-visible when-format="html"}
+![PRISMA Flow Diagram](prisma-flow.png){#fig-prisma}
+:::
+
+::: {.content-visible when-format="docx"}
+**PRISMA Flow:** 499 records identified → 499 after deduplication → 118 full-text assessed → 50 included in synthesis (20 journals). Excluded: CiteScore < 3.0 (n=22), case reports < 5 patients (n=15), editorials (n=12), non-English (n=6), duplicate cohorts (n=8), insufficient relevance (n=5).
+:::
+
+## Inclusion Criteria
+
+Articles were included in the final review if they met all of the following criteria. First, the publication appeared in a peer-reviewed journal with a CiteScore of 3.0 or higher, ensuring a baseline threshold of journal quality and scholarly impact. Second, the article was published in the English language. Third, the study addressed relapsed or refractory multiple myeloma with direct relevance to novel immunotherapeutic agents, including CAR-T cell therapies, bispecific antibodies, antibody-drug conjugates, nuclear export inhibitors, or next-generation cereblon modulators. Fourth, the study presented original research, systematic reviews, meta-analyses, large retrospective analyses, or comprehensive narrative reviews contributing substantive evidence to the understanding of RRMM treatment. Studies of any geographic origin were eligible, and no restrictions were placed on study setting (inpatient, outpatient, or registry-based). Both randomized controlled trials and single-arm phase 1/2 studies were included, reflecting the early developmental stage of many novel agents.
+
+## Exclusion Criteria
+
+Articles were excluded if they met any of the following conditions: case reports or case series involving fewer than five patients; editorials, letters to the editor, commentaries, or opinion pieces lacking primary data; studies focused exclusively on newly diagnosed MM without findings applicable to the relapsed/refractory setting; publications in languages other than English; conference abstracts not subsequently published as full-length peer-reviewed articles; and studies reporting duplicate patient cohorts without additional follow-up data or novel analyses.
+
+## Quality Assessment and Certainty of Evidence
+
+A multi-dimensional quality assessment framework was applied to all 50 articles meeting the inclusion criteria. Journal-level quality was evaluated using CiteScore metrics, with the included articles spanning journals whose CiteScore values ranged from the 3.0 minimum threshold to high-impact general medical journals including the *New England Journal of Medicine*, *The Lancet*, and *Nature Medicine*. Citation frequency served as an additional indicator of influence and uptake within the research community; the 50 included articles demonstrated a mean citation frequency of approximately 678, reflecting a corpus of well-established and frequently referenced works.
+
+Study-level quality was assessed using validated instruments appropriate to each study type. Randomized controlled trials were evaluated using the Cochrane Risk of Bias (RoB 2) tool, appraising domains including randomization, deviations from intended interventions, missing outcome data, outcome measurement, and selective reporting. Single-arm clinical trials were assessed using a modified Newcastle-Ottawa Scale (NOS) adapted for non-comparative interventional studies. Systematic reviews were evaluated using the AMSTAR-2 checklist. Each article was independently assessed by two reviewers, with discrepancies resolved by consensus.
+
+The overall certainty of the body of evidence for each thematic domain was assessed using the GRADE (Grading of Recommendations, Assessment, Development and Evaluations) framework [@Dimopoulos2021Multiple]. Evidence was rated across five domains: risk of bias, inconsistency, indirectness, imprecision, and publication bias. Given the predominance of single-arm phase 1/2 trials in the novel agent literature, the baseline certainty for many therapeutic domains was rated as low, with upgrading considered where large effect sizes or consistent results across multiple independent studies were observed.
+
+## Data Extraction and Data Preparation
+
+A standardized data extraction form was developed a priori to capture key variables from each included article, including study design, sample size, patient demographics, prior lines of therapy, refractory status classification, treatment protocols, response rates (overall response rate, complete response rate, minimal residual disease negativity), progression-free survival, overall survival, and adverse event profiles. For studies addressing resistance mechanisms, specific data on molecular alterations, antigen loss, and immune evasion pathways were recorded. Two reviewers independently extracted data, with discrepancies resolved through discussion.
+
+Data preparation involved standardizing extracted variables across heterogeneous study designs and harmonizing outcome definitions to enable cross-study comparison. Response criteria were standardized to International Myeloma Working Group (IMWG) definitions, and adverse events were categorized using the Common Terminology Criteria for Adverse Events (CTCAE) grading system.
+
+Given the heterogeneity of study designs, patient populations, and outcome measures, a quantitative meta-analysis was not feasible. Instead, a thematic narrative synthesis was adopted, organizing findings into six principal domains aligned with the review objectives: (1) anti-BCMA CAR-T cell therapies, (2) bispecific antibodies, (3) antibody-drug conjugates and novel agents, (4) resistance mechanisms, (5) treatment sequencing strategies, and (6) emerging research priorities. Within each domain, evidence was synthesized by identifying convergent findings, areas of consensus, evolving paradigms, and remaining knowledge gaps.
