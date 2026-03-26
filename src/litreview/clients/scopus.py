@@ -291,6 +291,7 @@ class ScopusClient:
             scopus_id=scopus_id or None,
             year=year,
             journal=entry.get("prism:publicationName", ""),
+            issn=entry.get("prism:issn"),
             volume=entry.get("prism:volume"),
             issue=entry.get("prism:issueIdentifier"),
             pages=entry.get("prism:pageRange"),

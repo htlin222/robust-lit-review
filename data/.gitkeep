@@ -1,0 +1,3 @@
+# Place scimago.csv here (optional)
+# Download from: https://www.scimagojr.com/journalrank.php?out=xls
+# The pipeline will use OpenAlex as fallback if this file is absent.

@@ -36,7 +36,8 @@ def review(
     topic: str = typer.Argument(..., help="Research topic for the literature review"),
     terms: list[str] = typer.Option(None, "--term", "-t", help="Additional search terms"),
     max_results: int = typer.Option(100, "--max-results", "-n", help="Max results per database"),
-    min_citescore: float = typer.Option(3.0, "--min-citescore", help="Minimum CiteScore threshold"),
+    min_quartile: str = typer.Option("Q1", "--min-quartile", "-q", help="Minimum SJR quartile (Q1, Q2, Q3, Q4)"),
+    min_citescore: float = typer.Option(3.0, "--min-citescore", help="Minimum CiteScore fallback threshold"),
     target: int = typer.Option(50, "--target", help="Target number of articles"),
     output_dir: Path = typer.Option(Path("output"), "--output", "-o", help="Output directory"),
     render: bool = typer.Option(True, "--render/--no-render", help="Render Quarto to PDF/DOCX"),
@@ -47,6 +48,7 @@ def review(
 
     config = get_config()
     config.max_results_per_db = max_results
+    config.min_quartile = min_quartile
     config.min_citescore = min_citescore
     config.target_articles = target
     config.output_dir = output_dir
