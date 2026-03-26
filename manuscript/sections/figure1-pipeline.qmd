@@ -1,0 +1,68 @@
+```{=latex}
+\begin{figure}[htbp]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[
+  node distance=8mm and 12mm,
+  stage/.style={draw, rectangle, align=center, minimum height=8ex, text width=4.5cm, font=\small, fill=blue!8, rounded corners=2pt},
+  substage/.style={draw, rectangle, align=center, minimum height=6ex, text width=3cm, font=\footnotesize, fill=green!8, rounded corners=2pt},
+  output/.style={draw, rectangle, align=center, minimum height=6ex, text width=3cm, font=\footnotesize, fill=orange!12, rounded corners=2pt},
+  arrow/.style={thick,->,>=stealth},
+  label/.style={font=\scriptsize\itshape, text=gray}
+]
+
+% Row 1: Input + Search
+\node[stage] (input) {Topic Input\\{\footnotesize e.g., ``HLH in adults''}};
+\node[substage, right=15mm of input] (scopus) {Scopus API};
+\node[substage, above=3mm of scopus] (pubmed) {PubMed API};
+\node[substage, below=3mm of scopus] (embase) {Embase API};
+\draw[arrow] (input) -- (scopus);
+\draw[arrow] (input) -- (pubmed);
+\draw[arrow] (input) -- (embase);
+
+% Row 2: Filter pipeline
+\node[stage, below=15mm of input] (dedup) {Deduplicate\\+ Quality Filter\\{\footnotesize Scimago/OpenAlex Q1}};
+\draw[arrow] (scopus) |- (dedup);
+\draw[arrow] (pubmed) |- (dedup);
+\draw[arrow] (embase) |- (dedup);
+
+\node[stage, right=15mm of dedup] (validate) {DOI Validation\\+ Abstract Fetch\\{\footnotesize doi.org + PubMed}};
+\draw[arrow] (dedup) -- (validate);
+
+% Row 3: Extract + Select
+\node[stage, below=15mm of dedup] (extract) {Haiku Extraction\\{\footnotesize 5 subagents $\rightarrow$ JSON}\\{\footnotesize study type, dosing, stats}};
+\draw[arrow] (validate) |- (extract);
+
+\node[stage, right=15mm of extract] (select) {Balanced Selection\\{\footnotesize 16 subtopics}\\{\footnotesize 50 articles}};
+\draw[arrow] (extract) -- (select);
+
+% Row 4: Writing
+\node[stage, below=15mm of extract, text width=10cm, fill=cyan!10] (write) {Modular Parallel Writing (8 Agents)\\{\footnotesize Abstract $|$ Intro $|$ Methods $|$ Pathogenesis $|$ Diagnosis $|$ Treatment $|$ Discussion $|$ Conclusion}\\{\footnotesize Quarto \{\{< include >\}\} assembly}};
+\draw[arrow] (select) |- (write);
+
+% Row 5: Audit
+\node[stage, below=15mm of write, fill=yellow!15] (audit) {PRISMA 2020 Self-Audit\\{\footnotesize 27 items $\times$ keyword/LLM judge}};
+\draw[arrow] (write) -- (audit);
+
+\node[stage, right=15mm of audit, fill=red!8] (repair) {Repair Agent\\{\footnotesize targeted fixes only}};
+\draw[arrow] (audit) -- node[above, label] {fail/partial} (repair);
+\draw[arrow] (repair) -- ++(0,1.2) -| (audit);
+
+% Row 6: Output
+\node[output, below=15mm of audit] (render) {Quarto Render\\{\footnotesize PDF + DOCX}};
+\node[output, left=10mm of render] (cover) {Cover Letter};
+\node[output, right=10mm of render] (release) {GitHub\\Release};
+\draw[arrow] (audit) -- node[right, label] {pass} (render);
+\draw[arrow] (render) -- (cover);
+\draw[arrow] (render) -- (release);
+
+% Human checkpoints
+\node[draw, diamond, aspect=1.5, fill=purple!10, font=\scriptsize, right=25mm of select] (cp) {HITL\\CP1--9};
+\draw[arrow, dashed, purple] (cp) -- (select);
+
+\end{tikzpicture}
+}
+\caption{Pipeline architecture of Robust-Lit-Review. The system executes nine stages from topic input to GitHub release, with parallel database search, haiku-model structured extraction, modular writing via eight independent agents, and a PRISMA 2020 self-audit loop with automated repair. Nine optional human-in-the-loop checkpoints (CP1--CP9) are available at critical decision points.}
+\label{fig-pipeline}
+\end{figure}
+```

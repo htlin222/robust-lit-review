@@ -4,7 +4,12 @@ author:
   - name: Hsieh-Ting Lin
     orcid: 0009-0002-3974-4528
     affiliations:
-      - Department of Hematology
+      - name: Koo Foundation Sun Yat-Sen Cancer Center
+        department: Department of Oncology
+        city: Taipei
+        country: Taiwan
+    corresponding: true
+    email: htlin222@gmail.com
 date: "2026-03-26"
 format:
   pdf:
@@ -17,6 +22,10 @@ format:
       - margin=1in
     fontsize: 11pt
     linestretch: 2.0
+    include-in-header:
+      - text: |
+          \usepackage{tikz}
+          \usetikzlibrary{positioning, calc, shapes.geometric}
   docx:
     toc: false
     number-sections: true

@@ -4,6 +4,37 @@
 
 We developed a nine-stage automated pipeline that transforms a clinical topic into a publication-ready literature review manuscript. The system architecture is illustrated in @fig-pipeline, which depicts the complete data flow from topic specification through final manuscript release. The nine stages are: (1) topic and scope definition, (2) multi-database search, (3) deduplication and quality filtering, (4) full-text and abstract retrieval, (5) structured data extraction, (6) section planning and article classification, (7) modular parallel writing, (8) PRISMA 2020 self-audit and repair, and (9) manuscript assembly and release.
 
+```
+Figure 1: Pipeline Architecture of Robust-Lit-Review
+
+Topic Input
+    |
+    +---> [Scopus API] --+
+    +---> [PubMed API] --+--> Deduplicate + Quality Filter (Scimago/OpenAlex Q1)
+    +---> [Embase API] --+         |
+                               DOI Validation + Abstract Fetch (doi.org + PubMed)
+                                       |
+                               Haiku Extraction (5 subagents -> JSON)
+                                       |
+                               Balanced Selection (16 subtopics, 50 articles)
+                                       |                      [HITL CP1-9]
+    +------------------------------------------------------------------+
+    | Modular Parallel Writing (8 Agents)                              |
+    | Abstract | Intro | Methods | Results | Treatment | Discussion    |
+    | Quarto {{< include >}} assembly                                  |
+    +------------------------------------------------------------------+
+                                       |
+                               PRISMA 2020 Self-Audit (27 items)
+                                    /        \
+                              [pass]         [fail/partial]
+                                |                 |
+                                |          Repair Agent --> re-audit
+                                |
+                          Quarto Render (PDF + DOCX)
+                            /       |        \
+                     Cover Letter   BibTeX   GitHub Release
+```
+
 The pipeline operates in two modes. In **fully automated mode**, each checkpoint selects a sensible default and proceeds without human intervention, producing a complete manuscript in a single unattended run. In **human-in-the-loop mode**, the pipeline pauses at nine predefined checkpoints where the operator reviews intermediate outputs, selects from multiple-choice options, and confirms or overrides the system's recommendation before the next stage executes. Both modes produce identical log artifacts, ensuring that the provenance of every decision---whether made by the operator or by a default rule---is captured in a machine-readable JSON trace.
 
 ## Multi-database search and quality filtering
