@@ -51,12 +51,10 @@ class ScimagoLookup:
         Returns True if loaded successfully, False if file not found.
         """
         if csv_path is None:
-            # Look in common locations
-            candidates = [
-                Path("data/scimago.csv"),
-                Path("data/scimagojr.csv"),
-                Path.home() / ".litreview" / "scimago.csv",
-            ]
+            # Look in common locations (including glob for variant filenames)
+            data_dir = Path("data")
+            candidates = list(data_dir.glob("scimago*.csv")) + list(data_dir.glob("scimagojr*.csv"))
+            candidates += [Path.home() / ".litreview" / "scimago.csv"]
             for p in candidates:
                 if p.exists():
                     csv_path = p
