@@ -22,10 +22,15 @@ format:
       - margin=1in
     fontsize: 11pt
     linestretch: 2.0
+    keep-tex: true
     include-in-header:
       - text: |
           \usepackage{tikz}
           \usetikzlibrary{positioning, calc, shapes.geometric}
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
   docx:
     toc: false
     number-sections: true
