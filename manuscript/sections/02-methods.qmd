@@ -4,35 +4,65 @@
 
 We developed a nine-stage automated pipeline that transforms a clinical topic into a publication-ready literature review manuscript. The system architecture is illustrated in @fig-pipeline, which depicts the complete data flow from topic specification through final manuscript release. The nine stages are: (1) topic and scope definition, (2) multi-database search, (3) deduplication and quality filtering, (4) full-text and abstract retrieval, (5) structured data extraction, (6) section planning and article classification, (7) modular parallel writing, (8) PRISMA 2020 self-audit and repair, and (9) manuscript assembly and release.
 
-```
-Figure 1: Pipeline Architecture of Robust-Lit-Review
+```{mermaid}
+%%| label: fig-pipeline
+%%| fig-cap: "Pipeline architecture of Robust-Lit-Review. The system executes nine stages from topic input to GitHub release, with parallel database search, haiku-model structured extraction, modular writing via eight independent agents, and a PRISMA 2020 self-audit loop with automated repair. Nine optional human-in-the-loop checkpoints (CP1–CP9) are available at critical decision points."
+%%| fig-width: 7
 
-Topic Input
-    |
-    +---> [Scopus API] --+
-    +---> [PubMed API] --+--> Deduplicate + Quality Filter (Scimago/OpenAlex Q1)
-    +---> [Embase API] --+         |
-                               DOI Validation + Abstract Fetch (doi.org + PubMed)
-                                       |
-                               Haiku Extraction (5 subagents -> JSON)
-                                       |
-                               Balanced Selection (16 subtopics, 50 articles)
-                                       |                      [HITL CP1-9]
-    +------------------------------------------------------------------+
-    | Modular Parallel Writing (8 Agents)                              |
-    | Abstract | Intro | Methods | Results | Treatment | Discussion    |
-    | Quarto {{< include >}} assembly                                  |
-    +------------------------------------------------------------------+
-                                       |
-                               PRISMA 2020 Self-Audit (27 items)
-                                    /        \
-                              [pass]         [fail/partial]
-                                |                 |
-                                |          Repair Agent --> re-audit
-                                |
-                          Quarto Render (PDF + DOCX)
-                            /       |        \
-                     Cover Letter   BibTeX   GitHub Release
+flowchart TD
+    A["🔍 Topic Input"] --> B["Scopus API"]
+    A --> C["PubMed API"]
+    A --> D["Embase API"]
+
+    B --> E["Deduplicate + Quality Filter\n(Scimago / OpenAlex Q1)"]
+    C --> E
+    D --> E
+
+    E --> F["DOI Validation\n(doi.org API, 100%)"]
+    F --> G["Abstract Fetch\n(PubMed by DOI)"]
+    G --> H["Haiku Structured Extraction\n(5 subagents → JSON)"]
+    H --> I["Balanced Subtopic Selection\n(16 categories, 50 articles)"]
+
+    CP["🧑‍⚕️ HITL\nCP1–CP9"] -.-> I
+
+    I --> J["Modular Parallel Writing\n(8 Agents)"]
+
+    J --> J1["Abstract"]
+    J --> J2["Introduction"]
+    J --> J3["Methods"]
+    J --> J4["Pathogenesis"]
+    J --> J5["Diagnosis"]
+    J --> J6["Treatment"]
+    J --> J7["COVID/Special"]
+    J --> J8["Discussion"]
+
+    J1 --> K["Quarto Assembly\n(include syntax)"]
+    J2 --> K
+    J3 --> K
+    J4 --> K
+    J5 --> K
+    J6 --> K
+    J7 --> K
+    J8 --> K
+
+    K --> L{"PRISMA 2020\nSelf-Audit\n(27 items)"}
+    L -->|"Pass ✓"| M["Quarto Render"]
+    L -->|"Fail/Partial"| N["Repair Agent"]
+    N -->|"Re-audit"| L
+
+    M --> O["📄 PDF"]
+    M --> P["📝 DOCX"]
+    M --> Q["🌐 HTML"]
+    M --> R["📦 GitHub Release"]
+
+    style A fill:#4CAF50,color:#fff
+    style CP fill:#9C27B0,color:#fff
+    style L fill:#FFC107,color:#000
+    style N fill:#F44336,color:#fff
+    style O fill:#2196F3,color:#fff
+    style P fill:#2196F3,color:#fff
+    style Q fill:#2196F3,color:#fff
+    style R fill:#2196F3,color:#fff
 ```
 
 The pipeline operates in two modes. In **fully automated mode**, each checkpoint selects a sensible default and proceeds without human intervention, producing a complete manuscript in a single unattended run. In **human-in-the-loop mode**, the pipeline pauses at nine predefined checkpoints where the operator reviews intermediate outputs, selects from multiple-choice options, and confirms or overrides the system's recommendation before the next stage executes. Both modes produce identical log artifacts, ensuring that the provenance of every decision---whether made by the operator or by a default rule---is captured in a machine-readable JSON trace.
