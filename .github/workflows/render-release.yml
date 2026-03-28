@@ -7,6 +7,9 @@ on:
       - 'output/**/*.qmd'
       - 'output/*.qmd'
       - 'output/*.bib'
+      - 'manuscript/**/*.qmd'
+      - 'manuscript/*.bib'
+      - 'src/**/*.py'
   workflow_dispatch:
     inputs:
       topic:
