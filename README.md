@@ -1,5 +1,9 @@
 # Robust Literature Review Pipeline
 
+[![GitHub stars](https://img.shields.io/github/stars/htlin222/robust-lit-review?style=flat-square)](https://github.com/htlin222/robust-lit-review/stargazers)
+[![Last Commit](https://img.shields.io/github/last-commit/htlin222/robust-lit-review?style=flat-square)](https://github.com/htlin222/robust-lit-review/commits/main)
+[![Python](https://img.shields.io/badge/python-3.10+-blue?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE)
 [![Render & Release](https://github.com/htlin222/robust-lit-review/actions/workflows/render-release.yml/badge.svg)](https://github.com/htlin222/robust-lit-review/actions/workflows/render-release.yml)
 
 **From topic to submission-ready manuscript in one command.** This pipeline produces a complete, publication-grade systematic literature review article — not a skeleton or reference list, but a real academic manuscript with narrative synthesis, specific clinical data, and full PRISMA 2020 compliance.
