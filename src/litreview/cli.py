@@ -41,6 +41,9 @@ def review(
     target: int = typer.Option(50, "--target", help="Target number of articles"),
     output_dir: Path = typer.Option(Path("output"), "--output", "-o", help="Output directory"),
     render: bool = typer.Option(True, "--render/--no-render", help="Render Quarto to PDF/DOCX"),
+    ai_screen: bool = typer.Option(False, "--ai-screen/--no-ai-screen", help="Enable AI PICO screening (P1)"),
+    explore_gaps: bool = typer.Option(False, "--explore-gaps/--no-explore-gaps", help="Enable research gap exploration (P2)"),
+    copilot: bool = typer.Option(False, "--copilot/--no-copilot", help="Enable enhanced co-pilot mode (P3)"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="Verbose logging"),
 ):
     """Run a complete literature review on a topic."""
@@ -52,6 +55,9 @@ def review(
     config.min_citescore = min_citescore
     config.target_articles = target
     config.output_dir = output_dir
+    config.enable_ai_screening = ai_screen
+    config.explore_gaps = explore_gaps
+    config.copilot_mode = copilot
 
     # Show configuration
     keys = config.validate_keys()

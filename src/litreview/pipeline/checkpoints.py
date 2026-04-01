@@ -62,6 +62,11 @@ class Checkpoint:
     timestamp: str | None = None
     notes: str = ""  # Optional human notes
 
+    # Co-pilot enhancements (P3)
+    impact_preview: dict[str, str] | None = None  # choice_key → impact summary
+    ai_suggestion: str | None = None  # Co-pilot recommendation
+    refinement_history: list[dict] = field(default_factory=list)  # Iterative mods
+
 
 @dataclass
 class CheckpointLog:

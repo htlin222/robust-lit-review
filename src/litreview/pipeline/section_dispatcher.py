@@ -205,8 +205,15 @@ def dispatch_sections(
     articles: list[ArticleMetadata],
     stats: ReviewStatistics,
     output_dir: Path,
+    rag_store=None,
 ) -> dict[str, dict]:
     """Prepare section-specific context files for parallel writing agents.
+
+    Args:
+        articles: Selected articles for the review.
+        stats: Review statistics.
+        output_dir: Output directory.
+        rag_store: Optional RAG store for semantic re-ranking within sections.
 
     Returns a dict mapping section filename to its context for the writing agent.
     """
@@ -217,10 +224,10 @@ def dispatch_sections(
     # Enrich all articles
     enriched = enrich_articles(articles)
 
-    # Classify articles
+    # Classify articles (use LLM categories if available, else keyword-based)
     article_categories: dict[str, list[tuple[ArticleMetadata, ExtractedData]]] = {}
     for article, data in enriched:
-        categories = classify_article_subtopic(article)
+        categories = article.subtopic_categories or classify_article_subtopic(article)
         for cat in categories:
             article_categories.setdefault(cat, []).append((article, data))
 
@@ -236,6 +243,24 @@ def dispatch_sections(
                 if doi not in seen_dois:
                     relevant.append((article, data))
                     seen_dois.add(doi)
+
+        # Semantic re-ranking: use RAG store to prioritize most relevant articles
+        if rag_store is not None and relevant and section.subtopics:
+            try:
+                rag_results = rag_store.retrieve_for_section(
+                    section.writing_instructions, k=len(relevant)
+                )
+                # Reorder relevant articles by RAG relevance score
+                rag_order = {(a.doi or a.title): score for a, score in rag_results}
+                relevant.sort(
+                    key=lambda pair: rag_order.get(pair[0].doi or pair[0].title, 0),
+                    reverse=True,
+                )
+                logger.info(
+                    f"  {section.filename}: re-ranked {len(relevant)} articles by semantic relevance"
+                )
+            except Exception as e:
+                logger.debug(f"  {section.filename}: RAG re-ranking failed ({e}), using default order")
 
         # If no specific subtopics, include all (e.g., methods section)
         if not section.subtopics:

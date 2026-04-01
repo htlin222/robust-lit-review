@@ -207,11 +207,20 @@ def extract_data_from_abstract(article: ArticleMetadata) -> ExtractedData:
     return data
 
 
-def classify_article_subtopic(article: ArticleMetadata) -> list[str]:
+def classify_article_subtopic(article: ArticleMetadata, use_llm: bool = False) -> list[str]:
     """Classify an article into subtopic categories based on title+abstract.
+
+    Args:
+        article: The article to classify.
+        use_llm: If True and article has LLM-assigned categories (from ai_screener),
+                 return those instead of keyword matching.
 
     Returns list of applicable categories for balanced topic coverage.
     """
+    # If LLM categories are available (set by ai_screener.collect_classification_results)
+    if use_llm and article.subtopic_categories:
+        return article.subtopic_categories
+
     text = f"{article.title} {article.abstract}".lower()
     categories = []
 

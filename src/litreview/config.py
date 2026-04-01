@@ -42,6 +42,12 @@ class Config(BaseModel):
     max_results_per_db: int = Field(default=100, description="Max results per database search")
     target_articles: int = Field(default=50, description="Target number of articles for review")
 
+    # AI-enhanced features (P0-P3)
+    enable_ai_screening: bool = Field(default=False, description="Enable AI-powered PICO screening (P1)")
+    explore_gaps: bool = Field(default=False, description="Enable research gap exploration (P2)")
+    copilot_mode: bool = Field(default=False, description="Enable enhanced co-pilot checkpoints (P3)")
+    screening_model: str = Field(default="claude-haiku-4-5-20251001", description="Model for screening tasks")
+
     # Output settings
     output_dir: Path = Field(default=Path("output"))
     template_dir: Path = Field(default=Path("templates"))

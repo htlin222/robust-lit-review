@@ -21,6 +21,15 @@ logger = logging.getLogger(__name__)
 
 ANTHROPIC_API_URL = "https://api.anthropic.com/v1/messages"
 
+# RAG store instance — set by orchestrator when RAG is enabled
+_rag_store = None
+
+
+def set_rag_store(store) -> None:
+    """Set the RAG store instance for retrieval-augmented writing."""
+    global _rag_store
+    _rag_store = store
+
 
 def _get_api_key() -> str:
     """Get Anthropic API key from environment."""
@@ -51,6 +60,23 @@ def _build_article_context(articles: list[ArticleMetadata]) -> str:
             entry += f"  Abstract: {abstract}\n"
         entries.append(entry)
     return "\n".join(entries)
+
+
+def _build_tiered_context(
+    query: str,
+    articles: list[ArticleMetadata],
+    focal_k: int = 15,
+) -> str:
+    """Build tiered context using RAG store if available.
+
+    Focal articles (top-K by semantic relevance) get rich context.
+    Background articles get 1-line summaries for citation awareness.
+    Falls back to standard context if RAG is not enabled.
+    """
+    if _rag_store is not None:
+        return _rag_store.build_tiered_context(query, articles, focal_k=focal_k)
+    # Fallback: standard context for all articles
+    return _build_article_context(articles)
 
 
 async def _call_claude(prompt: str, system: str, max_tokens: int = 8000) -> str:
@@ -94,7 +120,11 @@ Your writing must:
 
 async def write_introduction(topic: str, articles: list[ArticleMetadata], stats: ReviewStatistics) -> str:
     """Generate a comprehensive introduction section."""
-    context = _build_article_context(articles[:20])  # Use top cited for intro context
+    context = _build_tiered_context(
+        f"{topic} background clinical significance epidemiology incidence",
+        articles,
+        focal_k=20,
+    )
 
     prompt = f"""Write the Introduction section for a systematic literature review on: "{topic}"
 
@@ -164,7 +194,11 @@ Include the PRISMA flow diagram as a code block."""
 
 async def write_results(topic: str, articles: list[ArticleMetadata], stats: ReviewStatistics) -> str:
     """Generate the results section with thematic synthesis."""
-    context = _build_article_context(articles)
+    context = _build_tiered_context(
+        f"{topic} results findings outcomes clinical evidence treatment diagnosis",
+        articles,
+        focal_k=25,  # More focal articles for the main results section
+    )
     stats_table = format_statistics_table(stats)
 
     prompt = f"""Write the Results section for a systematic literature review on: "{topic}"
@@ -199,9 +233,11 @@ Start with "# Results" as the heading. Write ~2,000-3,000 words."""
 
 async def write_discussion(topic: str, articles: list[ArticleMetadata], stats: ReviewStatistics) -> str:
     """Generate the discussion section."""
-    # Get top cited articles for emphasis
-    top_cited = sorted(articles, key=lambda a: a.citation_count, reverse=True)[:15]
-    context = _build_article_context(top_cited)
+    context = _build_tiered_context(
+        f"{topic} implications limitations future directions guidelines recommendations",
+        articles,
+        focal_k=15,
+    )
 
     prompt = f"""Write the Discussion section for a systematic literature review on: "{topic}"
 

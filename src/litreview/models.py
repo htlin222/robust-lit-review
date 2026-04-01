@@ -48,6 +48,12 @@ class ArticleMetadata(BaseModel):
     doi_validated: bool = False
     url_validated: bool = False
 
+    # AI-enhanced fields (P0: RAG, P1: screening)
+    relevance_score: float | None = None
+    subtopic_categories: list[str] = Field(default_factory=list)
+    screening_status: str | None = None  # "include" | "exclude" | "uncertain"
+    screening_reason: str | None = None
+
     @property
     def citation_key(self) -> str:
         """Generate a BibTeX citation key."""
@@ -97,6 +103,7 @@ class ReviewStatistics(BaseModel):
     total_articles_found: int = 0
     articles_after_dedup: int = 0
     articles_after_quality_filter: int = 0
+    articles_after_screening: int = 0
     articles_with_valid_doi: int = 0
     articles_included: int = 0
     articles_by_source: dict[str, int] = Field(default_factory=dict)
@@ -121,3 +128,4 @@ class ReviewOutput(BaseModel):
     bibtex: str = ""
     quarto_content: str = ""
     search_queries: list[SearchQuery] = Field(default_factory=list)
+    gap_report: dict | None = None

@@ -196,43 +196,110 @@ class LitReviewPipeline:
         topic: str,
         search_terms: list[str] | None = None,
     ) -> ReviewOutput:
-        """Execute the complete literature review pipeline."""
+        """Execute the complete literature review pipeline.
+
+        Enhanced pipeline flow:
+          [P2] Stage 0: Gap Exploration (optional, --explore-gaps)
+               Stage 1: Build Search Queries
+               Stage 2: Search All Databases
+               Stage 3: Deduplicate
+               Stage 4: Filter by Journal Quality
+          [P1] Stage 4.5: AI Screening (optional, --ai-screen)
+               Stage 5: Validate DOIs & Enrich OA
+               Stage 6: Balanced Article Selection
+          [P0] Stage 6.5: RAG Index (if semantic deps available)
+               Stage 7: Export to Zotero
+               Stage 8: Generate BibTeX
+               Stage 9: Compute Statistics
+          [P0] Stage 10: Writing uses RAG-enhanced tiered context
+          [P3] Co-pilot mode active at ALL checkpoints (when --copilot)
+        """
         logger.info(f"Starting literature review pipeline for: {topic}")
         output = ReviewOutput(topic=topic)
 
-        # Stage 1: Build search queries
+        # ── Stage 0: Gap Exploration (P2, optional) ──────────────────
+        if getattr(self.config, "explore_gaps", False):
+            logger.info("Stage 0: Exploring research gaps...")
+            from litreview.pipeline.gap_explorer import explore_gaps, merge_search_terms
+
+            gap_report = await explore_gaps(topic, search_terms, self)
+            output.gap_report = gap_report.to_dict()
+            search_terms = merge_search_terms(search_terms, gap_report)
+            logger.info(
+                f"Gap exploration: {len(gap_report.gaps)} gaps found, "
+                f"{len(gap_report.refined_queries)} refined queries"
+            )
+
+        # ── Stage 1: Build search queries ────────────────────────────
         queries = self.build_search_queries(topic, search_terms)
         output.search_queries = queries
         logger.info(f"Generated {len(queries)} search queries")
 
-        # Stage 2: Search all databases in parallel
+        # ── Stage 2: Search all databases in parallel ────────────────
         all_articles = await self.search_all_databases(queries)
         total_found = len(all_articles)
 
-        # Stage 3: Deduplicate
+        # ── Stage 3: Deduplicate ─────────────────────────────────────
         deduped = self.deduplicate(all_articles)
         after_dedup = len(deduped)
 
-        # Stage 4: Filter by journal quality
+        # ── Stage 4: Filter by journal quality ───────────────────────
         filtered = self.filter_by_quality(deduped)
         after_quality = len(filtered)
 
-        # Stage 5: Validate DOIs and enrich
+        # ── Stage 4.5: AI Screening (P1, optional) ──────────────────
+        after_screening = after_quality
+        if getattr(self.config, "enable_ai_screening", False):
+            logger.info("Stage 4.5: AI-powered screening...")
+            from litreview.pipeline.ai_screener import screen_articles
+
+            screened, borderline = await screen_articles(filtered, topic)
+            filtered = screened
+            after_screening = len(filtered)
+            logger.info(
+                f"AI screening: {after_screening} passed, "
+                f"{len(borderline)} borderline for CP2 review"
+            )
+
+        # ── Stage 5: Validate DOIs and enrich ────────────────────────
         validated = await self.validate_and_enrich(filtered)
         after_validation = len([a for a in validated if a.doi_validated or not a.doi])
 
-        # Stage 6: Select articles with balanced subtopic coverage
+        # ── Stage 6: Select articles with balanced subtopic coverage ─
         from litreview.pipeline.enrichment import ensure_balanced_coverage
+
         selected = ensure_balanced_coverage(validated, self.config.target_articles)
         output.articles = selected
 
-        # Stage 7: Export to Zotero
+        # ── Stage 6.5: RAG Index (P0) ────────────────────────────────
+        try:
+            from litreview.pipeline.rag_store import ArticleRAGStore
+            from litreview.pipeline.enrichment import enrich_articles
+            from litreview.pipeline.review_writer import set_rag_store
+
+            logger.info("Stage 6.5: Building RAG index...")
+            rag = ArticleRAGStore(
+                cache_dir=self.config.output_dir / ".rag_cache"
+            )
+            enriched = enrich_articles(selected)
+            extracted_map = {
+                (a.doi or a.title): d for a, d in enriched
+            }
+            rag.index(selected, extracted_map)
+            set_rag_store(rag)
+            self._rag_store = rag
+            logger.info("RAG store ready for retrieval-augmented writing")
+        except Exception as e:
+            logger.info(f"RAG store not available ({e}), using standard context")
+            self._rag_store = None
+
+        # ── Stage 7: Export to Zotero ────────────────────────────────
         await self.export_to_zotero(selected, topic)
 
-        # Stage 8: Generate BibTeX
+        # ── Stage 8: Generate BibTeX ─────────────────────────────────
         output.bibtex = generate_bibtex(selected)
 
-        # Stage 9: Compute statistics
+        # ── Stage 9: Compute statistics ──────────────────────────────
         output.statistics = compute_statistics(
             articles=selected,
             bibtex_content=output.bibtex,
@@ -241,6 +308,7 @@ class LitReviewPipeline:
         output.statistics.total_articles_found = total_found
         output.statistics.articles_after_dedup = after_dedup
         output.statistics.articles_after_quality_filter = after_quality
+        output.statistics.articles_after_screening = after_screening
         output.statistics.articles_with_valid_doi = after_validation
 
         # Generate PRISMA flow
