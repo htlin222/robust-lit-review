@@ -1,0 +1,135 @@
+---
+title: "Update on Adjuvant Treatment in HER2-Positive Breast Cancer"
+subtitle: "A Web-Based Literature Summary (2025--2026)"
+date: "2026-04-03"
+author: "Automated Literature Review Pipeline"
+format:
+  pdf:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
+    cite-method: citeproc
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 1.5
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+bibliography: her2_adjuvant_references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/american-medical-association.csl
+---
+
+# Introduction
+
+Human epidermal growth factor receptor 2 (HER2)-positive breast cancer accounts for approximately 15--20% of all breast cancers and is characterized by aggressive biology and historically poor prognosis. The treatment landscape for HER2-positive early breast cancer has undergone rapid transformation with the advent of novel antibody-drug conjugates (ADCs), tyrosine kinase inhibitors (TKIs), and refined risk-adapted strategies. This summary reviews the most significant updates in adjuvant and post-neoadjuvant treatment for HER2-positive breast cancer from 2025--2026, with a focus on practice-changing clinical trial results.
+
+# Standard Adjuvant Framework
+
+The current standard adjuvant treatment for HER2-positive early breast cancer is built upon the backbone of trastuzumab-based therapy. Key established regimens include:
+
+- **Trastuzumab + chemotherapy** (anthracycline-taxane or non-anthracycline-based) for 1 year [@Perez2011Adjuvant]
+- **Dual HER2 blockade with trastuzumab + pertuzumab** (APHINITY trial) for high-risk patients, demonstrating improved invasive disease-free survival (iDFS) [@vonMinckwitz2017Adjuvant]
+- **Paclitaxel + trastuzumab (APT regimen)** for small, node-negative tumors with excellent long-term outcomes [@Tolaney2015Adjuvant]
+- **T-DM1 (trastuzumab emtansine)** for patients with residual invasive disease after neoadjuvant therapy (KATHERINE trial) [@vonMinckwitz2019TDM1]
+
+# DESTINY-Breast05: T-DXd Redefines Post-Neoadjuvant Therapy
+
+## Trial Design
+
+The DESTINY-Breast05 (DB-05) trial is a landmark Phase III, randomized, open-label study comparing trastuzumab deruxtecan (T-DXd, Enhertu) with T-DM1 in patients with high-risk, HER2-positive early breast cancer who had residual invasive disease after neoadjuvant HER2-targeted therapy. A total of 1,635 patients were randomized 1:1 to receive T-DXd (n=818) or T-DM1 (n=817) [@Harbeck2025DB05].
+
+## Key Efficacy Results
+
+T-DXd demonstrated a statistically significant and clinically meaningful improvement over T-DM1:
+
+- **53% reduction** in the risk of invasive disease recurrence or death (HR 0.47; 95% CI, 0.34--0.66; P <0.0001)
+- **3-year iDFS rates:** 90.6% (T-DXd) vs. 80.3% (T-DM1)
+- Early signals of **fewer CNS recurrences** in the T-DXd arm
+
+These results were presented at ESMO 2025 and published in the *New England Journal of Medicine* in December 2025 [@Harbeck2025DB05].
+
+## Safety Profile
+
+Adverse events were primarily gastrointestinal and hematologic. Interstitial lung disease (ILD) occurred in 9.6% of the T-DXd arm vs. 1.6% in the T-DM1 arm, though the majority were low grade (Grade 1 or 2). Appropriate ILD monitoring and management protocols remain essential.
+
+## Clinical Impact
+
+The DB-05 results establish T-DXd as a **potential new standard of care** in the post-neoadjuvant setting for patients with residual disease, replacing T-DM1 from the KATHERINE paradigm. Enhertu was granted FDA Priority Review in 2026 for this indication, with an anticipated action date in Q3 2026 [@AstraZeneca2026Priority].
+
+# DESTINY-Breast11: Neoadjuvant T-DXd
+
+## Trial Design and Results
+
+DESTINY-Breast11 (DB-11) is a Phase III, randomized, open-label, multicenter trial evaluating neoadjuvant T-DXd alone or followed by paclitaxel + trastuzumab + pertuzumab (THP) versus dose-dense doxorubicin + cyclophosphamide (ddAC) followed by THP for high-risk HER2-positive early breast cancer [@Harbeck2025DB11].
+
+Key results presented at ESMO 2025:
+
+- **Pathologic complete response (pCR):** 67.3% for T-DXd-THP vs. 56.3% for ddAC-THP ($\Delta$ 11.2%; 95% CI: 4.0--18.3; P=0.003)
+- This represents the **highest pCR rate** reported in a registrational neoadjuvant study for HER2-positive early breast cancer
+- **Improved safety profile:** fewer Grade $\geq$3 adverse events (37.5% vs. 55.8%) and markedly lower rate of left ventricular dysfunction (1.9% vs. 9.0%)
+
+## Clinical Significance
+
+The T-DXd-THP regimen offers an **anthracycline-free** neoadjuvant option with superior efficacy and better tolerability, potentially redefining the neoadjuvant paradigm for high-risk HER2-positive disease [@Harbeck2025DB11].
+
+# CompassHER2 Trials: Tucatinib in the Adjuvant Setting
+
+## CompassHER2-pCR (EA1181)
+
+This trial evaluated a de-escalated 12-week preoperative regimen of THP (trastuzumab, pertuzumab, and paclitaxel or docetaxel). Key finding: **64% of early-stage HER2-positive, ER-negative** patients achieved pCR with this shortened regimen, suggesting de-escalation is feasible in selected populations [@CompassHER2pCR].
+
+## CompassHER2 RD (A011801)
+
+This ongoing Phase III randomized trial evaluates the addition of **tucatinib** to T-DM1 versus T-DM1 + placebo in patients with high-risk HER2-positive residual disease after neoadjuvant therapy. Results are awaited and may further inform the post-neoadjuvant treatment landscape, though the DB-05 results have shifted the comparator paradigm [@CompassHER2RD].
+
+# HER2CLIMB-05: Tucatinib in First-Line Maintenance
+
+Although primarily a metastatic setting study, the HER2CLIMB-05 trial results presented at SABCS 2025 are relevant to understanding the evolving role of tucatinib:
+
+- Addition of tucatinib to trastuzumab + pertuzumab as first-line maintenance significantly prolonged PFS
+- **Median PFS:** 24.9 months (tucatinib arm) vs. 16.3 months (control), an absolute benefit of 8.6 months
+- HR-negative patients showed a 44.6% risk reduction with 12.3-month PFS improvement
+- HR-positive patients showed a 27.5% risk reduction with 6.9-month PFS improvement [@Murthy2026HER2CLIMB05]
+
+# Neratinib: Extended Adjuvant Therapy
+
+The ExteNET trial established neratinib as an extended adjuvant option for 1 year after trastuzumab-based therapy. Updated long-term follow-up data at 8 years confirmed:
+
+- Significant improvement in iDFS with neratinib vs. placebo
+- **8-year OS rates** were comparable: 90.1% (neratinib) vs. 90.2% (placebo), with no OS benefit demonstrated
+- Greatest benefit observed in HR-positive, HER2-positive subgroup
+- The role of neratinib is being reconsidered in the context of newer agents like T-DXd [@Chan2019ExteNET]
+
+# De-Escalation Strategies
+
+An important parallel trend is de-escalation of therapy for lower-risk HER2-positive early breast cancer:
+
+- **WSG-ADAPT-HER2+/HR-:** De-escalated trastuzumab + pertuzumab with or without weekly paclitaxel showed excellent survival in pCR achievers; omission of further chemotherapy did not affect iDFS in pCR patients [@Nitz2022ADAPT]
+- **Pooled WSG analysis (2025):** Patients achieving pCR after chemotherapy-free or ADC-based treatment showed no apparent benefit from adjuvant chemotherapy
+- **Risk-based selection:** Emerging consensus supports considering early interruption of anti-HER2 therapy (after 6 months) in selected low-risk patients
+
+# Summary and Future Directions
+
+The 2025--2026 period has brought transformative changes to adjuvant HER2-positive breast cancer treatment:
+
+| Setting | Previous Standard | Emerging Standard |
+|---|---|---|
+| Post-neoadjuvant (residual disease) | T-DM1 (KATHERINE) | T-DXd (DESTINY-Breast05) |
+| Neoadjuvant (high-risk) | ddAC-THP | T-DXd-THP (DESTINY-Breast11) |
+| Extended adjuvant | Neratinib (ExteNET) | Role being reconsidered |
+| Low-risk, pCR achievers | Standard chemotherapy | De-escalation feasible |
+
+**Key ongoing questions:**
+
+1. Long-term survival data from DESTINY-Breast05 and DESTINY-Breast11
+2. Optimal ILD monitoring and management protocols for T-DXd in the curative setting
+3. Role of tucatinib in the adjuvant setting (CompassHER2 RD results pending)
+4. Biomarker-guided treatment selection for escalation vs. de-escalation
+5. Integration of T-DXd across the entire HER2-positive treatment continuum
+
+# References
