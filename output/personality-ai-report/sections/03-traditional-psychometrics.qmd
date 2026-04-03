@@ -1,0 +1,60 @@
+# Traditional Psychometric Instruments
+
+## The Big Five / Five-Factor Model
+
+The Five-Factor Model (FFM) represents the most widely accepted taxonomy of personality traits, consisting of five broad dimensions: **Openness to Experience**, **Conscientiousness**, **Extraversion**, **Agreeableness**, and **Neuroticism** (OCEAN) [@goldberg1992; @john1999].
+
+### NEO Personality Inventory-Revised (NEO PI-R)
+
+The NEO PI-R [@costa1992] is the most comprehensive operationalization of the FFM, comprising 240 items measuring five domains and 30 facets (six per domain). Key psychometric properties include:
+
+| Property | Value |
+|----------|-------|
+| Internal consistency (α) | 0.86--0.92 (domain level) |
+| Test-retest reliability | 0.66--0.92 (weeks to years) |
+| Factor structure | Strongly supports 5-domain model |
+| Cross-cultural validation | Validated in 50+ cultures |
+
+The NEO PI-R remains the **gold standard** for comprehensive personality assessment in research settings, though its length (240 items, ~45 minutes) limits practical applicability in many contexts [@mccrae2004].
+
+### Big Five Inventory-2 (BFI-2)
+
+The BFI-2 [@soto2017] was developed as a more efficient alternative, comprising 60 items across five domains and 15 facets. Recent cross-cultural validations confirm the originally proposed factor structure with partial scalar invariance across samples. The BFI-2 offers an optimal balance between **psychometric fidelity** and **practical brevity** for research applications.
+
+### Brief Measures
+
+Ultra-brief measures such as the Ten-Item Personality Inventory (TIPI) [@gosling2003] sacrifice psychometric precision for convenience. A comparative validity study found that while very brief measures show adequate convergent validity with longer instruments, they demonstrate lower internal consistency and reduced predictive validity for behavioral outcomes [@sleep2021].
+
+## HEXACO Model
+
+The HEXACO model [@ashton2004; @lee2018] extends the FFM by adding a sixth factor: **Honesty-Humility** (H), while reconceptualizing Neuroticism as **Emotionality** and redistributing certain facets across factors. The six dimensions are:
+
+1. **Honesty-Humility** — sincerity, fairness, greed avoidance, modesty
+2. **Emotionality** — fearfulness, anxiety, dependence, sentimentality
+3. **Extraversion** — social self-esteem, social boldness, sociability, liveliness
+4. **Agreeableness** — forgiveness, gentleness, flexibility, patience
+5. **Conscientiousness** — organization, diligence, perfectionism, prudence
+6. **Openness to Experience** — aesthetic appreciation, inquisitiveness, creativity, unconventionality
+
+The HEXACO-PI-R (200 items) demonstrates Cronbach's α values of 0.89--0.92 at the domain level. The critical advantage of HEXACO over the Big Five is its superior prediction of **dark personality traits**, workplace deviance, and ethically relevant behaviors, largely driven by the Honesty-Humility factor [@lee2018].
+
+## Myers-Briggs Type Indicator (MBTI)
+
+The MBTI [@myers1962] classifies individuals into 16 types based on four dichotomies: Extraversion/Introversion, Sensing/Intuition, Thinking/Feeling, Judging/Perceiving. Despite its enormous popularity in organizational settings (estimated 2 million administrations annually), the MBTI has been subject to substantial scientific criticism [@pittenger2005]:
+
+- **Low test-retest reliability**: 35--50% of individuals receive a different type classification upon retesting
+- **Forced dichotomies**: The typological approach ignores the continuous, normally distributed nature of personality traits
+- **Weak predictive validity**: Limited ability to predict job performance, academic outcomes, or clinical presentations compared to FFM measures
+- **Barnum effect**: Type descriptions are often so general they could apply to anyone
+
+The scientific consensus strongly favors dimensional models (Big Five, HEXACO) over the MBTI for research and clinical applications, though the MBTI retains value as an **accessible entry point** for personality self-reflection in educational and coaching contexts.
+
+## Comparative Summary of Traditional Instruments
+
+| Instrument | Items | Dimensions | α Range | Test-Retest | Strengths | Limitations |
+|-----------|-------|-----------|---------|-------------|-----------|-------------|
+| NEO PI-R | 240 | 5 + 30 facets | 0.86--0.92 | 0.66--0.92 | Gold standard, comprehensive | Length, cost |
+| BFI-2 | 60 | 5 + 15 facets | 0.80--0.90 | 0.80--0.88 | Efficient, well-validated | Fewer facets |
+| HEXACO-100 | 100 | 6 + 24 facets | 0.89--0.92 | 0.85--0.90 | H-H factor, dark traits | Less widely used |
+| MBTI | 93 | 4 dichotomies | 0.70--0.85 | 0.50--0.65 | Popular, accessible | Low reliability, forced types |
+| TIPI | 10 | 5 | 0.40--0.70 | 0.62--0.77 | Ultra-brief | Low precision |

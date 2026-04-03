@@ -1,0 +1,36 @@
+# Introduction
+
+## Background and Rationale
+
+Personality assessment has been a cornerstone of psychology for over a century, evolving from early trait theories to sophisticated computational approaches that leverage artificial intelligence (AI) and big data. The study of personality---defined as the relatively stable patterns of thoughts, feelings, and behaviors that distinguish individuals from one another---has profound implications for clinical psychology, organizational behavior, education, and increasingly, human-computer interaction [@john1999].
+
+Traditional psychometric instruments such as the NEO Personality Inventory-Revised (NEO PI-R) [@costa1992], the Big Five Inventory-2 (BFI-2) [@soto2017], and the HEXACO Personality Inventory [@ashton2004] have established robust empirical foundations with well-documented reliability and validity. These self-report measures remain the gold standard in personality science, with internal consistency reliabilities ranging from 0.86 to 0.92 for domain scores and extensive cross-cultural validation data [@mccrae2004].
+
+However, the past decade has witnessed a paradigm shift. The explosion of digital data---social media posts, smartphone usage patterns, online purchasing behavior, and linguistic traces---has opened unprecedented opportunities for **computational personality assessment** [@vinciarelli2014]. Machine learning algorithms can now predict personality traits from digital footprints with accuracy rivaling human judgment [@youyou2015], while natural language processing (NLP) models based on transformer architectures such as BERT and GPT have achieved remarkable performance in text-based personality detection [@personality_bert2022; @kumar2025].
+
+This convergence of traditional psychometrics and AI-driven approaches raises fundamental questions:
+
+1. How do traditional and computational methods compare in terms of validity, reliability, and practical utility?
+2. Can AI-based personality assessment overcome the well-known limitations of self-report measures (e.g., social desirability bias, reference group effects)?
+3. What ethical frameworks are needed to govern the deployment of automated personality profiling?
+4. How should a scientifically rigorous, AI-enhanced personality report be designed?
+
+## Objectives
+
+This review aims to provide a comprehensive synthesis of **contemporary personality assessment methods**, spanning:
+
+- **Traditional psychometric instruments**: Big Five (NEO PI-R, BFI-2), HEXACO, MBTI, 16PF
+- **Machine learning and deep learning approaches**: Supervised, unsupervised, and transformer-based models
+- **Digital footprint analysis**: Social media, smartphone, and behavioral data
+- **NLP-based personality evaluation**: LIWC, word embeddings, BERT, GPT-based methods
+- **Comparative validity and reliability**: Head-to-head comparisons across paradigms
+- **AI-enhanced personality report design**: Scientific frameworks for explainable, ethical AI personality reports
+
+## Scope and Definitions
+
+Throughout this review, we adopt the following operational definitions:
+
+- **Personality traits**: Enduring dimensions of individual differences, primarily operationalized through the Big Five / Five-Factor Model (Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism)
+- **Computational personality**: The automated inference of personality traits using computational methods applied to behavioral, textual, or multimedia data [@vinciarelli2014]
+- **Digital footprint**: The trail of data generated through digital interactions, including social media activity, app usage, browsing history, and transaction records
+- **Explainable AI (XAI)**: Methods that provide human-interpretable explanations for AI model predictions [@xai2024]

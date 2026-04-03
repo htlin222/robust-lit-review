@@ -1,0 +1,62 @@
+---
+title: "Contemporary Personality Assessment: From Psychometrics to AI — A Comprehensive Review and Framework for Scientific Personality Reports"
+subtitle: "Integrating Traditional Instruments, Machine Learning, Digital Footprint Analysis, and NLP-Based Evaluation"
+date: "2026-04-03"
+author: "Automated Literature Review Pipeline"
+format:
+  pdf:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
+    cite-method: citeproc
+    documentclass: article
+    geometry:
+      - margin=1in
+    fontsize: 11pt
+    linestretch: 1.5
+  docx:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+bibliography: references.bib
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
+abstract: |
+  **Background:** Personality assessment has undergone a paradigm shift over the past decade, evolving from exclusively self-report psychometric instruments to a diverse ecosystem of computational methods leveraging artificial intelligence (AI), machine learning (ML), natural language processing (NLP), and digital behavioral data. This transformation raises fundamental questions about validity, reliability, ethics, and the optimal design of scientifically rigorous personality reports.
+
+  **Methods:** This narrative review synthesizes peer-reviewed literature (2015--2026) across six domains: (1) traditional psychometric instruments (NEO PI-R, BFI-2, HEXACO, MBTI), (2) machine learning and deep learning approaches (SVM, CNN, LSTM, BERT, GPT), (3) digital footprint analysis (social media, smartphone, financial data), (4) NLP-based personality evaluation (LIWC, open-vocabulary, transformer models), (5) comparative validity and reliability analysis across paradigms, and (6) frameworks for AI-enhanced personality report design.
+
+  **Results:** Traditional instruments maintain superior internal consistency (Cronbach's α = 0.80--0.92) and construct validity, while computational methods demonstrate genuine incremental validity, capturing behavioral information inaccessible to self-report. Transformer-based NLP models achieve correlations of 0.38--0.50 with self-report measures. Digital footprint analysis shows consistent but plateauing prediction accuracy (r = 0.29--0.40). AI-based scores show moderate reliability (average α ≈ 0.63) with inconsistent test-retest properties. Zero-shot LLM-based personality assessment eliminates the need for labeled training data but faces construct validity challenges.
+
+  **Conclusions:** The future of personality assessment lies in scientifically principled integration of traditional and computational methods. We propose a Multimodal Personality Intelligence System (MPIS) framework combining self-report anchors, NLP-enriched analysis, behavioral data, and explainable AI (XAI) to produce valid, transparent, and ethically governed personality reports. This framework addresses the critical need for assessment tools that balance technological capability with psychometric rigor and ethical responsibility.
+
+  **Keywords:** personality assessment, Big Five, HEXACO, machine learning, natural language processing, digital footprint, computational personality, explainable AI, psychometrics, BERT, GPT
+---
+
+{{< include sections/01-introduction.qmd >}}
+
+{{< include sections/02-methods.qmd >}}
+
+{{< include sections/03-traditional-psychometrics.qmd >}}
+
+{{< include sections/04-ml-approaches.qmd >}}
+
+{{< include sections/05-digital-footprint.qmd >}}
+
+{{< include sections/06-nlp-assessment.qmd >}}
+
+{{< include sections/07-comparison.qmd >}}
+
+{{< include sections/08-ai-framework.qmd >}}
+
+{{< include sections/09-discussion.qmd >}}
+
+# References
+
+::: {#refs}
+:::

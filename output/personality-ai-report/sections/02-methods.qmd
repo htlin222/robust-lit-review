@@ -1,0 +1,34 @@
+# Methods
+
+## Search Strategy
+
+This narrative review synthesized literature from multiple sources using a systematic search approach. We searched PubMed, Scopus, and Google Scholar using the following Boolean query:
+
+> ("personality assessment" OR "personality prediction" OR "personality profiling") AND ("Big Five" OR "Five Factor Model" OR "HEXACO" OR "NEO-PI" OR "MBTI" OR "machine learning" OR "artificial intelligence" OR "deep learning" OR "natural language processing" OR "text mining" OR "computational" OR "digital footprint" OR "social media" OR "psychometric") AND ("validity" OR "reliability" OR "accuracy" OR "comparison" OR "review")
+
+## Inclusion Criteria
+
+- Published between 2015 and 2026
+- Peer-reviewed journal articles, systematic reviews, and meta-analyses
+- English language
+- Focused on personality trait assessment using traditional psychometric, computational, or hybrid methods
+- Reported validity and/or reliability metrics
+
+## Exclusion Criteria
+
+- Conference abstracts without full text
+- Studies focused exclusively on clinical personality disorders (e.g., DSM Axis II) without reference to normal-range traits
+- Non-empirical opinion pieces or editorials
+- Studies with sample sizes below 50
+
+## Quality Assessment
+
+Studies were evaluated based on:
+
+- **Psychometric standards**: Cronbach's alpha, test-retest reliability, convergent and discriminant validity
+- **Machine learning standards**: Cross-validation methodology, out-of-sample prediction accuracy, effect sizes (Pearson's *r*, AUC, RMSE)
+- **Reporting quality**: Transparency of methods, data availability, replicability
+
+## Organization of Findings
+
+Findings are organized into six thematic sections: (1) traditional psychometric instruments, (2) machine learning approaches, (3) digital footprint analysis, (4) NLP-based assessment, (5) comparative validity analysis, and (6) a proposed framework for AI-enhanced personality reports.
