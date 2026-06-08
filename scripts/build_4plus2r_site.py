@@ -146,8 +146,33 @@ def main() -> None:
              "crossref_verified": s.get("crossref_verified", False)}
             for s in data.get("included_studies", [])
         ]
+    # Per-chapter search strategy (for the clickable 檢索命中 count).
+    pico_search: dict[str, dict] = {}
+    for chapter_id, pico_id in CHAPTER_PICO.items():
+        pj = BASE / f"{pico_id}.json"
+        if not pj.exists():
+            continue
+        p = json.loads(pj.read_text(encoding="utf-8")).get("pico", {})
+        inter = [t for t in (p.get("primary_terms") or [p.get("intervention", "")]) if t]
+        outc = [t for t in ([p.get("outcome", "")] + (p.get("secondary_terms") or [])) if t]
+        groups = []
+        if inter:
+            groups.append("(" + " OR ".join(f'"{t}"' for t in inter) + ")")
+        if outc:
+            groups.append("(" + " OR ".join(f'"{t}"' for t in outc) + ")")
+        query = " AND ".join(groups) if groups else f'"{p.get("intervention", "")}"'
+        pico_search[chapter_id] = {
+            "databases": ["Scopus", "PubMed", "Embase"],
+            "query": query + " AND PUBYEAR > 2015",
+            "date_from": 2016,
+            "terms": inter + outc,
+            "mesh": p.get("mesh_terms", []),
+            "found": json.loads(pj.read_text(encoding="utf-8")).get("prisma", {}).get("total_found", 0),
+        }
+
     (OUT / "assets" / "pico-studies.js").write_text(
-        "window.__PICO_STUDIES__ = " + json.dumps(pico_studies, ensure_ascii=False) + ";\n",
+        "window.__PICO_STUDIES__ = " + json.dumps(pico_studies, ensure_ascii=False) + ";\n"
+        "window.__PICO_SEARCH__ = " + json.dumps(pico_search, ensure_ascii=False) + ";\n",
         encoding="utf-8")
 
     print(f"Rendered {index} — {len(chapters)} chapters, {len(refs)} references, "

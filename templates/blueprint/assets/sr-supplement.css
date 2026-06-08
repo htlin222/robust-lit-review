@@ -54,3 +54,10 @@
 /* claim tag as a link to the official primary source */
 a.claim-tag{text-decoration:none;cursor:pointer}
 a.claim-tag:hover{color:var(--brand-d);border-color:var(--brand)}
+
+/* search-strategy modal (檢索命中 popup) */
+.q-body{padding:14px 16px 18px}
+.q-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}
+.q-chip{font-size:13px;background:var(--brand-l);color:var(--brand-d);border:1px solid #bfe0e3;padding:3px 9px}
+.q-code{background:#f1f4f8;border:1px solid var(--line);padding:11px 13px;font-size:13px;
+  line-height:1.6;white-space:pre-wrap;word-break:break-word;color:var(--ink);overflow-x:auto;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
