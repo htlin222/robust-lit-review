@@ -29,3 +29,28 @@
 /* SR method line under a chapter verdict */
 .sr-meta{font-size:12.5px;color:var(--muted);margin:6px 0 2px}
 .sr-meta strong{color:var(--ink-soft)}
+
+/* clickable PRISMA steps -> study-list modal */
+.prisma-step.clickable{cursor:pointer;transition:background .15s}
+.prisma-step.clickable:hover,.prisma-step.clickable:focus{background:var(--brand-l);outline:none}
+.prisma-step.clickable .ps-l::after{content:" ⊕";color:var(--brand);font-size:11px}
+
+.lit-modal-backdrop{position:fixed;inset:0;background:rgba(16,33,54,.5);z-index:80;
+  display:flex;align-items:center;justify-content:center;padding:24px}
+.lit-modal{background:#fff;max-width:760px;width:100%;max-height:82vh;overflow:auto;
+  border:1px solid var(--line-strong);box-shadow:0 12px 40px rgba(16,33,54,.3)}
+.lm-head{position:sticky;top:0;background:#f1f4f8;border-bottom:1px solid var(--line);
+  padding:13px 16px;display:flex;align-items:center;justify-content:space-between;font-size:15px}
+.lm-close{border:0;background:transparent;font-size:24px;line-height:1;cursor:pointer;color:var(--ink-soft)}
+.lm-list{list-style:none;margin:0;padding:8px 16px 18px}
+.lm-list li{display:grid;grid-template-columns:30px 1fr;gap:8px;padding:11px 4px;
+  border-bottom:1px solid var(--line);font-size:14px;line-height:1.55}
+.lm-list li:last-child{border-bottom:0}
+.lm-n{color:var(--brand-d);font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+.lm-title a{color:var(--ink);text-decoration:none}
+.lm-title a:hover{color:var(--brand-d);text-decoration:underline}
+.lm-meta{color:var(--muted);font-size:12.5px;margin-top:3px}
+
+/* claim tag as a link to the official primary source */
+a.claim-tag{text-decoration:none;cursor:pointer}
+a.claim-tag:hover{color:var(--brand-d);border-color:var(--brand)}

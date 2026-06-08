@@ -36,6 +36,26 @@ ORDER = [
 
 _CITE_DOI = re.compile(r'data-doi="([^"]+)"')
 
+# Make every "4+2R 主張" claim tag link to the official primary source, so readers
+# can verify the claim is represented faithfully.
+CLAIM_SOURCE_URL = "https://www.4plus2r.com/"
+_CLAIM_TAG = re.compile(r'<span class="claim-tag">([^<]+)</span>')
+
+
+def _link_claim_tags(html: str) -> str:
+    return _CLAIM_TAG.sub(
+        lambda m: f'<a class="claim-tag" href="{CLAIM_SOURCE_URL}" target="_blank" '
+                  f'rel="noopener" title="連至 4+2R 官方來源">{m.group(1)} ↗</a>',
+        html,
+    )
+
+# chapter id -> pico_*.json it was written from (for the clickable PRISMA popup)
+CHAPTER_PICO = {
+    "ch2": "pico_01", "ch3": "pico_02", "ch4": "pico_03", "ch5": "pico_04",
+    "ch6": "pico_06", "ch7": "pico_05", "ch9": "pico_07", "ch10": "pico_08",
+    "ch11": "pico_09",
+}
+
 
 def load_study_map() -> dict[str, dict]:
     m: dict[str, dict] = {}
@@ -90,6 +110,7 @@ def main() -> None:
         if not src.exists():
             continue
         html = src.read_text(encoding="utf-8")
+        html = _link_claim_tags(html)
 
         # number citations by first appearance across the whole document
         def _sub(match: re.Match) -> str:
@@ -108,9 +129,29 @@ def main() -> None:
         html = _CITE_DOI.sub(_sub, html)
         chapters.append(Chapter(id=cid, file=cfile, html=html))
 
-    meta = SiteMeta(description="以 robust-lit-review 工作流（Q1·≥2016·CrossRef 驗證·GRADE）對 4+2R 代謝飲食法六大主張的系統性評析。")
+    meta = SiteMeta(description="以 robust-lit-review 工作流（Q1·≥2016·CrossRef 驗證·GRADE）對 4+2R 代謝飲食法九大主張的系統性評析。")
     index = render_blueprint_site(meta, chapters, refs, OUT)
-    print(f"Rendered {index} — {len(chapters)} chapters, {len(refs)} references")
+
+    # Per-chapter included-study list for the clickable PRISMA popup.
+    pico_studies: dict[str, list[dict]] = {}
+    for chapter_id, pico_id in CHAPTER_PICO.items():
+        pj = BASE / f"{pico_id}.json"
+        if not pj.exists():
+            continue
+        data = json.loads(pj.read_text(encoding="utf-8"))
+        pico_studies[chapter_id] = [
+            {"title": s.get("title", ""), "journal": s.get("journal", ""),
+             "year": s.get("year"), "quartile": s.get("quartile"),
+             "doi": s.get("doi"), "pmid": s.get("pmid"),
+             "crossref_verified": s.get("crossref_verified", False)}
+            for s in data.get("included_studies", [])
+        ]
+    (OUT / "assets" / "pico-studies.js").write_text(
+        "window.__PICO_STUDIES__ = " + json.dumps(pico_studies, ensure_ascii=False) + ";\n",
+        encoding="utf-8")
+
+    print(f"Rendered {index} — {len(chapters)} chapters, {len(refs)} references, "
+          f"{sum(len(v) for v in pico_studies.values())} studies in {len(pico_studies)} popups")
 
 
 if __name__ == "__main__":

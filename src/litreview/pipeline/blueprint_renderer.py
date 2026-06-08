@@ -147,7 +147,9 @@ def _shell(meta: SiteMeta) -> str:
 
   <script src="assets/references.js"></script>
   <script src="assets/chapters.js" onerror="window.__CHAPTERS__=window.__CHAPTERS__||{{}}"></script>
+  <script src="assets/pico-studies.js" onerror="window.__PICO_STUDIES__=window.__PICO_STUDIES__||{{}}"></script>
   <script src="assets/app.js"></script>
+  <script src="assets/prisma-popup.js" defer></script>
 </body>
 </html>
 """
@@ -187,7 +189,7 @@ def render_blueprint_site(
     (output_dir / "assets" / "references.js").write_text(refs_js, encoding="utf-8")
 
     # static blueprint assets
-    for name in ("style.css", "app.js", "sr-supplement.css", "og-image.png"):
+    for name in ("style.css", "app.js", "sr-supplement.css", "prisma-popup.js", "og-image.png"):
         src = _BLUEPRINT / "assets" / name
         if src.exists():
             shutil.copyfile(src, output_dir / "assets" / name)
