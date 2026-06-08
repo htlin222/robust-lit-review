@@ -1,0 +1,46 @@
+<section class="chapter" id="ch1" data-title="方法與證據分級">
+  <h2 class="ch-title"><span class="ch-num">1</span> 方法與證據分級</h2>
+
+  <p class="lead">本報告與一般網路評論的差別，在於它走的是<strong>可重現的系統性回顧（SR）流程</strong>。為避免「品牌主張無法直接檢驗」的問題，我們先把 4+2R 拆解成六個<strong>可獨立檢驗的 PICO 子問題</strong>，每個子問題各跑一條完整的檢索—篩選—驗證—分級流程。</p>
+
+  <h3>檢索策略</h3>
+  <p>資料庫：<strong>Scopus、PubMed、Embase</strong> 三庫平行檢索（2026 年 6 月）。每個 PICO 以介入詞 AND 結果詞的布林式查詢；查詢時即套用發表年限。</p>
+  <table class="data-table">
+    <thead><tr><th>PICO</th><th>對應主張</th><th>檢索命中</th><th>Q1·≥2016</th><th>納入</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>腸道菌 → 體重</td><td class="num">120</td><td class="num">15</td><td class="num">15</td></tr>
+      <tr><td>2</td><td>高蛋白 → 體組成</td><td class="num">120</td><td class="num">19</td><td class="num">19</td></tr>
+      <tr><td>3</td><td>進食順序 → 血糖</td><td class="num">98</td><td class="num">26</td><td class="num">26</td></tr>
+      <tr><td>4</td><td>減重 → 復胖/定點</td><td class="num">120</td><td class="num">18</td><td class="num">18</td></tr>
+      <tr><td>5</td><td>低碳 → 體重/代謝</td><td class="num">120</td><td class="num">15</td><td class="num">15</td></tr>
+      <tr><td>6</td><td>快速減重 → 安全</td><td class="num">118</td><td class="num">21</td><td class="num">21</td></tr>
+      <tr><td><strong>合計</strong></td><td>—</td><td class="num"><strong>696</strong></td><td class="num"><strong>114</strong></td><td class="num"><strong>114</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>納入與品質門檻（硬性）</h3>
+  <ul>
+    <li><strong>年限：</strong>僅收 <strong>2016 年（含）以後</strong>發表的文獻；無法確認年份者剔除。</li>
+    <li><strong>期刊品質：</strong><strong>僅收 Q1</strong>（SCImago/Scimago 2024 最佳分位；無法定位分位的期刊在嚴格模式下一律剔除，不予「疑者從寬」）。</li>
+    <li><strong>DOI 解析：</strong>每篇經 doi.org handle API 確認可解析。</li>
+    <li><strong>CrossRef 防偽：</strong>逐篇查詢 CrossRef 確認該文獻<strong>確實存在</strong>且標題相符——這是<strong>防杜 AI 虛構引用</strong>的關鍵閘門；查無者一律剔除。本報告 114 篇納入文獻全數通過。</li>
+  </ul>
+
+  <h3>證據分級（GRADE）</h3>
+  <p>每個 PICO 以 GRADE 評定證據確定性：RCT 為主之證據體起始為「高」，觀察性為主起始為「低」，再依<strong>偏誤風險、不一致性、間接性、不精確性、發表偏差</strong>五個面向降級。最終分位（<span class="grade-pips gc-high">⊕⊕⊕⊕</span> 高 → <span class="grade-pips gc-verylow">⊕⊝⊝⊝</span> 極低）由起始層級與降級總和<strong>程式化重算</strong>，不採信語言模型自報的分位。</p>
+
+  <div class="pro-only"><span class="audience-tag">專業</span>
+    <p>判定邏輯：對「介入改善結果」型主張，<em>中／高確定性 × 有益方向 → 成立</em>；<em>中／高確定性 × 無效或反向 → 與證據牴觸</em>；<em>低／極低確定性或方向不一 → 部分成立／證據薄弱</em>。安全訊號獨立以 <span class="verdict-chip vc-risk">安全疑慮</span> 標示。各章判定均以此一致規則導出，並經 Argdown 論證結構稽核（前提是否真正支持結論）。</p>
+  </div>
+
+  <h3>交叉查核與限制</h3>
+  <div class="callout co-warn">
+    <p><strong>OpenEvidence 交叉查核：</strong>本流程設計以 OpenEvidence（crossref 驗證）作為獨立外部對照。<strong>本次報告生成時，OpenEvidence 瀏覽器中繼未連線，故未能即時取得其對照結論</strong>；依設計此步驟為「非致命」，不阻斷評析。各判定之外部支持目前仰賴納入之 Q1 文獻方向一致性，OE 對照待中繼可用時補入。</p>
+  </div>
+  <ul>
+    <li><strong>無方案層級證據：</strong>查無 4+2R 命名方案本身的 RCT；本報告評析其機制證據，非方案直接療效。</li>
+    <li><strong>自動化檢索之雜訊：</strong>布林式檢索會帶入部分動物／體外或主題鄰近研究；各章已明確區分「機轉假說（非人體證據）」與人體臨床證據。</li>
+    <li><strong>Q1-only 取捨：</strong>嚴格僅收 Q1 會漏掉部分高品質 Q2 研究，以可比的品質下限換取嚴謹度。</li>
+    <li><strong>單評者篩選：</strong>本自動化流程為單一管線篩選，未做雙人獨立篩選與正式偏誤風險工具（RoB2/ROBINS-I）逐篇評分。</li>
+  </ul>
+</section>

@@ -193,6 +193,10 @@ class PubMedClient:
         # Journal metadata
         journal_el = article.find("Journal") if article is not None else None
         journal = _text(journal_el, "Title")
+        # ISSN — prefer linking ISSN; needed for quartile resolution downstream.
+        issn = _text(journal_el, "ISSN")
+        if not issn and citation is not None:
+            issn = _text(citation, "MedlineJournalInfo/ISSNLinking")
         journal_issue = journal_el.find("JournalIssue") if journal_el is not None else None
         volume = _text(journal_issue, "Volume")
         issue = _text(journal_issue, "Issue")
@@ -228,6 +232,7 @@ class PubMedClient:
             "pmid": pmid or None,
             "year": year,
             "journal": journal,
+            "issn": issn or None,
             "volume": volume or None,
             "issue": issue or None,
             "pages": pages or None,
