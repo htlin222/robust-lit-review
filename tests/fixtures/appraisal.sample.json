@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "claim": {
+    "id": "sample-claim",
+    "title": {
+      "zh": "範例介入可改善代謝健康",
+      "en": "The sample intervention improves metabolic health"
+    },
+    "verdict": "uncertain",
+    "verdict_label": { "zh": "證據不足", "en": "Uncertain" },
+    "one_liner": {
+      "zh": "在 Q1、2016 年後文獻中，效益方向不一致且確定性偏低。",
+      "en": "Across Q1, post-2016 evidence the effect direction is inconsistent and certainty is low."
+    }
+  },
+  "disclaimer": {
+    "zh": "本報告為實證文獻評析，非個別醫療建議。",
+    "en": "This report is an evidence appraisal, not individual medical advice."
+  },
+  "generated_at": "2026-06-09T00:00:00Z",
+  "languages": ["zh", "en"],
+  "audiences": ["pro", "lay"],
+  "filters_applied": { "min_year": 2016, "min_quartile": "Q1" },
+  "pico": [
+    {
+      "id": "pico-1",
+      "number": 1,
+      "question": {
+        "zh": "在過重成人中，介入相較標準飲食是否降低體重？",
+        "en": "In overweight adults, does the intervention reduce body weight vs standard diet?"
+      },
+      "population": { "zh": "過重成人", "en": "Overweight adults" },
+      "intervention": { "zh": "範例代謝飲食", "en": "Sample metabolic diet" },
+      "comparison": { "zh": "標準飲食建議", "en": "Standard dietary advice" },
+      "outcome": { "zh": "體重變化（公斤）", "en": "Body-weight change (kg)" },
+      "search_strategy": {
+        "databases": ["PubMed", "Scopus", "Embase"],
+        "query": "(\"sample metabolic diet\") AND (\"body weight\") AND PUBYEAR > 2015",
+        "date_from": 2016,
+        "date_to": 2026,
+        "filters": { "zh": "Q1；CrossRef 驗證；2016 年後", "en": "Q1; CrossRef-verified; post-2016" }
+      },
+      "prisma": {
+        "identification": 312,
+        "screening": 240,
+        "eligibility": 31,
+        "included": 6,
+        "excluded": { "screening": 209, "eligibility": 25 }
+      },
+      "included_studies": [
+        {
+          "citation_key": "Lee2021Effect",
+          "title": "Effect of a metabolic diet on body weight: a randomized trial",
+          "authors": ["Lee J", "Chen W"],
+          "journal": "Lancet Diabetes & Endocrinology",
+          "year": 2021,
+          "doi": "10.1016/s2213-8587(21)00001-0",
+          "pmid": "33333333",
+          "quartile": "Q1",
+          "citescore": 24.1,
+          "design": "RCT",
+          "pubmed_verified": true,
+          "crossref_verified": true,
+          "openevidence_crosscheck": "partial"
+        },
+        {
+          "citation_key": "Garcia2019Weight",
+          "title": "Weight outcomes of structured meal-replacement programs",
+          "authors": ["Garcia M"],
+          "journal": "Diabetes Care",
+          "year": 2019,
+          "doi": "10.2337/dc19-0001",
+          "pmid": "31111111",
+          "quartile": "Q1",
+          "citescore": 16.2,
+          "design": "cohort",
+          "pubmed_verified": true,
+          "crossref_verified": true,
+          "openevidence_crosscheck": "confirmed"
+        }
+      ],
+      "grade": {
+        "rows": [
+          {
+            "outcome": { "zh": "體重下降", "en": "Weight loss" },
+            "n_studies": 6,
+            "n_participants": 742,
+            "certainty": "low",
+            "downgrades": ["risk_of_bias", "inconsistency"],
+            "effect": { "zh": "-2.8 kg（95% CI -4.1 至 -1.5）", "en": "-2.8 kg (95% CI -4.1 to -1.5)" }
+          }
+        ]
+      },
+      "verdict": "uncertain",
+      "effect_direction": "beneficial",
+      "dissent": {
+        "zh": "OpenEvidence 對長期維持效果持保留態度。",
+        "en": "OpenEvidence is cautious about long-term maintenance of the effect."
+      },
+      "writeups": {
+        "pro": {
+          "zh": "六項 Q1、2016 年後研究（n=742）顯示短期體重下降，但異質性高、偏誤風險中度，GRADE 確定性為低。",
+          "en": "Six Q1 post-2016 studies (n=742) show short-term weight loss, but heterogeneity is high and risk of bias moderate; GRADE certainty is low."
+        },
+        "lay": {
+          "zh": "短期內可能幫助減重，但證據品質有限，長期效果尚不確定。",
+          "en": "It may help with short-term weight loss, but the evidence quality is limited and long-term effects are unclear."
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "citation_key": "Lee2021Effect",
+      "formatted": {
+        "zh": "Lee J, Chen W. Effect of a metabolic diet on body weight: a randomized trial. Lancet Diabetes Endocrinol. 2021.",
+        "en": "Lee J, Chen W. Effect of a metabolic diet on body weight: a randomized trial. Lancet Diabetes Endocrinol. 2021."
+      },
+      "doi": "10.1016/s2213-8587(21)00001-0",
+      "pmid": "33333333",
+      "url": "https://doi.org/10.1016/s2213-8587(21)00001-0",
+      "pubmed_verified": true,
+      "crossref_verified": true,
+      "openevidence_crosscheck": "partial"
+    },
+    {
+      "citation_key": "Garcia2019Weight",
+      "formatted": {
+        "zh": "Garcia M. Weight outcomes of structured meal-replacement programs. Diabetes Care. 2019.",
+        "en": "Garcia M. Weight outcomes of structured meal-replacement programs. Diabetes Care. 2019."
+      },
+      "doi": "10.2337/dc19-0001",
+      "pmid": "31111111",
+      "url": "https://doi.org/10.2337/dc19-0001",
+      "pubmed_verified": true,
+      "crossref_verified": true,
+      "openevidence_crosscheck": "confirmed"
+    }
+  ]
+}

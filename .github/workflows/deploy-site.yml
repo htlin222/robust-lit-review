@@ -1,0 +1,57 @@
+name: Deploy Appraisal Site
+
+# Builds the verdict-style claim-appraisal site and deploys it to Cloudflare
+# Pages. Runs independently of render-release.yml (which still produces PDF/DOCX).
+on:
+  push:
+    branches: [main]
+    paths:
+      - "appraisal.json"
+      - "templates/web/**"
+      - "src/litreview/pipeline/site_renderer.py"
+      - "src/litreview/pipeline/prisma_svg.py"
+      - ".github/workflows/deploy-site.yml"
+  workflow_dispatch:
+    inputs:
+      project_name:
+        description: "Cloudflare Pages project name"
+        default: "verdict-4plus2r-sr"
+        required: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Install package
+        run: uv pip install --system -e "."
+
+      - name: Build site
+        run: |
+          if [ -f appraisal.json ]; then
+            python -m litreview.cli build-site appraisal.json -o output/site
+          else
+            echo "appraisal.json not present; building the bundled sample for preview."
+            python -m litreview.cli build-site tests/fixtures/appraisal.sample.json -o output/site
+          fi
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: >-
+            pages deploy output/site
+            --project-name=${{ github.event.inputs.project_name || 'verdict-4plus2r-sr' }}
+            --branch=${{ github.ref_name }}

@@ -39,6 +39,7 @@ class Config(BaseModel):
     min_quartile: str = Field(default="Q1", description="Minimum SJR quartile (Q1, Q2, Q3, Q4)")
     min_citescore: float = Field(default=3.0, description="Minimum CiteScore fallback for journal filtering")
     min_sjr: float = Field(default=0.5, description="Minimum SJR quartile threshold")
+    min_year: int = Field(default=2016, description="Earliest publication year to include")
     max_results_per_db: int = Field(default=100, description="Max results per database search")
     target_articles: int = Field(default=50, description="Target number of articles for review")
 

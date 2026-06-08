@@ -42,14 +42,28 @@ class PubMedClient:
     # ------------------------------------------------------------------
 
     @retry(wait=wait_exponential(min=1, max=10), stop=stop_after_attempt(3), reraise=True)
-    async def search(self, query: str, max_results: int = 100) -> list[str]:
-        """Search PubMed and return a list of PMIDs."""
+    async def search(
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
+    ) -> list[str]:
+        """Search PubMed and return a list of PMIDs.
+
+        When *date_from* is set, the publication-date range is appended to the
+        term using PubMed's ``[pdat]`` syntax (e.g. ``2016:2026[pdat]``).
+        """
+        term = query
+        if date_from is not None:
+            hi = date_to if date_to is not None else 3000
+            term = f"({query}) AND {date_from}:{hi}[pdat]"
         params = {
             "db": "pubmed",
             "retmode": "json",
             "retmax": max_results,
             "api_key": self.api_key,
-            "term": query,
+            "term": term,
         }
         resp = await self._client.get("/esearch.fcgi", params=params)
         resp.raise_for_status()
@@ -98,10 +112,16 @@ class PubMedClient:
     # ------------------------------------------------------------------
 
     async def search_and_fetch(
-        self, query: str, max_results: int = 100
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
     ) -> list[ArticleMetadata]:
         """Search PubMed and return fully-populated ArticleMetadata objects."""
-        pmids = await self.search(query, max_results=max_results)
+        pmids = await self.search(
+            query, max_results=max_results, date_from=date_from, date_to=date_to
+        )
         if not pmids:
             return []
         raw_articles = await self.fetch_articles(pmids)

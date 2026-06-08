@@ -1,0 +1,177 @@
+{% macro bil(o) -%}
+<span class="bil"><span data-lang="zh">{{ o.zh }}</span><span data-lang="en">{{ o.en or o.zh }}</span></span>
+{%- endmacro %}
+{% macro verdict_badge(v, label) -%}
+<span class="verdict-badge verdict-{{ v }}">{{ bil(label) }}</span>
+{%- endmacro %}
+{% macro pips(certainty) -%}
+{% set n = {'high': 4, 'moderate': 3, 'low': 2, 'very_low': 1}.get(certainty, 1) %}
+<span class="pips" title="{{ certainty }}" aria-label="GRADE {{ certainty }}">{% for i in range(4) %}{{ '⊕' if i < n else '⊝' }}{% endfor %}</span>
+{%- endmacro %}
+{% macro oe_badge(state) -%}
+{% if state and state != 'n/a' %}<span class="badge oe oe-{{ state }}" title="OpenEvidence cross-check: {{ state }}">OpenEvidence ✓</span>{% endif %}
+{%- endmacro %}
+{% macro pubmed_badge(ok) -%}
+{% if ok %}<span class="badge pm" title="Verified on PubMed">PubMed ✓</span>{% endif %}
+{%- endmacro %}
+{% macro crossref_badge(ok) -%}
+{% if ok %}<span class="badge cr" title="Confirmed to exist in CrossRef">CrossRef ✓</span>{% endif %}
+{%- endmacro %}
+<!doctype html>
+<html lang="zh-Hant" data-lang-active="zh" data-audience-active="pro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ a.claim.title.zh }} · {{ a.claim.title.en }}</title>
+<meta name="description" content="{{ a.claim.one_liner.en }}">
+<link rel="stylesheet" href="assets/verdict.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <strong class="brand">Robust SR</strong>
+    <div class="toggles">
+      <div class="seg" role="group" aria-label="Audience">
+        <button data-set-audience="pro" class="active">專業人員版</button>
+        <button data-set-audience="lay">民眾版</button>
+      </div>
+      <div class="seg" role="group" aria-label="Language">
+        <button data-set-lang="zh" class="active">中文</button>
+        <button data-set-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="disclaimer" role="note">{{ bil(a.disclaimer) }}</div>
+
+<main id="main" class="wrap layout">
+  <nav class="toc" aria-label="Contents">
+    <p class="toc-loading">正在載入各章節…</p>
+    <ol hidden>
+      <li><a href="#claim">{{ bil({'zh':'結論','en':'Verdict'}) }}</a></li>
+      {% for p in a.pico %}
+      <li><a href="#{{ p.id }}">§{{ p.number }} {{ bil(p.outcome) }}</a></li>
+      {% endfor %}
+      <li><a href="#references">{{ bil({'zh':'參考文獻','en':'References'}) }}</a></li>
+    </ol>
+  </nav>
+
+  <article class="content">
+    <section id="claim" class="claim-header">
+      <h1>{{ bil(a.claim.title) }}</h1>
+      <p class="verdict-line">{{ verdict_badge(a.claim.verdict, a.claim.verdict_label) }}
+        <span class="cert">{{ pips(a.get('overall_certainty', 'very_low')) }}</span></p>
+      <p class="one-liner">{{ bil(a.claim.one_liner) }}</p>
+      <p class="filters">{{ bil({'zh':'納入條件','en':'Filters'}) }}:
+        Q1 · ≥ {{ a.filters_applied.min_year }} · CrossRef-verified</p>
+    </section>
+
+    {% for p in a.pico %}
+    <section id="{{ p.id }}" class="pico" data-pico="{{ p.number }}">
+      <h2>§{{ p.number }} · {{ bil(p.question) }}</h2>
+
+      <table class="pico-grid">
+        <tr><th>P</th><td>{{ bil(p.population) }}</td></tr>
+        <tr><th>I</th><td>{{ bil(p.intervention) }}</td></tr>
+        <tr><th>C</th><td>{{ bil(p.comparison) }}</td></tr>
+        <tr><th>O</th><td>{{ bil(p.outcome) }}</td></tr>
+      </table>
+
+      <details class="search">
+        <summary>{{ bil({'zh':'檢索策略','en':'Search strategy'}) }}</summary>
+        <p class="dbs">{{ p.search_strategy.databases | join(' · ') }} · {{ p.search_strategy.date_from }}–{{ p.search_strategy.date_to }}</p>
+        <code>{{ p.search_strategy.query }}</code>
+        <p>{{ bil(p.search_strategy.filters) }}</p>
+      </details>
+
+      <div class="prisma">{{ p.prisma_svg | safe }}</div>
+
+      <h3>{{ bil({'zh':'GRADE 證據確定性','en':'GRADE certainty of evidence'}) }}</h3>
+      <table class="grade">
+        <thead><tr>
+          <th>{{ bil({'zh':'結果','en':'Outcome'}) }}</th>
+          <th>{{ bil({'zh':'研究數','en':'Studies'}) }}</th>
+          <th>n</th>
+          <th>{{ bil({'zh':'效果','en':'Effect'}) }}</th>
+          <th>{{ bil({'zh':'確定性','en':'Certainty'}) }}</th>
+        </tr></thead>
+        <tbody>
+        {% for row in p.grade.rows %}
+          <tr>
+            <td>{{ bil(row.outcome) }}</td>
+            <td>{{ row.n_studies }}</td>
+            <td>{{ row.n_participants }}</td>
+            <td>{{ bil(row.effect) }}</td>
+            <td>{{ pips(row.certainty) }}<br><small>{{ row.downgrades | join(', ') }}</small></td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <h3>{{ bil({'zh':'納入研究','en':'Included studies'}) }}</h3>
+      <table class="studies">
+        <thead><tr>
+          <th>{{ bil({'zh':'研究','en':'Study'}) }}</th>
+          <th>{{ bil({'zh':'年份','en':'Year'}) }}</th>
+          <th>{{ bil({'zh':'設計','en':'Design'}) }}</th>
+          <th>Q</th>
+          <th>{{ bil({'zh':'驗證','en':'Verification'}) }}</th>
+        </tr></thead>
+        <tbody>
+        {% for s in p.included_studies %}
+          <tr>
+            <td><a href="https://doi.org/{{ s.doi }}">{{ s.title }}</a><br><small>{{ s.authors | join(', ') }} · {{ s.journal }}</small></td>
+            <td>{{ s.year }}</td>
+            <td>{{ s.design }}</td>
+            <td>{{ s.quartile }}</td>
+            <td>{{ pubmed_badge(s.pubmed_verified) }} {{ crossref_badge(s.crossref_verified) }} {{ oe_badge(s.openevidence_crosscheck) }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <p class="pico-verdict">{{ verdict_badge(p.verdict, {'zh': p.verdict, 'en': p.verdict}) }}</p>
+
+      <div class="writeups">
+        {% for aud in ['pro', 'lay'] %}
+          {% for lng in ['zh', 'en'] %}
+          <div class="writeup" data-audience="{{ aud }}" data-lang="{{ lng }}"{% if not (aud == 'pro' and lng == 'zh') %} hidden{% endif %}>
+            {{ p.writeups[aud][lng] or p.writeups[aud]['zh'] }}
+          </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+
+      {% if p.dissent and (p.dissent.zh or p.dissent.en) %}
+      <p class="dissent">⚠ {{ bil(p.dissent) }}</p>
+      {% endif %}
+    </section>
+    {% endfor %}
+
+    <section id="references">
+      <h2>{{ bil({'zh':'參考文獻','en':'References'}) }}</h2>
+      <ol class="refs">
+        {% for r in a.references %}
+        <li>
+          {{ bil(r.formatted) }}
+          <a href="{{ r.url }}">{{ r.doi }}</a>
+          {{ pubmed_badge(r.pubmed_verified) }} {{ crossref_badge(r.crossref_verified) }} {{ oe_badge(r.openevidence_crosscheck) }}
+        </li>
+        {% endfor %}
+      </ol>
+    </section>
+  </article>
+</main>
+
+<footer class="wrap foot">
+  <p>{{ bil(a.disclaimer) }}</p>
+  <p><small>Generated {{ a.generated_at }} · Q1 · ≥{{ a.filters_applied.min_year }} · CrossRef-verified</small></p>
+</footer>
+
+<script src="assets/toggles.js" defer></script>
+<script src="assets/toc.js" defer></script>
+</body>
+</html>

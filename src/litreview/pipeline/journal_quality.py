@@ -159,6 +159,7 @@ async def assess_journal_quality(
     email: str = "",
     scimago_csv: Path | None = None,
     min_quartile: str = "Q1",
+    strict: bool = False,
 ) -> list[ArticleMetadata]:
     """Assess journal quality for all articles and filter by quartile.
 
@@ -170,6 +171,10 @@ async def assess_journal_quality(
     Args:
         min_quartile: Minimum quartile to include. "Q1" = Q1 only,
                       "Q2" = Q1+Q2, "Q3" = Q1+Q2+Q3, "Q4" = all.
+        strict: When True, drop journals whose quartile cannot be confirmed
+                ("Unknown"). The claim-appraisal pipeline uses ``strict=True``
+                so the Q1-only filter is a hard gate — an unrankable journal is
+                excluded rather than given the benefit of the doubt.
     """
     from litreview.clients.openalex import OpenAlexClient
 
@@ -236,11 +241,16 @@ async def assess_journal_quality(
 
     # Filter by quartile
     filtered = []
+    dropped_unknown = 0
     for article in articles:
         q = article.journal_quartile or "Unknown"
-        if q in accepted or q == "Unknown":
-            # Include unknowns (can't confirm they're low quality)
+        if q in accepted:
             filtered.append(article)
+        elif q == "Unknown" and not strict:
+            # Lenient mode: include unknowns (can't confirm they're low quality)
+            filtered.append(article)
+        elif q == "Unknown":
+            dropped_unknown += 1
 
     # Stats
     from collections import Counter
@@ -248,6 +258,8 @@ async def assess_journal_quality(
     q_filtered = Counter(a.journal_quartile for a in filtered)
     logger.info(f"Journal quality: {dict(q_dist)}")
     logger.info(f"After {min_quartile} filter: {len(filtered)}/{len(articles)} ({dict(q_filtered)})")
+    if strict and dropped_unknown:
+        logger.info(f"Strict mode dropped {dropped_unknown} journals with Unknown quartile")
 
     return filtered
 

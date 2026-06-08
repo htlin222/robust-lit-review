@@ -68,7 +68,13 @@ class ScopusClient:
         response.raise_for_status()
         return response.json()
 
-    async def search(self, query: str, max_results: int = 100) -> list[dict]:
+    async def search(
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
+    ) -> list[dict]:
         """Search Scopus and return raw entry dicts, handling pagination.
 
         Parameters
@@ -77,12 +83,21 @@ class ScopusClient:
             Scopus search query string.
         max_results:
             Maximum number of results to retrieve.
+        date_from:
+            When set, restricts to ``PUBYEAR > date_from - 1`` (i.e. >= date_from).
+        date_to:
+            When set, restricts to ``PUBYEAR < date_to + 1`` (i.e. <= date_to).
 
         Returns
         -------
         list[dict]
             List of raw Scopus entry dictionaries.
         """
+        if date_from is not None:
+            query = f"{query} AND PUBYEAR > {date_from - 1}"
+        if date_to is not None:
+            query = f"{query} AND PUBYEAR < {date_to + 1}"
+
         entries: list[dict] = []
         start = 0
 
@@ -206,7 +221,11 @@ class ScopusClient:
     # ------------------------------------------------------------------
 
     async def search_and_enrich(
-        self, query: str, max_results: int = 100
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
     ) -> list[ArticleMetadata]:
         """Search Scopus and enrich results with journal metrics.
 
@@ -216,13 +235,17 @@ class ScopusClient:
             Scopus search query string.
         max_results:
             Maximum number of results to retrieve.
+        date_from, date_to:
+            Optional publication-year bounds passed through to :meth:`search`.
 
         Returns
         -------
         list[ArticleMetadata]
             Enriched article metadata objects.
         """
-        entries = await self.search(query, max_results=max_results)
+        entries = await self.search(
+            query, max_results=max_results, date_from=date_from, date_to=date_to
+        )
         articles: list[ArticleMetadata] = []
 
         # Cache journal metrics by ISSN to avoid duplicate lookups

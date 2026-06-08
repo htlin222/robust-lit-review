@@ -44,15 +44,26 @@ class EmbaseClient:
         wait=wait_exponential(multiplier=1, min=2, max=30),
         reraise=True,
     )
-    async def search(self, query: str, max_results: int = 100) -> list[dict]:
+    async def search(
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
+    ) -> list[dict]:
         """Search Embase via the Scopus search API with Embase term indexing.
 
         Wraps the query with INDEXTERMS() and restricts to medical journal
-        content to focus on Embase-indexed literature.
+        content to focus on Embase-indexed literature. When *date_from* is set,
+        a ``PUBYEAR`` bound is appended.
         """
         # Use TITLE-ABS-KEY with medical subject area filter instead of INDEXTERMS
         # which requires Embase-specific subscription
         embase_query = f"TITLE-ABS-KEY({query})"
+        if date_from is not None:
+            embase_query = f"{embase_query} AND PUBYEAR > {date_from - 1}"
+        if date_to is not None:
+            embase_query = f"{embase_query} AND PUBYEAR < {date_to + 1}"
         results: list[dict] = []
         start = 0
         count = min(max_results, 25)
@@ -97,10 +108,16 @@ class EmbaseClient:
         return results[:max_results]
 
     async def search_and_enrich(
-        self, query: str, max_results: int = 100
+        self,
+        query: str,
+        max_results: int = 100,
+        date_from: int | None = None,
+        date_to: int | None = None,
     ) -> list[ArticleMetadata]:
         """Search Embase and return enriched ArticleMetadata objects."""
-        raw_results = await self.search(query, max_results=max_results)
+        raw_results = await self.search(
+            query, max_results=max_results, date_from=date_from, date_to=date_to
+        )
         articles: list[ArticleMetadata] = []
 
         for entry in raw_results:

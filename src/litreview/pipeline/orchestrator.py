@@ -95,18 +95,25 @@ class LitReviewPipeline:
         tasks = []
 
         primary_query = queries[0].boolean_query if queries else ""
+        # Date bounds are carried on the query; topic-review queries leave these
+        # None (no change), the claim pipeline sets date_from=min_year.
+        date_from = queries[0].date_from if queries else None
+        date_to = queries[0].date_to if queries else None
 
         if self._scopus and primary_query:
             logger.info("Searching Scopus...")
-            tasks.append(self._scopus.search_and_enrich(primary_query, self.config.max_results_per_db))
+            tasks.append(self._scopus.search_and_enrich(
+                primary_query, self.config.max_results_per_db, date_from=date_from, date_to=date_to))
 
         if self._pubmed and primary_query:
             logger.info("Searching PubMed...")
-            tasks.append(self._pubmed.search_and_fetch(primary_query, self.config.max_results_per_db))
+            tasks.append(self._pubmed.search_and_fetch(
+                primary_query, self.config.max_results_per_db, date_from=date_from, date_to=date_to))
 
         if self._embase and primary_query:
             logger.info("Searching Embase...")
-            tasks.append(self._embase.search_and_enrich(primary_query, self.config.max_results_per_db))
+            tasks.append(self._embase.search_and_enrich(
+                primary_query, self.config.max_results_per_db, date_from=date_from, date_to=date_to))
 
         if tasks:
             results = await asyncio.gather(*tasks, return_exceptions=True)

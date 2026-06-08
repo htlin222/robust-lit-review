@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import asyncio
 import logging
-import sys
 from pathlib import Path
 
 import typer
@@ -113,6 +112,26 @@ def validate(
     console.print(f"\n[green]{valid}[/green] valid, [red]{len(invalid)}[/red] invalid")
     for doi in invalid:
         console.print(f"  [red]Invalid:[/red] {doi}")
+
+
+@app.command()
+def build_site(
+    appraisal: Path = typer.Argument(..., help="Path to appraisal.json (the web render contract)"),
+    output_dir: Path = typer.Option(Path("output/site"), "--output", "-o", help="Site output directory"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+):
+    """Render a ClaimAppraisal (appraisal.json) into the verdict-style static site."""
+    setup_logging(verbose)
+    from litreview.pipeline.site_renderer import render_site
+
+    if not appraisal.exists():
+        console.print(f"[red]Not found:[/red] {appraisal}")
+        raise typer.Exit(1)
+
+    index = render_site(appraisal, output_dir)
+    console.print(f"[green]Site rendered:[/green] {index}")
+    console.print(f"  Preview locally: [cyan]wrangler pages dev {output_dir}[/cyan]")
+    console.print(f"  Deploy:          [cyan]wrangler pages deploy {output_dir} --project-name=<project>[/cyan]")
 
 
 @app.command()
