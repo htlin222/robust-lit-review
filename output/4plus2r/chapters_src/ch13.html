@@ -1,0 +1,71 @@
+<section class="chapter" id="ch13" data-title="信度與穩健性（多代理量測）">
+  <h2 class="ch-title"><span class="ch-num">信</span> 信度與穩健性 · 我們自己的一致性數字</h2>
+
+  <p class="lead">有一個對自動化評讀最常見、也最該回答的質疑：<strong>「語言模型對 EBM 文獻的判讀，和人類專家的一致性本來就有限。」</strong>這是對的。本章不迴避，而是直接<strong>量測我們自己的「跨代理自我一致性」（inter-agent reproducibility）</strong>——同一套證據，讓多個獨立的評審代理在不知道彼此與不知道出版判定（盲評）的情況下各自評定，再算 Fleiss kappa。請特別注意：<strong>這量的是「可重現性／穩定性」，不是「與人類專家的有效性（validity）」</strong>。一個工具可以非常穩定地給出同一個答案，卻仍然系統性地偏離專家——兩者是不同的軸，本章只證明前者。</p>
+
+  <h3>四項一致性量測</h3>
+  <p>我們在四個環節各自重跑多代理盲評：判定面板（5 位評審投票決定每個 PICO 的最終判定 chip）、GRADE 證據分級、RoB2 逐篇偏誤風險、以及納入篩選的去留。各項以 Fleiss kappa（多評者）衡量，並對照標準分級帶。</p>
+  <table class="data-table">
+    <thead><tr><th>量測項</th><th>評審數</th><th>Fleiss κ</th><th>樣本數</th><th>一致性帶</th></tr></thead>
+    <tbody>
+      <tr><td>判定面板（verdict chip）</td><td class="num">5</td><td class="num">0.727</td><td class="num">9 PICO</td><td>高度一致（0.61–0.80）</td></tr>
+      <tr><td>GRADE 證據分級</td><td class="num">5</td><td class="num">0.923</td><td class="num">9 PICO</td><td>幾近完全一致（&gt;0.80）</td></tr>
+      <tr><td>RoB2 逐篇偏誤風險</td><td class="num">3</td><td class="num">0.730</td><td class="num">21 篇</td><td>高度一致（0.61–0.80）</td></tr>
+      <tr><td>納入篩選一致性</td><td class="num">2</td><td class="num">0.703</td><td class="num">165 篇</td><td>高度一致（0.61–0.80）</td></tr>
+    </tbody>
+  </table>
+  <p class="fine">分級帶（Landis &amp; Koch）：κ ≤ 0.20 微弱；0.21–0.40 尚可；0.41–0.60 中等；0.61–0.80 高度（substantial）；&gt; 0.80 幾近完全。四項全數落在<strong>高度</strong>或<strong>幾近完全</strong>區間——代理之間對「同一份證據怎麼判」具備可重現的穩定共識。</p>
+
+  <h3>逐 PICO 盲評多數決 vs 出版判定</h3>
+  <p>下表逐一列出九個 PICO：出版時實際採用的判定（shipped）、5 位盲評評審的多數決、是否一致、以及票數分佈（top share）。</p>
+  <table class="data-table">
+    <thead><tr><th>主張 / domain</th><th>出版判定</th><th>5 評審多數決</th><th>一致？</th><th>票數分佈</th></tr></thead>
+    <tbody>
+      <tr><td>microbiome 腸道菌</td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td>✓ 一致</td><td class="num">3/5 weak · 2 unproven</td></tr>
+      <tr><td>high_protein 高蛋白</td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td>✓ 一致</td><td class="num">4/5 moderate · 1 weak</td></tr>
+      <tr class="row-flag"><td>meal_order 進食順序</td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td><span class="verdict-chip vc-unproven">未經驗證</span></td><td><strong>✗ 不一致</strong></td><td class="num">5/5 unproven</td></tr>
+      <tr><td>setpoint_regain 代謝定點</td><td><span class="verdict-chip vc-contra">與證據牴觸</span></td><td><span class="verdict-chip vc-contra">與證據牴觸</span></td><td>✓ 一致</td><td class="num">5/5 contra</td></tr>
+      <tr class="row-flag"><td>low_carb 低碳</td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td><strong>✗ 不一致</strong></td><td class="num">5/5 weak</td></tr>
+      <tr><td>safety 快速減重安全</td><td><span class="verdict-chip vc-risk">安全疑慮</span></td><td><span class="verdict-chip vc-risk">安全疑慮</span></td><td>✓ 一致</td><td class="num">5/5 risk</td></tr>
+      <tr><td>recomposition 增肌減脂</td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td><span class="verdict-chip vc-moderate">部分成立</span></td><td>✓ 一致</td><td class="num">4/5 moderate · 1 weak</td></tr>
+      <tr><td>mental_health 飲食情緒</td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td>✓ 一致</td><td class="num">5/5 weak</td></tr>
+      <tr><td>aging_longevity 抗老</td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td><span class="verdict-chip vc-weak">證據薄弱</span></td><td>✓ 一致</td><td class="num">4/5 weak · 1 moderate</td></tr>
+    </tbody>
+  </table>
+  <p>九題中<strong>七題</strong>盲評多數決與出版判定方向一致（其中四題為 5/5 滿票共識）；<strong>兩題不一致</strong>，且在這兩題上盲評代理彼此<strong>滿票（5/5）</strong>——亦即不一致來自「代理一致地比出版判定更保守」，而非評審內部分歧。</p>
+
+  <div class="callout co-warn">
+    <p><strong>需專家覆核的兩題（盲評多數決 ≠ 出版判定）：</strong></p>
+    <ul>
+      <li><strong>進食順序（meal_order）：</strong>出版判定為 <span class="verdict-chip vc-moderate">部分成立</span>，但 5/5 盲評代理一致判為 <span class="verdict-chip vc-unproven">未經驗證</span>（GRADE 一致為 very low）。代理認為「先菜先蛋白改善餐後血糖」雖明確，但「對減重／長期體位」的證據未達『部分成立』門檻。</li>
+      <li><strong>低碳（low_carb）：</strong>出版判定為 <span class="verdict-chip vc-moderate">部分成立</span>，但 5/5 盲評代理一致判為 <span class="verdict-chip vc-weak">證據薄弱</span>（GRADE 一致為 low）。代理認為 12 個月減重於低碳/低脂/均衡之間相當、效益由熱量與順從度主導，故對「低碳本身」的判定應更保守。</li>
+    </ul>
+    <p><strong>建議處置：</strong>此二題標記為<strong>須領域專家覆核</strong>。盲評代理一致地偏向更保守的判定，提示出版措辭可能偏寬；在專家裁決前，讀者應以「方向證據成立、強度仍有爭議」理解此二章。</p>
+  </div>
+
+  <h3>RoB2 偏誤風險分佈與篩選旗標</h3>
+  <p>在納入 RoB2 評分的 <strong>21 篇</strong>試驗中，三位評審盲評的彙整分佈為：</p>
+  <table class="data-table">
+    <thead><tr><th>RoB2 等級</th><th>篇數</th><th>占比</th></tr></thead>
+    <tbody>
+      <tr><td><strong>低風險</strong> low</td><td class="num">4</td><td class="num">19%</td></tr>
+      <tr><td><strong>部分疑慮</strong> some concerns</td><td class="num">12</td><td class="num">57%</td></tr>
+      <tr><td><strong>高風險</strong> high</td><td class="num">5</td><td class="num">24%</td></tr>
+      <tr><td><strong>合計</strong></td><td class="num"><strong>21</strong></td><td class="num">100%</td></tr>
+    </tbody>
+  </table>
+  <p>多數試驗集中於「部分疑慮」，僅約五分之一達低風險——與本報告「機制方向可見、強度與長期證據受限」的整體基調一致。RoB2 三評者 κ = 0.730（高度一致）。</p>
+  <p>在納入篩選環節，兩位篩選代理對 <strong>165 篇</strong>納入文獻做去留盲評，其中一位篩選代理<strong>旗標 134 篇</strong>為「可能應排除／需再確認」（多為布林式檢索帶入的動物／體外或主題鄰近研究）。雙篩選 κ = 0.703（高度一致）；被旗標的 134/165 篇已逐章於「機轉假說（非人體證據）」與人體臨床證據之間明確區分。</p>
+
+  <div class="pro-only"><span class="audience-tag">專業</span>
+    <p><strong>方法學細節：</strong>四項皆為多評者名目尺度一致性，採 <em>Fleiss</em> κ（&gt;2 評者）而非 Cohen κ。判定面板與 GRADE 為 9 個 PICO × 5 個獨立代理；代理在<strong>盲評</strong>下作答（不知出版判定、不知彼此），故 κ 反映的是<strong>流程的可重現性</strong>而非與標準答案的吻合度。判定面板 κ = 0.727 低於 GRADE κ = 0.923，是預期的：GRADE 是程式化重算的離散層級（起始層級 ± 降級總和），自由度低；判定 chip 在相鄰類別（如 weak↔unproven、moderate↔weak）之間有裁量空間，故一致性略低但仍屬 substantial。九題中八題達「強多數」（top share ≥ 0.8），兩題 5/5 不一致案例屬<strong>代理間一致、與出版判定不一致</strong>，應視為訊號而非雜訊——它精準定位出最該由人類專家覆核的兩處。RoB2 為 3 評者 × 21 篇逐 domain 評分後彙整為 overall；篩選為 2 評者 × 165 篇二元（納入/排除）。所有 κ 為觀測一致性扣除期望一致性後之校正值，未做加權（名目尺度）。</p>
+  </div>
+
+  <div class="public-only"><span class="audience-tag">民眾</span>
+    <p>白話說：我們請好幾個「獨立評審 AI」在<strong>看不到標準答案、也看不到彼此</strong>的情況下，各自把同一份證據重新評一次，再看大家給的分數有多接近。結果四項測試裡，評審們的看法都<strong>相當一致</strong>（穩定、可重現）。九個主張裡有七個，盲評的多數結論和我們最後寫進報告的判定方向一樣；只有<strong>兩個（進食順序、低碳）</strong>盲評 AI 一致認為「應該更保守一點」，這兩題我們特別標記出來、建議由人類專家再看一次。但要誠實提醒：<strong>「AI 之間意見一致」不等於「AI 和醫學專家意見一致」</strong>——前者只代表這個工具穩定，後者才是對不對。這工具是<strong>輔助</strong>用的，最終仍需專家把關。</p>
+  </div>
+
+  <div class="callout co-warn">
+    <p><strong>關於本章數字的最重要聲明（請勿誤讀）：</strong>本章所有 κ 量的是<strong>自我一致性／可重現性（reproducibility）</strong>，<strong>不是</strong>與人類專家的<strong>有效性（validity）</strong>。高自我一致性只證明「同一份證據，本流程會穩定地給出同一個答案」，<strong>不證明這個答案與人類專家相符</strong>。依已發表資料，AI 與人類專家在文獻評讀上的<strong>校正後 kappa 約為 0.3–0.6</strong>（低於專家彼此間的 0.6–0.9），EBM 判讀本身亦存在模糊與裁量。因此本報告（含本章的高一致性數字）始終定位為<strong>輔助性、可重現的第一手評析，須由領域專家覆核</strong>，不主張可取代專家判定；上節標出的兩題不一致正是優先覆核對象。</p>
+  </div>
+</section>

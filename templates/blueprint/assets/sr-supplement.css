@@ -55,6 +55,11 @@
 a.claim-tag{text-decoration:none;cursor:pointer}
 a.claim-tag:hover{color:var(--brand-d);border-color:var(--brand)}
 
+/* reliability chapter: flagged rows + fine print */
+.data-table tr.row-flag{background:#fbf1dd}
+.data-table tr.row-flag td{font-weight:600}
+p.fine{font-size:12.5px;color:var(--muted);margin-top:4px}
+
 /* prominent AI-generated disclaimer (global notice) */
 .ai-disclaimer{border:2px solid var(--vc-risk);background:#fff6ee}
 .ai-disclaimer p{font-size:14.5px}

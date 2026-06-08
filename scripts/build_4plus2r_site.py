@@ -22,6 +22,7 @@ OUT = Path("output/site_4plus2r")
 ORDER = [
     ("ch0", "chapters/00-summary.html"),
     ("ch1", "chapters/01-methods.html"),
+    ("ch13", "chapters/01b-reliability.html"),
     ("ch2", "chapters/02-microbiome.html"),
     ("ch3", "chapters/03-protein.html"),
     ("ch4", "chapters/04-meal-order.html"),
