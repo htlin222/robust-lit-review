@@ -8,6 +8,11 @@
 
 **From topic to submission-ready manuscript in one command.** This pipeline produces a complete, publication-grade systematic literature review article — not a skeleton or reference list, but a real academic manuscript with narrative synthesis, specific clinical data, and full PRISMA 2020 compliance.
 
+> ### 🔬 Live example — claim appraisal
+> **[「4+2R 代謝飲食法」實證評析 →](https://verdict-4plus2r-sr.pages.dev/)** — a systematic-review-grade verdict on a popular diet, built end-to-end by `/claim-appraise`: **9 claims · 1,056 records → 165 Q1/≥2016/CrossRef-verified studies (97 cited) · GRADE per claim · `/argdown`-audited**, bilingual 專業／民眾 dual-audience.
+>
+> [![4+2R 代謝飲食法 evidence appraisal](https://verdict-4plus2r-sr.pages.dev/assets/og-image.png)](https://verdict-4plus2r-sr.pages.dev/)
+
 ## Why "Robust"?
 
 Most automated review tools stop at collecting references. This pipeline goes all the way to a **submission-ready manuscript** with built-in quality assurance:
