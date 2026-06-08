@@ -55,6 +55,14 @@
 a.claim-tag{text-decoration:none;cursor:pointer}
 a.claim-tag:hover{color:var(--brand-d);border-color:var(--brand)}
 
+/* OpenEvidence cross-check box */
+.oe-check{border:1px solid #d8c9f0;border-left:4px solid #6b3fa0;background:#faf7fd;
+  padding:13px 16px;margin:16px 0}
+.oe-check .oe-head{display:flex;align-items:center;gap:9px;margin-bottom:6px;flex-wrap:wrap}
+.oe-check .oe-head strong{color:#5a3490;font-size:14px}
+.oe-check p{margin:5px 0;font-size:14.5px}
+.oe-check .oe-src{font-size:12px;color:var(--muted)}
+
 /* search-strategy modal (檢索命中 popup) */
 .q-body{padding:14px 16px 18px}
 .q-chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 12px}

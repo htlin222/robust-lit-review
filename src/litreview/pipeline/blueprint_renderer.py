@@ -52,7 +52,8 @@ class SiteMeta:
     og_description: str = "九大主張，1056 篇檢索 → 165 篇 Q1（≥2016）逐篇 CrossRef 驗證 → GRADE → /argdown 稽核。專業／民眾雙版本。"
     gen_date: str = "2026-06-09"
     source_badges: list[str] = field(default_factory=lambda: [
-        "Scopus · PubMed · Embase", "Q1 · ≥2016", "CrossRef-verified", "GRADE", "AMA",
+        "Scopus · PubMed · Embase", "Q1 · ≥2016", "CrossRef-verified",
+        "GRADE-style", "OpenEvidence 對照", "AMA",
     ])
     ref_note_html: str = (
         '本評析的文獻均為 <strong>Q1 期刊、2016 年後</strong>，'

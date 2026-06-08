@@ -49,6 +49,40 @@ def _link_claim_tags(html: str) -> str:
         html,
     )
 
+
+# OpenEvidence independent cross-check per chapter (retrieved 2026-06; CREATOR_ONLY,
+# crossref-validated). label = 與本報告判定的方向關係.
+CHAPTER_OE = {
+    "ch2": ("一致", "人體 RCT 僅見約 0.7–1 kg 小幅減重，常受熱量限制干擾、缺長期資料；不支持腸道菌調節為「獨立且持久」之減重手段（動物效果遠大於人體，存在轉譯落差）。"),
+    "ch3": ("一致", "3–6 個月有小而顯著之減脂與瘦體保留（脂肪約多 −0.87 kg、FFM +0.43 kg），但 12 個月差異多不再顯著；順從度才是長期關鍵。"),
+    "ch4": ("一致", "先菜、先蛋白可顯著降低餐後血糖/胰島素（AUC 約 −39%）；但無證據顯示「單靠進食順序」即可減重。"),
+    "ch5": ("一致（機轉有修正）", "無任何飲食策略能永久下調體重設定點，約 80% 於 5 年內復胖——支持本章判定。惟 OE 提醒：「適應性產熱主導復胖」之因果本身仍有爭議，可能僅為對較低體重的正常化，故本報告對此機轉措辭從寬。"),
+    "ch6": ("一致", "快速/極低熱量飲食使膽結石風險升至 28–40%，UDCA 可降低約 67–83%（NNT≈5）；CKD、膽道疾病、孕期、糖尿病用藥（SGLT2i 應避免生酮）須醫療把關。"),
+    "ch7": ("一致", "12 個月減重於低碳/低脂/均衡之間相當（Cochrane −0.93 kg；DIETFITS 幾乎相同），熱量與順從度主導；低碳利 HDL/TG、低脂利 LDL。"),
+    "ch9": ("一致", "增肌減脂同時確實可能，但高度取決於族群：未訓練、過重、高齡者最明顯（瘦體 +0.8~5%、脂肪同減）；瘦壯之受訓者空間有限。阻力訓練＋約 1.6 g/kg 蛋白為必要條件。"),
+    "ch10": ("部分一致", "OE 指『飲食品質』（地中海飲食）可降憂鬱發生率約 33%、RCT 改善顯著；有配套（行為治療、≥8 週）之低熱量減重亦能小幅改善（SMD −0.47）。但短期、無配套之極低熱量飲食可能無效甚至惡化情緒——支持本章對 4+2R 限制式方案的保留；惟一般「飲食—情緒」之關聯較本章所述更正向。"),
+    "ch11": ("一致", "無任何 RCT 證實熱量限制/限時進食能延長人類壽命或改善硬性臨床終點；僅見短期替代生物標記（CALERIE：DunedinPACE 略降、PhenoAge/GrimAge 無變化、端粒無明確益處）。替代指標能否轉化為硬終點仍未證實——支持本章判定。"),
+}
+
+
+def _inject_oe(html: str, chapter_id: str) -> str:
+    oe = CHAPTER_OE.get(chapter_id)
+    if not oe:
+        return html
+    label, zh = oe
+    box = (
+        '<div class="oe-check">'
+        '<div class="oe-head"><span class="ver-badge vb-oe">OpenEvidence 獨立交叉查核</span>'
+        f'<strong>外部結論：與本報告{label}</strong></div>'
+        f'<p>{zh}</p>'
+        '<p class="oe-src">獨立來源：OpenEvidence（經 crossref 驗證），2026-06。此為方向一致性之對照，非正式 kappa。</p>'
+        '</div>'
+    )
+    if "</section>" in html:
+        head, tail = html.rsplit("</section>", 1)
+        return head + box + "</section>" + tail
+    return html + box
+
 # chapter id -> pico_*.json it was written from (for the clickable PRISMA popup)
 CHAPTER_PICO = {
     "ch2": "pico_01", "ch3": "pico_02", "ch4": "pico_03", "ch5": "pico_04",
@@ -111,6 +145,7 @@ def main() -> None:
             continue
         html = src.read_text(encoding="utf-8")
         html = _link_claim_tags(html)
+        html = _inject_oe(html, cid)
 
         # number citations by first appearance across the whole document
         def _sub(match: re.Match) -> str:
