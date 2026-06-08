@@ -61,6 +61,9 @@ class SiteMeta:
         'DOI 經 doi.org 解析。點擊內文 <span class="cite-demo">[1]</span> 可跳至對應文獻。'
     )
     footer_html: str = (
+        '<p>本報告由 <strong>AI（大型語言模型）自動化流程生成</strong>，非專家人工逐篇評讀；'
+        'AI 與人類評讀一致性有限（adjusted kappa 約 0.3–0.6），<strong>不可互換</strong>，'
+        '須經領域專家覆核，<strong>不可作為個別臨床或飲食決策依據</strong>。</p>'
         '<p>本報告為實證文獻評析，<strong>非個別醫療建議</strong>。'
         '減重前（尤其有慢性腎臟病、膽道疾病、孕哺、糖尿病用藥者）請諮詢醫師。</p>'
     )
