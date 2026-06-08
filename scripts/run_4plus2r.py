@@ -74,6 +74,31 @@ PICOS = [
         question_text="Do rapid very-low-calorie weight-loss diets increase gallstones and other adverse events?",
         primary_terms=["very low calorie diet", "rapid weight loss", "very-low-energy diet"],
         secondary_terms=["gallstones", "cholelithiasis", "adverse effects", "cholecystectomy"], priority=6),
+    PICOQuestion(
+        pico_id="pico_07", outcome_domain="recomposition",
+        population="adults in an energy deficit doing resistance training",
+        intervention="high-protein diet plus resistance training",
+        comparator="lower-protein or no resistance training",
+        outcome="simultaneous fat loss and muscle/lean-mass gain (body recomposition)",
+        question_text="Can adults simultaneously gain muscle and lose fat (body recomposition) during energy restriction with high protein and resistance training?",
+        primary_terms=["body recomposition", "resistance training", "muscle hypertrophy", "lean body mass"],
+        secondary_terms=["energy restriction", "fat loss", "dietary protein"], priority=7),
+    PICOQuestion(
+        pico_id="pico_08", outcome_domain="mental_health",
+        population="adults with overweight/obesity or depressive symptoms",
+        intervention="dietary intervention / diet quality / weight loss",
+        comparator="usual diet", outcome="depression / mood / mental health",
+        question_text="Do dietary interventions or diet-induced weight loss improve depression and mood?",
+        primary_terms=["dietary intervention", "diet quality", "dietary pattern"],
+        secondary_terms=["depression", "depressive symptoms", "mental health", "mood"], priority=8),
+    PICOQuestion(
+        pico_id="pico_09", outcome_domain="aging_longevity",
+        population="adults",
+        intervention="caloric restriction / time-restricted eating / dietary intervention",
+        comparator="ad libitum diet", outcome="biological aging / healthspan / longevity markers",
+        question_text="Does caloric restriction or dietary intervention slow biological aging or improve healthspan/longevity markers in humans?",
+        primary_terms=["caloric restriction", "time-restricted eating", "dietary restriction"],
+        secondary_terms=["aging", "longevity", "healthspan", "biological age"], priority=9),
 ]
 
 
@@ -97,6 +122,10 @@ async def main() -> None:
 
     async with ClaimAppraisalPipeline(config) as pipe:
         for pico in PICOS:
+            out_path = OUT / f"{pico.pico_id}.json"
+            if out_path.exists():
+                log.info("skip %s (already done)", pico.pico_id)
+                continue
             log.info("=== %s (%s) ===", pico.pico_id, pico.outcome_domain)
             try:
                 included, flow = await pipe.run_pico_search(pico)

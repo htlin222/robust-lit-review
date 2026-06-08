@@ -28,7 +28,10 @@ ORDER = [
     ("ch5", "chapters/05-setpoint.html"),
     ("ch6", "chapters/06-safety.html"),
     ("ch7", "chapters/07-lowcarb.html"),
-    ("ch8", "chapters/08-verdict.html"),
+    ("ch9", "chapters/09-recomposition.html"),
+    ("ch10", "chapters/10-mental-health.html"),
+    ("ch11", "chapters/11-aging.html"),
+    ("ch8", "chapters/12-verdict.html"),
 ]
 
 _CITE_DOI = re.compile(r'data-doi="([^"]+)"')

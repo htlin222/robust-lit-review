@@ -26,6 +26,26 @@ Most automated review tools stop at collecting references. This pipeline goes al
 | PDF + DOCX + BibTeX | Quarto multi-format rendering |
 | GitHub Release artifacts | Automated CI/CD on every push |
 
+## Two Modes
+
+| Mode | Input | Output | Skill |
+|------|-------|--------|-------|
+| **Topic review** | a research topic | submission-ready manuscript (PDF/DOCX) | `/lit-review` |
+| **Claim appraisal** | a real-world claim | a *verdict* per sub-question, as a published web report | `/claim-appraise` |
+
+### Claim Appraisal — adjudicate a claim, don't just review a topic
+
+`/claim-appraise "<claim>"` turns one real-world claim (a popular diet, a supplement, a health product) into a **defensible, peer-checkable evidence appraisal**:
+
+1. **Decompose** the claim into PICO sub-questions (efficacy + safety + over-extended claims).
+2. **Per-question systematic review** — Scopus + PubMed + Embase, **≥ 2016, Q1 journals only**, DOI-validated, and **every cited work CrossRef-verified to exist** (an anti-hallucination gate — no fabricated citations).
+3. **GRADE** the certainty of each sub-question (recomputed deterministically), **cross-checked against OpenEvidence**.
+4. **`/argdown`-audit** the overall verdict logic so the conclusion provably follows.
+5. **Ship a verdict-style site** (bilingual, 專業/民眾 dual-audience) to Cloudflare Pages, with the claim's **primary-source URL attached** so peers can confirm no cherry-picking (斷章取義).
+
+**Live worked example — the "4+2R 代謝飲食法" diet:** **<https://verdict-4plus2r-sr.pages.dev/>**
+9 sub-claims appraised over **1,056 records → 165 Q1/≥2016/CrossRef-verified studies** (97 cited). Verdicts range from *部分成立* (high-protein, meal-order) to *與證據牴觸* (the "重設代謝定點/永不復胖" claim). Reproduce it with `scripts/run_4plus2r.py` + `scripts/build_4plus2r_site.py`.
+
 ## Final Deliverables
 
 Every run produces a complete submission package:
@@ -199,10 +219,16 @@ On push to `main`, the workflow automatically:
 
 ## Claude Code Integration
 
-This project includes Claude Code skills:
+This project ships **Claude Code skills** — type `/` followed by the skill name to invoke a workflow:
 
-- `/lit-review` -- Run the full pipeline with modular parallel writing + PRISMA audit
-- `/brainstorm-topic` -- Brainstorm and refine search terms before running
+| Slash command | What it does |
+|---|---|
+| `/lit-review "topic"` | Full topic→manuscript pipeline (search → filter → write → PRISMA audit → render) |
+| `/lit-review --hitl "topic"` | Same, with 9 human-in-the-loop checkpoints |
+| `/brainstorm-topic` | Brainstorm and refine search terms before running |
+| `/claim-appraise "<claim>"` | **Claim appraisal** → PICO decomposition → per-question Q1/≥2016/CrossRef-verified SR → GRADE → verdict → bilingual verdict site (see below) |
+
+Skills live in [`.claude/skills/`](.claude/skills/) and are checked into the repo, so anyone who clones it gets the same `/` commands.
 
 ## Citing This Project
 
