@@ -47,6 +47,9 @@ class SiteMeta:
     brand_strong: str = "4+2R 代謝飲食法 · 系統性評析"
     brand_small: str = "Systematic-review-grade critical appraisal"
     description: str = ""
+    base_url: str = "https://verdict-4plus2r-sr.pages.dev"
+    og_title: str = "「4+2R 代謝飲食法」系統性文獻評析"
+    og_description: str = "九大主張，1056 篇檢索 → 165 篇 Q1（≥2016）逐篇 CrossRef 驗證 → GRADE → /argdown 稽核。專業／民眾雙版本。"
     gen_date: str = "2026-06-09"
     source_badges: list[str] = field(default_factory=lambda: [
         "Scopus · PubMed · Embase", "Q1 · ≥2016", "CrossRef-verified", "GRADE", "AMA",
@@ -73,6 +76,23 @@ def _shell(meta: SiteMeta) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{meta.title}</title>
   <meta name="description" content="{meta.description}" />
+  <link rel="canonical" href="{meta.base_url}/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:locale" content="zh_TW" />
+  <meta property="og:site_name" content="實證醫學評析" />
+  <meta property="og:title" content="{meta.og_title}" />
+  <meta property="og:description" content="{meta.og_description}" />
+  <meta property="og:url" content="{meta.base_url}/" />
+  <meta property="og:image" content="{meta.base_url}/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="{meta.og_title}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{meta.og_title}" />
+  <meta name="twitter:description" content="{meta.og_description}" />
+  <meta name="twitter:image" content="{meta.base_url}/assets/og-image.png" />
+
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230e7c86'/%3E%3Ctext x='32' y='42' font-family='Arial,sans-serif' font-size='24' font-weight='900' fill='white' text-anchor='middle'%3ESR%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/style.css" />
   <link rel="stylesheet" href="assets/sr-supplement.css" />
@@ -167,8 +187,10 @@ def render_blueprint_site(
     (output_dir / "assets" / "references.js").write_text(refs_js, encoding="utf-8")
 
     # static blueprint assets
-    for name in ("style.css", "app.js", "sr-supplement.css"):
-        shutil.copyfile(_BLUEPRINT / "assets" / name, output_dir / "assets" / name)
+    for name in ("style.css", "app.js", "sr-supplement.css", "og-image.png"):
+        src = _BLUEPRINT / "assets" / name
+        if src.exists():
+            shutil.copyfile(src, output_dir / "assets" / name)
 
     (output_dir / "_headers").write_text(_HEADERS, encoding="utf-8")
 

@@ -13,6 +13,7 @@ output*/site/
 output/site_4plus2r/
 output/*_run*.log
 .wrangler/
+.claude/settings.local.json
 output*/*.pdf
 output*/*.docx
 output*/*.html

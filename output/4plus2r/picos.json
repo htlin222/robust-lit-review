@@ -1,0 +1,206 @@
+[
+  {
+    "pico_id": "pico_01",
+    "population": "adults with overweight or obesity",
+    "intervention": "gut microbiota modulation (diet, probiotics)",
+    "comparator": "control diet",
+    "outcome": "body weight / adiposity",
+    "outcome_domain": "microbiome",
+    "question_text": "In adults with obesity, does modulating the gut microbiota cause weight loss beyond calorie restriction?",
+    "rationale": "",
+    "primary_terms": [
+      "gut microbiota",
+      "gut microbiome",
+      "probiotics"
+    ],
+    "secondary_terms": [
+      "obesity",
+      "weight loss",
+      "body weight"
+    ],
+    "mesh_terms": [],
+    "priority": 1
+  },
+  {
+    "pico_id": "pico_02",
+    "population": "adults with overweight or obesity",
+    "intervention": "energy-restricted high-protein diet",
+    "comparator": "standard-protein diet",
+    "outcome": "fat mass / lean mass / weight",
+    "outcome_domain": "high_protein",
+    "question_text": "In adults with obesity, does a high-protein diet improve weight and body composition vs standard protein?",
+    "rationale": "",
+    "primary_terms": [
+      "high-protein diet",
+      "dietary protein",
+      "protein intake"
+    ],
+    "secondary_terms": [
+      "weight loss",
+      "fat mass",
+      "body composition",
+      "lean mass"
+    ],
+    "mesh_terms": [],
+    "priority": 2
+  },
+  {
+    "pico_id": "pico_03",
+    "population": "adults with or at risk of type 2 diabetes",
+    "intervention": "nutrient/food order (vegetables and protein before carbohydrate)",
+    "comparator": "usual eating order",
+    "outcome": "postprandial glucose / HbA1c",
+    "outcome_domain": "meal_order",
+    "question_text": "Does eating vegetables and protein before carbohydrate improve glycaemic outcomes?",
+    "rationale": "",
+    "primary_terms": [
+      "food order",
+      "meal sequence",
+      "nutrient order",
+      "food sequence"
+    ],
+    "secondary_terms": [
+      "postprandial glucose",
+      "glycemic",
+      "type 2 diabetes"
+    ],
+    "mesh_terms": [],
+    "priority": 3
+  },
+  {
+    "pico_id": "pico_04",
+    "population": "adults who lost weight by caloric restriction",
+    "intervention": "dietary weight loss",
+    "comparator": "—",
+    "outcome": "weight regain / metabolic adaptation",
+    "outcome_domain": "setpoint_regain",
+    "question_text": "After diet-induced weight loss, can a 'metabolic reset' prevent weight regain and adaptive thermogenesis?",
+    "rationale": "",
+    "primary_terms": [
+      "weight regain",
+      "metabolic adaptation",
+      "adaptive thermogenesis",
+      "weight loss maintenance"
+    ],
+    "secondary_terms": [
+      "obesity",
+      "energy expenditure"
+    ],
+    "mesh_terms": [],
+    "priority": 4
+  },
+  {
+    "pico_id": "pico_05",
+    "population": "adults with overweight or obesity",
+    "intervention": "low-carbohydrate diet",
+    "comparator": "balanced or low-fat diet",
+    "outcome": "weight / cardiometabolic risk",
+    "outcome_domain": "low_carb",
+    "question_text": "Does a low-carbohydrate diet produce superior long-term weight and cardiometabolic outcomes?",
+    "rationale": "",
+    "primary_terms": [
+      "low-carbohydrate diet",
+      "carbohydrate restriction",
+      "ketogenic diet"
+    ],
+    "secondary_terms": [
+      "weight loss",
+      "cardiometabolic",
+      "body weight"
+    ],
+    "mesh_terms": [],
+    "priority": 5
+  },
+  {
+    "pico_id": "pico_06",
+    "population": "adults on rapid or very-low-calorie weight-loss diets",
+    "intervention": "very-low-calorie / rapid weight loss diet",
+    "comparator": "gradual weight loss",
+    "outcome": "gallstones / adverse events",
+    "outcome_domain": "safety",
+    "question_text": "Do rapid very-low-calorie weight-loss diets increase gallstones and other adverse events?",
+    "rationale": "",
+    "primary_terms": [
+      "very low calorie diet",
+      "rapid weight loss",
+      "very-low-energy diet"
+    ],
+    "secondary_terms": [
+      "gallstones",
+      "cholelithiasis",
+      "adverse effects",
+      "cholecystectomy"
+    ],
+    "mesh_terms": [],
+    "priority": 6
+  },
+  {
+    "pico_id": "pico_07",
+    "population": "adults in an energy deficit doing resistance training",
+    "intervention": "high-protein diet plus resistance training",
+    "comparator": "lower-protein or no resistance training",
+    "outcome": "simultaneous fat loss and muscle/lean-mass gain (body recomposition)",
+    "outcome_domain": "recomposition",
+    "question_text": "Can adults simultaneously gain muscle and lose fat (body recomposition) during energy restriction with high protein and resistance training?",
+    "rationale": "",
+    "primary_terms": [
+      "body recomposition",
+      "resistance training",
+      "muscle hypertrophy",
+      "lean body mass"
+    ],
+    "secondary_terms": [
+      "energy restriction",
+      "fat loss",
+      "dietary protein"
+    ],
+    "mesh_terms": [],
+    "priority": 7
+  },
+  {
+    "pico_id": "pico_08",
+    "population": "adults with overweight/obesity or depressive symptoms",
+    "intervention": "dietary intervention / diet quality / weight loss",
+    "comparator": "usual diet",
+    "outcome": "depression / mood / mental health",
+    "outcome_domain": "mental_health",
+    "question_text": "Do dietary interventions or diet-induced weight loss improve depression and mood?",
+    "rationale": "",
+    "primary_terms": [
+      "dietary intervention",
+      "diet quality",
+      "dietary pattern"
+    ],
+    "secondary_terms": [
+      "depression",
+      "depressive symptoms",
+      "mental health",
+      "mood"
+    ],
+    "mesh_terms": [],
+    "priority": 8
+  },
+  {
+    "pico_id": "pico_09",
+    "population": "adults",
+    "intervention": "caloric restriction / time-restricted eating / dietary intervention",
+    "comparator": "ad libitum diet",
+    "outcome": "biological aging / healthspan / longevity markers",
+    "outcome_domain": "aging_longevity",
+    "question_text": "Does caloric restriction or dietary intervention slow biological aging or improve healthspan/longevity markers in humans?",
+    "rationale": "",
+    "primary_terms": [
+      "caloric restriction",
+      "time-restricted eating",
+      "dietary restriction"
+    ],
+    "secondary_terms": [
+      "aging",
+      "longevity",
+      "healthspan",
+      "biological age"
+    ],
+    "mesh_terms": [],
+    "priority": 9
+  }
+]

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Noto Sans CJK TC','Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif">
+  <rect width="1200" height="630" fill="#f6f7f9"/>
+  <rect width="1200" height="14" fill="#0e7c86"/>
+  <rect x="0" y="14" width="16" height="616" fill="#0e7c86"/>
+
+  <!-- brand mark -->
+  <rect x="72" y="74" width="62" height="62" fill="#0e7c86"/>
+  <text x="103" y="116" fill="#ffffff" font-size="26" font-weight="800" text-anchor="middle">SR</text>
+  <text x="150" y="100" fill="#48566b" font-size="22" font-weight="700" letter-spacing="2">實證醫學 · 系統性文獻評析</text>
+  <text x="150" y="128" fill="#8593a6" font-size="18" letter-spacing="1">Systematic-Review-Grade Critical Appraisal</text>
+
+  <!-- title -->
+  <text x="72" y="240" fill="#1c2530" font-size="78" font-weight="800" letter-spacing="1">4+2R 代謝飲食法</text>
+  <text x="74" y="296" fill="#48566b" font-size="34" font-weight="600">九大主張的實證評析 — 哪些成立、哪些被誇大</text>
+
+  <!-- overall verdict chip -->
+  <rect x="72" y="338" width="430" height="58" fill="#fbf1dd"/>
+  <rect x="72" y="338" width="6" height="58" fill="#a8761b"/>
+  <text x="100" y="375" fill="#a8761b" font-size="27" font-weight="800">整體判定：部分成立 · 核心賣點誇大</text>
+
+  <!-- stats row -->
+  <g>
+    <rect x="72" y="436" width="336" height="116" fill="#ffffff" stroke="#e3e8ef"/>
+    <text x="240" y="492" fill="#0a5e66" font-size="54" font-weight="850" text-anchor="middle">9</text>
+    <text x="240" y="528" fill="#8593a6" font-size="21" text-anchor="middle">受檢主張</text>
+
+    <rect x="432" y="436" width="336" height="116" fill="#ffffff" stroke="#e3e8ef"/>
+    <text x="600" y="492" fill="#0a5e66" font-size="54" font-weight="850" text-anchor="middle">165</text>
+    <text x="600" y="528" fill="#8593a6" font-size="21" text-anchor="middle">Q1 文獻 · 2016 年後</text>
+
+    <rect x="792" y="436" width="336" height="116" fill="#ffffff" stroke="#e3e8ef"/>
+    <text x="960" y="492" fill="#0a5e66" font-size="54" font-weight="850" text-anchor="middle">100%</text>
+    <text x="960" y="528" fill="#8593a6" font-size="21" text-anchor="middle">逐篇 CrossRef 驗證</text>
+  </g>
+
+  <!-- footer -->
+  <text x="72" y="598" fill="#8593a6" font-size="20">verdict-4plus2r-sr.pages.dev　·　robust-lit-review 工作流（Scopus·PubMed·Embase → GRADE → /argdown）</text>
+</svg>
